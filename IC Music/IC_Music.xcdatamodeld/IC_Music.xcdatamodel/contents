@@ -3,6 +3,9 @@
     <entity name="IC_TrackInfo" representedClassName="IC_TrackInfo" syncable="YES" codeGenerationType="class">
         <attribute name="bpmSpotify" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="customInfo" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="danceability" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="durationSeconds" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="energy" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="rpmUser" optional="YES" attributeType="String" defaultValueString="0"/>
         <attribute name="spotifyId" optional="YES" attributeType="String"/>
         <attribute name="trackTitle" optional="YES" attributeType="String" defaultValueString=""/>

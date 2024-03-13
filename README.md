@@ -1,5 +1,6 @@
-Vorraussetzungen
-- Offline faehig, Benutzung Spotify Sessionmanager.connection
+Vorraussetzungen bei der Entwicklung:
+- Offline faehig
+- Benutzung Spotify Sessionmanager.connection
 - CoreData
 - Backupfaehig (Zip export/import)
 - SwiftUi

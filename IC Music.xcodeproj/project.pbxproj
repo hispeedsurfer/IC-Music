@@ -15,13 +15,17 @@
 		A942B60D2B8BA34000BC2D73 /* IC_Music.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A942B60B2B8BA34000BC2D73 /* IC_Music.xcdatamodeld */; };
 		A942B69C2B8BC5ED00BC2D73 /* IC_SpotifyLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942B69B2B8BC5ED00BC2D73 /* IC_SpotifyLoginView.swift */; };
 		A965A5252B94F3D500FB98BE /* ZipFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A965A5242B94F3D500FB98BE /* ZipFile.swift */; };
+		A99118E72B9C4DCD00110793 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A99118E42B9C4BED00110793 /* Localizable.strings */; };
+		A99C0B412B9E53FF00AFD370 /* IC_FileImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99C0B402B9E53FF00AFD370 /* IC_FileImporter.swift */; };
+		A99C0B432B9E578900AFD370 /* IC_SliderMusic.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99C0B422B9E578900AFD370 /* IC_SliderMusic.swift */; };
+		A99C0B452B9E585600AFD370 /* IC_ToggleEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99C0B442B9E585600AFD370 /* IC_ToggleEdit.swift */; };
 		A9A4CC492B8DF05100DE9B22 /* IC_SpinningPlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A4CC482B8DF05100DE9B22 /* IC_SpinningPlaylistView.swift */; };
+		A9C377822BA0C45200E8C49D /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9C377812BA0C45200E8C49D /* SpotifyiOS.framework */; };
 		A9C4D2C72B9C2E3600CA1233 /* IC_SpotifyLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4D2C62B9C2E3600CA1233 /* IC_SpotifyLoginViewModel.swift */; };
 		A9C4D2C92B9C2F2F00CA1233 /* IC_SpotifyAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4D2C82B9C2F2F00CA1233 /* IC_SpotifyAccessToken.swift */; };
 		A9C4D2CB2B9C2F8100CA1233 /* IC_SpotifyAPIDefaultHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4D2CA2B9C2F8100CA1233 /* IC_SpotifyAPIDefaultHandler.swift */; };
 		A9C4D2CD2B9C2FB300CA1233 /* IC_SpotifyAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4D2CC2B9C2FB300CA1233 /* IC_SpotifyAPIError.swift */; };
 		A9C4D2CF2B9C316700CA1233 /* IC_Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4D2CE2B9C316700CA1233 /* IC_Constants.swift */; };
-		A9C4D2D22B9C334800CA1233 /* SpotifyiOS in Frameworks */ = {isa = PBXBuildFile; productRef = A9C4D2D12B9C334800CA1233 /* SpotifyiOS */; };
 		A9C4D2D42B9C34BD00CA1233 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A9C4D2D32B9C34BD00CA1233 /* README.md */; };
 		A9C4ED1D2B8DF7840024C4B3 /* IC_TrackDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4ED1C2B8DF7840024C4B3 /* IC_TrackDetailView.swift */; };
 		A9C4ED1E2B8DFC530024C4B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A942B6042B8BA34000BC2D73 /* Assets.xcassets */; };
@@ -40,7 +44,12 @@
 		A942B6902B8BA89700BC2D73 /* IC-Music-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IC-Music-Bridging-Header.h"; sourceTree = "<group>"; };
 		A942B69B2B8BC5ED00BC2D73 /* IC_SpotifyLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_SpotifyLoginView.swift; sourceTree = "<group>"; };
 		A965A5242B94F3D500FB98BE /* ZipFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipFile.swift; sourceTree = "<group>"; };
+		A99118E32B9C4BED00110793 /* IC Music */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "IC Music"; path = Localizable.strings; sourceTree = "<group>"; };
+		A99C0B402B9E53FF00AFD370 /* IC_FileImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_FileImporter.swift; sourceTree = "<group>"; };
+		A99C0B422B9E578900AFD370 /* IC_SliderMusic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_SliderMusic.swift; sourceTree = "<group>"; };
+		A99C0B442B9E585600AFD370 /* IC_ToggleEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_ToggleEdit.swift; sourceTree = "<group>"; };
 		A9A4CC482B8DF05100DE9B22 /* IC_SpinningPlaylistView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IC_SpinningPlaylistView.swift; sourceTree = "<group>"; };
+		A9C377812BA0C45200E8C49D /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
 		A9C4D2C62B9C2E3600CA1233 /* IC_SpotifyLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_SpotifyLoginViewModel.swift; sourceTree = "<group>"; };
 		A9C4D2C82B9C2F2F00CA1233 /* IC_SpotifyAccessToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IC_SpotifyAccessToken.swift; sourceTree = "<group>"; };
 		A9C4D2CA2B9C2F8100CA1233 /* IC_SpotifyAPIDefaultHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_SpotifyAPIDefaultHandler.swift; sourceTree = "<group>"; };
@@ -55,8 +64,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9C4D2D22B9C334800CA1233 /* SpotifyiOS in Frameworks */,
 				A90269752B93743A00052FB3 /* ZIPFoundation in Frameworks */,
+				A9C377822BA0C45200E8C49D /* SpotifyiOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +75,7 @@
 		A942B5F42B8BA33E00BC2D73 = {
 			isa = PBXGroup;
 			children = (
+				A99118E52B9C4BED00110793 /* IC Music.lproj */,
 				A9C4D2D32B9C34BD00CA1233 /* README.md */,
 				A942B5FF2B8BA33E00BC2D73 /* IC Music */,
 				A942B5FE2B8BA33E00BC2D73 /* Products */,
@@ -86,6 +96,7 @@
 			children = (
 				A942B6042B8BA34000BC2D73 /* Assets.xcassets */,
 				A9C4D2CE2B9C316700CA1233 /* IC_Constants.swift */,
+				A99C0B402B9E53FF00AFD370 /* IC_FileImporter.swift */,
 				A942B60B2B8BA34000BC2D73 /* IC_Music.xcdatamodeld */,
 				A942B6002B8BA33E00BC2D73 /* IC_MusicApp.swift */,
 				A9A4CC482B8DF05100DE9B22 /* IC_SpinningPlaylistView.swift */,
@@ -102,6 +113,8 @@
 				A942B6092B8BA34000BC2D73 /* Persistence.swift */,
 				A942B6062B8BA34000BC2D73 /* Preview Content */,
 				A965A5242B94F3D500FB98BE /* ZipFile.swift */,
+				A99C0B422B9E578900AFD370 /* IC_SliderMusic.swift */,
+				A99C0B442B9E585600AFD370 /* IC_ToggleEdit.swift */,
 			);
 			path = "IC Music";
 			sourceTree = "<group>";
@@ -117,8 +130,17 @@
 		A942B6932B8BAABE00BC2D73 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A9C377812BA0C45200E8C49D /* SpotifyiOS.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A99118E52B9C4BED00110793 /* IC Music.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				A99118E42B9C4BED00110793 /* Localizable.strings */,
+			);
+			path = "IC Music.lproj";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,7 +161,6 @@
 			name = "IC Music";
 			packageProductDependencies = (
 				A90269742B93743A00052FB3 /* ZIPFoundation */,
-				A9C4D2D12B9C334800CA1233 /* SpotifyiOS */,
 			);
 			productName = "IC Music";
 			productReference = A942B5FD2B8BA33E00BC2D73 /* IC Music.app */;
@@ -167,11 +188,12 @@
 			knownRegions = (
 				en,
 				Base,
+				"IC Music",
+				"ic Music",
 			);
 			mainGroup = A942B5F42B8BA33E00BC2D73;
 			packageReferences = (
 				A90269732B93743A00052FB3 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
-				A9C4D2D02B9C334800CA1233 /* XCRemoteSwiftPackageReference "ios-sdk" */,
 			);
 			productRefGroup = A942B5FE2B8BA33E00BC2D73 /* Products */;
 			projectDirPath = "";
@@ -187,6 +209,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A99118E72B9C4DCD00110793 /* Localizable.strings in Resources */,
 				A9C4D2D42B9C34BD00CA1233 /* README.md in Resources */,
 				A9C4ED1E2B8DFC530024C4B3 /* Assets.xcassets in Resources */,
 			);
@@ -204,6 +227,7 @@
 				A9A4CC492B8DF05100DE9B22 /* IC_SpinningPlaylistView.swift in Sources */,
 				A9C4D2CB2B9C2F8100CA1233 /* IC_SpotifyAPIDefaultHandler.swift in Sources */,
 				A90268CC2B932DC500052FB3 /* IC_SpotifyDefaultViewModel.swift in Sources */,
+				A99C0B412B9E53FF00AFD370 /* IC_FileImporter.swift in Sources */,
 				A965A5252B94F3D500FB98BE /* ZipFile.swift in Sources */,
 				A942B60A2B8BA34000BC2D73 /* Persistence.swift in Sources */,
 				A9C4D2CF2B9C316700CA1233 /* IC_Constants.swift in Sources */,
@@ -211,12 +235,25 @@
 				A942B60D2B8BA34000BC2D73 /* IC_Music.xcdatamodeld in Sources */,
 				A942B6012B8BA33E00BC2D73 /* IC_MusicApp.swift in Sources */,
 				A90269722B936D1000052FB3 /* NSPersistentContainer+extension.swift in Sources */,
+				A99C0B452B9E585600AFD370 /* IC_ToggleEdit.swift in Sources */,
 				A9C4D2CD2B9C2FB300CA1233 /* IC_SpotifyAPIError.swift in Sources */,
+				A99C0B432B9E578900AFD370 /* IC_SliderMusic.swift in Sources */,
 				A9C4ED1D2B8DF7840024C4B3 /* IC_TrackDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A99118E42B9C4BED00110793 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A99118E32B9C4BED00110793 /* IC Music */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		A942B60E2B8BA34000BC2D73 /* Debug */ = {
@@ -368,10 +405,12 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_CFLAGS = DEPRECATED;
 				OTHER_LDFLAGS = "-ObjC";
 				OTHER_SWIFT_FLAGS = "-DZIP_FILE";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.andreasfranke.IC-Music";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "IC Music/IC-Music-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -409,10 +448,12 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_CFLAGS = DEPRECATED;
 				OTHER_LDFLAGS = "-ObjC";
 				OTHER_SWIFT_FLAGS = "-DZIP_FILE";
 				PRODUCT_BUNDLE_IDENTIFIER = "de.andreasfranke.IC-Music";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "IC Music/IC-Music-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -452,14 +493,6 @@
 				minimumVersion = 0.9.18;
 			};
 		};
-		A9C4D2D02B9C334800CA1233 /* XCRemoteSwiftPackageReference "ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/spotify/ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -467,11 +500,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A90269732B93743A00052FB3 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
 			productName = ZIPFoundation;
-		};
-		A9C4D2D12B9C334800CA1233 /* SpotifyiOS */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A9C4D2D02B9C334800CA1233 /* XCRemoteSwiftPackageReference "ios-sdk" */;
-			productName = SpotifyiOS;
 		};
 /* End XCSwiftPackageProductDependency section */
 

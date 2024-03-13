@@ -166,7 +166,10 @@ extension NSPersistentContainer {
                     create: true
                 ).appendingPathComponent("IC_test.zip")
                 
-                try fm.removeItem(at: tmpUrl1)
+                
+                if fm.fileExists(atPath: tmpUrl1.path) {
+                    try fm.removeItem(at: tmpUrl1)
+                }
                 try fm.zipItem(at: destinationURL, to: tmpUrl1)
                 // if we encounter an error, store it here
                 var error: NSError?

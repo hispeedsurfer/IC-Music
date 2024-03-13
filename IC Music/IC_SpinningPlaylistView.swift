@@ -17,6 +17,7 @@ import CoreData
 struct TrackInit {
     var trackUri: String
     var trackTitle: String
+    var durationSeconds: Int32
     //var spotifyId: String
     //var tempo: Double
 }
@@ -29,15 +30,13 @@ struct ItemCard: View {
 }
 
 struct IC_SpinningPlaylistView: View {
-    @ObservedObject var spotifyDefaultViewModel: IC_SpotifyDefaultViewModel
+    @StateObject var spotifyDefaultViewModel: IC_SpotifyDefaultViewModel = { IC_SpotifyDefaultViewModel.shared } ()
     
-    init(spotifyDefaultViewModel: IC_SpotifyDefaultViewModel) {
-        self.spotifyDefaultViewModel = spotifyDefaultViewModel
+    init(/*spotifyDefaultViewModel: IC_SpotifyDefaultViewModel*/) {
+        //self.spotifyDefaultViewModel = spotifyDefaultViewModel
         UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont.preferredFont(forTextStyle: .subheadline)]
         UINavigationBar.appearance().titleTextAttributes = [.font : UIFont.preferredFont(forTextStyle: .subheadline)]
     }
-    
-    @AppStorage("InitialImport") var importShouldBeShown = true
     
     //@StateObject var spinningPlaylistsViewModel = IC_SpinningPlaylistViewModel()
     
@@ -52,6 +51,8 @@ struct IC_SpinningPlaylistView: View {
     @State private var playerState: SPTAppRemotePlayerState?
     
     @State private var document = ""
+    
+    private var bDep: Bool = true
     
     var trackInfoEmpty: IC_TrackInfo {
         let trackInfo = IC_TrackInfo(context: viewContext)
@@ -82,43 +83,10 @@ struct IC_SpinningPlaylistView: View {
         //enableInterface(true)
     }
     
-    func updatePlayerState(playerState: SPTAppRemotePlayerState) {
-        self.playerState = playerState
-        self.currentSongBeingPlayed = playerState.track.name
-        //let duration: UInt = playerState.track.duration
-        //playerState.playbackPosition
-        //updateViewWithPlayerState(playerState)
-    }
-    
     
     @State var isEditable = false
-    @State private var isImporting: Bool = false
-    @State private var isExorting: Bool = false
     
-    @State
-    private var isExporting = false
-    
-    @State
-    private var zipFile: ZipFile?
-    
-    @State private var showingConfirmationDialog = false
-    private func export()
-    {
-        Task { @MainActor in
-            do
-            {
-                let zipPath = spotifyDefaultViewModel.copyPersistentStore()
-                let zipURL = URL(fileURLWithPath: zipPath)
-                
-                self.zipFile = try ZipFile(zipURL: zipURL)
-                self.isExporting = true
-            }
-            catch
-            {
-                print("Could not export .zip:", error)
-            }
-        }
-    }
+    @State private var selectedTrackInfoIdx: Int?
     
     func fetchPlayerState() {
         spotifyDefaultViewModel.appRemote.playerAPI?.getPlayerState({ (playerState, error) in
@@ -156,50 +124,17 @@ struct IC_SpinningPlaylistView: View {
         }
     }
     
+    var sortedTrackItems: [(key: Int, value: IC_TrackInfo)] {
+        trackItmems.sorted { $0.key < $1.key }
+    }
+    
+    @State private var scrollToIndex: Int = 1
+    
+    @State private var columnVisibility = NavigationSplitViewVisibility.all
+    
     var body: some View {
         
-        HStack {
-            
-            Button(action: {
-                self.showingConfirmationDialog = true
-            }) {
-                Text("Import File")
-            }
-            .disabled(!importShouldBeShown)
-            .confirmationDialog("Are you sure you want to disable the import button?", isPresented: $showingConfirmationDialog) {
-                Button("Disable", role: .destructive) {
-                    self.importShouldBeShown = false
-                }
-                Button("Cancel", role: .cancel) {}
-                Button("Import") {
-                    self.isImporting = true
-                }
-            }
-            
-            Button(action: export) {
-                Label("Export ZIP", systemImage: "square.and.arrow.up")
-                    .imageScale(.large)
-                    .foregroundColor(.accentColor)
-            }.fileExporter(isPresented: self.$isExporting, document: self.zipFile, contentType: .zip) { result in
-                print("Exported ZIP:", result)
-            }
-        }
-        .fileImporter(isPresented: $isImporting,
-                      allowedContentTypes: [.zip],
-                      onCompletion: { result in
-            
-            switch result {
-            case .success(let url):
-                // url contains the URL of the chosen file.
-                //let newImage = createImage(imageFile: url)
-                print("url: \(url)")
-                spotifyDefaultViewModel.restorePersistentStore(url: url)
-                self.importShouldBeShown = false
-            case .failure(let error):
-                print(error)
-            }
-        })
-        //}
+        IC_FileImporter()
         
         VStack(spacing:5) {
             HStack(spacing:5){
@@ -230,34 +165,12 @@ struct IC_SpinningPlaylistView: View {
             }
         }
         
-        HStack(spacing:10){
-            Button(action: {
-                spotifyDefaultViewModel.didPressPlayPauseButton()
-            }) {
-                HStack {
-                    Image(systemName: spotifyDefaultViewModel.playerState?.isPaused ?? true ? "play.circle.fill" : "pause.circle.fill")
-                    Text(spotifyDefaultViewModel.playerState?.isPaused ?? true ? "Resume" : "Pause")
-                }
-            }
-            
-            Text("\(spotifyDefaultViewModel.elapsedTimeLabel)")
-            //.padding()
-            
-            Slider(value: $spotifyDefaultViewModel.playbackPosition, in: 0.0...Double(spotifyDefaultViewModel.currentDuration))
-                .onReceive(spotifyDefaultViewModel.$currentTimeInSecondsPass) { _ in
-                    // here I changed the value every second
-                    spotifyDefaultViewModel.playbackPosition = spotifyDefaultViewModel.currentTimeInSecondsPass
-                }
-            // controlling rewind
-                .gesture(DragGesture(minimumDistance: 0))
-            
-            Text("\(spotifyDefaultViewModel.currentDurationLabel)")
-            //.padding()
-        }
-        .padding(5)
+        IC_SliderMusic()
         
-        NavigationView {
-            ScrollViewReader { reader in
+        //if(bDep) {
+            NavigationView {
+                ScrollViewReader { reader in
+                    
                 Toggle(isEditable ? "Edit Mode" : "Read Mode", isOn: $isEditable)
                     .onChange(of: isEditable) {
                         if !isEditable && viewContext.hasChanges {
@@ -269,46 +182,76 @@ struct IC_SpinningPlaylistView: View {
                             }
                         }
                     }
-                List (selection: binding(for: spotifyDefaultViewModel.currentTrackUri)){
-                    let sortedKeysAndValues = trackItmems.sorted() { $0.0 < $1.0 }
-                    ForEach(sortedKeysAndValues, id: \.key) { idx, trackInfo in
-                        NavigationLink(destination: IC_TrackDetailView(trackInfo: trackInfo, isEditable: self.$isEditable, trackInfoAfter: trackItmems[idx+1] ?? trackInfoEmpty), tag: idx, selection: binding(for: spotifyDefaultViewModel.currentTrackUri)) {
-                            Label(
-                                title: { ItemCard(item:trackInfo) },
-                                icon: { Image(systemName: "star") }
-                            )
-                            .id(idx)
-                            .foregroundColor(trackInfo.trackURI==spotifyDefaultViewModel.currentTrackUri ? .white : .black)
+                    List (selection: binding(for: spotifyDefaultViewModel.currentTrackUri)){
+                        let sortedKeysAndValues = trackItmems.sorted() { $0.0 < $1.0 }
+                        ForEach(sortedKeysAndValues, id: \.key) { idx, trackInfo in
+                            NavigationLink(destination: IC_TrackDetailView(trackInfo: trackInfo, isEditable: self.$isEditable, trackInfoAfter: trackItmems[idx+1] ?? trackInfoEmpty), tag: idx, selection: binding(for: spotifyDefaultViewModel.currentTrackUri)) {
+                                Text("\(trackInfo.trackTitle ?? "")")
+                                    .id(idx)
+                                    .foregroundColor(trackInfo.trackURI==spotifyDefaultViewModel.currentTrackUri ? .white : .black)
+                            }
                         }
                     }
-                }
-                .onChange(of: spotifyDefaultViewModel.currentTrackUri) { oldValue, newValue in
-                    //print("currentSongBeingPlayed: \(newValue)")
-                    //fetchPlayerState()
-                    var idx = dictUriIdx[newValue] ?? -2
-                    if idx != -2 {
-                        if idx < dictUriIdx.count {
-                            idx = idx - 1
+                    //.listStyle(.sidebar) if active sidebar in this case is nomore hidding when in split view expanded
+                    .onChange(of: spotifyDefaultViewModel.currentTrackUri) { oldValue, newValue in
+                        //print("currentSongBeingPlayed: \(newValue)")
+                        //fetchPlayerState()
+                        var idx = dictUriIdx[newValue] ?? -2
+                        if idx != -2 {
+                            if idx < dictUriIdx.count {
+                                idx = idx - 1
+                            }
+                            reader.scrollTo(idx, anchor: .top)
                         }
-                        reader.scrollTo(idx, anchor: .top)
                     }
+                    .navigationTitle(contentItem?.title ?? "")
+                    //.listStyle(GroupedListStyle()).navigationBarTitle("Settings")
                 }
-                .navigationTitle(contentItem?.title ?? "")
-                //.listStyle(GroupedListStyle()).navigationBarTitle("Settings")
             }
-        }
-        .onChange(of: spotifyDefaultViewModel.currentSongBeingPlayed) { oldValue, newValue in
-            //print("currentSongBeingPlayed: \(newValue)")
-            fetchPlayerState()
-        }
-        .padding(0)
+            .onChange(of: spotifyDefaultViewModel.currentSongBeingPlayed) { oldValue, newValue in
+                //print("currentSongBeingPlayed: \(newValue)")
+                fetchPlayerState()
+            }
+            .padding(0)
+        /*}
+        else {
+            NavigationSplitView(columnVisibility: $columnVisibility) {
+                ScrollViewReader { reader in
+                    
+                    IC_ToggleEdit(isEditable: isEditable)
+                    
+                    List(sortedTrackItems, id: \.key, selection: $selectedTrackInfoIdx) { key, trackInfo in
+                        NavigationLink(trackInfo.trackTitle ?? "", selection: $selectedTrackInfoIdx) {
+                            IC_TrackDetailView(trackInfo: trackInfo, isEditable: self.$isEditable, trackInfoAfter: trackInfoEmpty)
+                        }
+                        .tag(key)
+                        .id(key)
+                    }
+                    .onChange(of: spotifyDefaultViewModel.currentTrackUri) { oldValue, newValue in
+                        //print("currentSongBeingPlayed: \(newValue)")
+                        //fetchPlayerState()
+                        var idx = dictUriIdx[newValue] ?? -2
+                        if idx != -2 {
+                            
+                            selectedTrackInfoIdx = idx
+                            
+                            if idx < dictUriIdx.count {
+                                idx = idx - 1
+                            }
+                            reader.scrollTo(idx, anchor: .top)
+                        }
+                    }
+                    .navigationTitle(contentItem?.title ?? "")
+                }
+            } detail: {
+                Text("Select a track")
+            }
+            .navigationSplitViewStyle(.balanced)
+            .onChange(of: spotifyDefaultViewModel.currentSongBeingPlayed) { oldValue, newValue in
+                fetchPlayerState()
+            }
+            //.padding(0)
+        }*/
     }
+    
 }
-
-/*
- struct SpinningPlaylist_Previews: PreviewProvider {
- static var previews: some View {
- IC_SpinningPlaylistView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
- }
- }
- */

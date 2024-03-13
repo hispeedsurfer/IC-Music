@@ -12,18 +12,21 @@ struct IC_SpotifyLoginView: View {
     @ObservedObject var spotifyDefaultViewModel: IC_SpotifyDefaultViewModel
     @ObservedObject var spotifyLoginViewModel: IC_SpotifyLoginViewModel
     
+    /*
     init(spotifyDefaultViewModel: IC_SpotifyDefaultViewModel) {
         self.spotifyDefaultViewModel = spotifyDefaultViewModel
         self.spotifyLoginViewModel = IC_SpotifyLoginViewModel(spotifyDefaultViewModel: spotifyDefaultViewModel)
     }
-    
+    */
     
     /* only to clear the accessTokenKey
-    init(spotifyLoginViewModel: SpotifyLoginViewModel = SpotifyLoginViewModel()) {
-        self.spotifyLoginViewModel = spotifyLoginViewModel
-        UserDefaults.standard.set(nil, forKey: accessTokenKey)
-    }
      */
+    init(spotifyDefaultViewModel: IC_SpotifyDefaultViewModel) {
+        self.spotifyDefaultViewModel = spotifyDefaultViewModel
+        self.spotifyLoginViewModel = IC_SpotifyLoginViewModel(spotifyDefaultViewModel: spotifyDefaultViewModel)
+        //UserDefaults.standard.set(nil, forKey: accessTokenKey)
+    }
+    
     
     var body: some View {
         switch spotifyLoginViewModel.authState {
@@ -37,13 +40,25 @@ struct IC_SpotifyLoginView: View {
                 } label: {
                     Text(self.spotifyLoginViewModel.userConnectionButtonTitle)
                 }
+                Spacer()
+                Button(action: {
+                    UserDefaults.standard.removeObject(forKey: accessTokenKey)
+                }) {
+                    Text("Clear UserDefault accessTokenKey")
+                }
+                Spacer()
+                Button(action: {
+                    spotifyDefaultViewModel.connect()
+                }) {
+                    Text("authoriye and play")
+                }
             }
         case .loading:
             ProgressView()
         case .error:
             Text("ERROR")
         case .authorized:
-            IC_SpinningPlaylistView(spotifyDefaultViewModel: spotifyDefaultViewModel)
+            IC_SpinningPlaylistView(/*spotifyDefaultViewModel: spotifyDefaultViewModel*/)
         }
     }
 }

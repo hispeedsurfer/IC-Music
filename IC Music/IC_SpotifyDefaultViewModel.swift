@@ -44,14 +44,6 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
         }
     }
     
-    /*public internal(set) var accessToken: String {
-            get {
-                return self._accessToken
-            }
-            set {
-                self._accessToken = newValue
-            }
-        }*/
     @Published private var responseCode: String = "" {
         didSet {
 #if !USE_API
@@ -61,11 +53,17 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
                     case .finished:
                         break
                     case .failure(let error):                        
-                        //print(APIError.fetchingTokenRequestError(error))
-                        print("failture fetchAccessToken.receiveCompletion")
+                        print(APIError.fetchingTokenRequestError(error))
+                        //print("failture fetchAccessToken.receiveCompletion")
                     }
                 }, receiveValue: { [weak self] spotifyAccessToken in
                     if let accessToken = spotifyAccessToken.accessToken {
+                        /* not in original
+                        if self?.accessToken != accessToken {
+                            self?.accessToken = accessToken
+                        }*/
+                          
+                        
                         self?.appRemote.connectionParameters.accessToken = accessToken
                         self?.appRemote.connect()
                     }
@@ -86,6 +84,8 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
         
         // Set these url's to your backend which contains the secret to exchange for an access token
         // You can use the provided ruby script spotify_token_swap.rb for testing purposes
+        
+        /* !!! without tokenSwapURL and tokenRefreshURL configuration with session manager not working !!! */
         configuration.tokenSwapURL = URL(string: "http://localhost:1234/swap")
         configuration.tokenRefreshURL = URL(string: "http://localhost:1234/refresh")
         return configuration
@@ -97,8 +97,8 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
     }()
     
     lazy var appRemote: SPTAppRemote = {
-        let appRemote = SPTAppRemote(configuration: configuration, logLevel: .error)
-        appRemote.connectionParameters.accessToken = self.accessToken
+        let appRemote = SPTAppRemote(configuration: configuration, logLevel: .debug)
+        // not in original //appRemote.connectionParameters.accessToken = self.accessToken
         appRemote.delegate = self
         return appRemote
     }()
@@ -156,7 +156,6 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
         lastPlayerState = playerState
     }
     
-    private var bConnected = false
     func onOpenURL(url: URL) {
         let parameters = appRemote.authorizationParameters(from: url)
         
@@ -168,20 +167,6 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
 #if !USE_API
             print(APIError.noAccessTokenError(error_description))
 #endif
-        }
-        
-        bConnected = true
-    }
-    
-    func onOpenURLOrig(url: URL) {
-        let parameters = appRemote.authorizationParameters(from: url)
-
-        if let code = parameters?["code"] {
-            responseCode = code
-        } else if let access_token = parameters?[SPTAppRemoteAccessTokenKey] {
-            accessToken = access_token
-        } else if let error_description = parameters?[SPTAppRemoteErrorDescriptionKey] {
-            print(APIError.noAccessTokenError(error_description))
         }
     }
     
@@ -201,41 +186,22 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
         }
     }
     
+    func connect() {
+        guard let _ = self.appRemote.connectionParameters.accessToken else {
+            self.appRemote.authorizeAndPlayURI("")
+            
+            self.authenticationState = .authorized
+            
+            return
+        }
+        
+        appRemote.connect()
+    }
+    
     func connectUser() {
         guard let sessionManager = try? sessionManager else { return }
         sessionManager.initiateSession(with: scopes, options: .clientOnly)
         self.authenticationState = .loading
-        firstCall = false
-    }
-    
-    private var firstCall = true
-    func connect() {
-        //playerViewController.appRemoteConnecting()
-        if appRemote.isConnected == false && firstCall {
-            connectUser();
-            firstCall = false
-        }
-        else {
-            appRemote.connect()
-        }
-    }
-    
-    var defaultCallback: SPTAppRemoteCallback {
-        get {
-            return {[weak self] _, error in
-                if error != nil {
-                    // display error
-                }
-            }
-        }
-    }
-    
-    private func startPlayback2() {
-        appRemote.playerAPI?.resume(defaultCallback)
-    }
-    
-    private func pausePlayback2() {
-        appRemote.playerAPI?.pause(defaultCallback)
     }
     
     func didPressPlayPauseButton() {
@@ -244,10 +210,6 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
                 // The Spotify app is not installed, present the user with an App Store page
                 //showAppStoreInstall()
             }
-        } else if lastPlayerState == nil || lastPlayerState!.isPaused {
-            startPlayback2()
-        } else {
-            pausePlayback2()
         }
     }
     
@@ -333,6 +295,7 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
                     let newTrackInfo = IC_TrackInfo(context: viewContext)
                     newTrackInfo.trackURI = item.trackUri
                     newTrackInfo.trackTitle = item.trackTitle
+                    newTrackInfo.durationSeconds = item.durationSeconds
                     
                     var sportifyId = item.trackUri
                     
@@ -405,7 +368,7 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
                                 //print(item.title ?? "No title")
                                 //print("title \(item.title ?? "No title"), uri \(item.uri)")
                                 
-                                trackUris.append(TrackInit(trackUri: item.uri, trackTitle: item.title ?? "No title"))
+                                trackUris.append(TrackInit(trackUri: item.uri, trackTitle: item.title ?? "No title", durationSeconds: 0))
                             }
                             
                             let result: SearchResult = SearchResult(tracks: SearchResultTracks(searchResultIdx: self.trackItemsLoad(trackUris: trackUris)), playList: contentItem)
@@ -452,20 +415,33 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
                     if let tempo = trackData["tempo"] as? Double {
                         //print("Tempo for uri: \(trackInfo.trackURI ?? "") \(tempo)")
                         trackInfo.bpmSpotify = tempo
-                        
-                        
-                        DispatchQueue.main.async{
-                            do {
-                                if self.viewContext.hasChanges {
-                                    try self.viewContext.save()
-                                }
-                            } catch {
-                                let nsError = error as NSError
-                                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-                            }
-                         }
-                        
                     }
+                    
+                    if let duration = trackData["duration_ms"] as? Int {
+                        //print("Tempo for uri: \(trackInfo.trackURI ?? "") \(tempo)")
+                        trackInfo.durationSeconds = Int32((duration / 1000))
+                    }
+                    
+                    if let danceability = trackData["danceability"] as? Double {
+                        //print("Tempo for uri: \(trackInfo.trackURI ?? "") \(tempo)")
+                        trackInfo.danceability = danceability
+                    }
+                    
+                    if let energy = trackData["energy"] as? Double {
+                        //print("Tempo for uri: \(trackInfo.trackURI ?? "") \(tempo)")
+                        trackInfo.energy = energy
+                    }
+                    
+                    DispatchQueue.main.async{
+                        do {
+                            if self.viewContext.hasChanges {
+                                try self.viewContext.save()
+                            }
+                        } catch {
+                            let nsError = error as NSError
+                            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                        }
+                     }
                 }
             } catch {
                 print("Error parsing JSON: \(error.localizedDescription)")
@@ -512,6 +488,7 @@ extension IC_SpotifyDefaultViewModel: SPTAppRemotePlayerStateDelegate {
 extension IC_SpotifyDefaultViewModel: SPTAppRemoteDelegate{
     
     func appRemoteDidEstablishConnection(_ appRemote: SPTAppRemote) {
+        //self.appRemote = appRemote
         appRemote.playerAPI?.delegate = self
         appRemote.playerAPI?.subscribe(toPlayerState: { (success, error) in
             if let error = error {
@@ -528,7 +505,8 @@ extension IC_SpotifyDefaultViewModel: SPTAppRemoteDelegate{
     }
     
     func appRemote(_ appRemote: SPTAppRemote, didDisconnectWithError error: Error?) {
-        appRemote.connect()
+        // not in original // appRemote.connect()
+	connectUser()
         if let error {
 #if !USE_API
             print(APIError.appRemoteDisconnectedWithError(error))
@@ -541,12 +519,11 @@ extension IC_SpotifyDefaultViewModel: SPTAppRemoteDelegate{
     func appRemote(_ appRemote: SPTAppRemote, didFailConnectionAttemptWithError error: Error?) {
         if error != nil {
 #if !USE_API
-            if bConnected {
-                //print(APIError.appRemoteDidFailConnectionAttemptWithError(error))
-            }
+            //print(APIError.appRemoteDidFailConnectionAttemptWithError(error))
 #endif
         }
-        //connect()
+        // not in original // connect()
+	connectUser()
         lastPlayerState = nil
     }
     
@@ -563,7 +540,16 @@ extension IC_SpotifyDefaultViewModel: SPTSessionManagerDelegate {
     }
     
     func sessionManager(manager: SPTSessionManager, didInitiate session: SPTSession) {
-        appRemote.connectionParameters.accessToken = session.accessToken
-        appRemote.connect()
+        //appRemote.connectionParameters.accessToken = session.accessToken
+        
+        //appRemote.connect()
+        if session.isExpired && false {
+            sessionManager.renewSession()
+        } else {
+            // Store session and credentials
+            appRemote.connectionParameters.accessToken = session.accessToken
+            appRemote.connect()
+        }
+        
     }
 }

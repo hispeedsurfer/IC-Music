@@ -36,8 +36,11 @@ struct IC_MusicApp: App {
             IC_SpotifyLoginView(spotifyDefaultViewModel: spotifyDefaultViewModel)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .onOpenURL { url in
-                    spotifyDefaultViewModel.onOpenURLOrig(url: url)
+                    spotifyDefaultViewModel.onOpenURL(url: url)
                 }
+                //.onReceive(NotificationCenter.default.publisher(for: UIApplication.didFinishLaunchingNotification), perform: { _ in
+                //    spotifyDefaultViewModel.connect()
+                //})
                 .onAppear {
                     spotifyDefaultViewModel.didBecomeActive()
                 }
@@ -56,17 +59,19 @@ struct IC_MusicApp: App {
     var body: some Scene {
         WindowGroup {
             //IC_MusicPlaylistsSelectionView()
-            IC_SpinningPlaylistView()
+            //IC_SpinningPlaylistView()
+            IC_SpotifyLoginView(spotifyDefaultViewModel: spotifyDefaultViewModel)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .onOpenURL { url in
                     spotifyDefaultViewModel.onOpenURL(url: url)
                 }
-                .onReceive(NotificationCenter.default.publisher(for: UIApplication.didFinishLaunchingNotification), perform: { _ in
+                /*.onReceive(NotificationCenter.default.publisher(for: UIApplication.didFinishLaunchingNotification), perform: { _ in
                     spotifyDefaultViewModel.connectUser()
-                })
+                })*/
                 .onAppear {
-                    spotifyDefaultViewModel.connectUser()
-                    spotifyDefaultViewModel.didBecomeActive()
+                    //spotifyDefaultViewModel.connectUser()
+                    //spotifyDefaultViewModel.didBecomeActive()
+                    spotifyDefaultViewModel.didPressPlayPauseButton()
                 }
                 .onDisappear {
                     spotifyDefaultViewModel.willResignActive()
@@ -77,15 +82,33 @@ struct IC_MusicApp: App {
             switch scenePhase {
             case .background:
                 print("background")
-                try? persistenceController.container.viewContext.save()
-            case .active:
                 
-                if !hasTimeElapsed {
-                    hasTimeElapsed = true
+                //try? persistenceController.container.viewContext.save()
+                let context = persistenceController.container.viewContext
+                if context.hasChanges {
+                    do {
+                        try context.save()
+                    } catch {
+                        // Replace this implementation with code to handle the error appropriately.
+                        // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                        let nserror = error as NSError
+                        fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+                    }
                 }
-                else {
-                    spotifyDefaultViewModel.connect()
-                }
+                break
+                
+            case .inactive:
+                
+                break
+            //case .active:
+            //    
+            //    if !hasTimeElapsed {
+            //        hasTimeElapsed = true
+            //    }
+            //    else {
+            //       spotifyDefaultViewModel.connect()
+            //    }
+                
             default: break
             }
         }

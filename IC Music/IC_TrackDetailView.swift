@@ -13,49 +13,93 @@ import CoreData
 
 struct IC_TrackDetailView: View {
     @Environment(\.managedObjectContext) private var viewContext
-    @ObservedObject var trackInfo: IC_TrackInfo
+    @StateObject var trackInfo: IC_TrackInfo
     
     @Binding var isEditable: Bool
     
-    @ObservedObject var trackInfoAfter: IC_TrackInfo
+    @StateObject var trackInfoAfter: IC_TrackInfo
+    
+    let amountFormatter: NumberFormatter = {
+         let formatter = NumberFormatter()
+         formatter.zeroSymbol = ""
+         return formatter
+    }()
     
     var body: some View {
         VStack (spacing: 5) {
             
             TextEditor(text: Binding($trackInfo.customInfo)!)
                 .disabled(!isEditable)
-                .foregroundColor(Color.gray)
-                .font(.custom("HelveticaNeue", size: 25))
+                .font(.system(size: 25))
+                .foregroundColor(Color.blue)
+                //.padding()
+                .cornerRadius(10)
                 .lineSpacing(5)
-            //.padding()
+                .multilineTextAlignment(.leading)
+                //.padding()
             Divider()
             VStack {
-                Text("RPM User: \(trackInfoAfter.rpmUser ?? "")")
+                ZStack {
+                    HStack {
+                        Text("RPM User: \(trackInfoAfter.rpmUser ?? "")").font(.system(size: 15)).padding([.leading])
+                        Spacer()
+                    }
+                    
+                    HStack{
+                        Text("\(trackInfoAfter.trackTitle ?? "")")
+                    }
+
+                    HStack {
+                        Spacer()
+                        Text("BPM Spotify: \(String(format: "%.0f", trackInfoAfter.bpmSpotify))").font(.system(size: 15)).padding([.trailing])
+                    }
+                }
+                    .padding(0)
                 TextEditor(text: Binding($trackInfoAfter.customInfo)!)
                     .disabled(!isEditable)
-                    .foregroundColor(Color.gray)
-                    .font(.custom("HelveticaNeue", size: 20))
-                    .lineSpacing(3)
+                    .font(.system(size: 22))
+                    .foregroundColor(Color.blue)
+                    .cornerRadius(10)
+                    .lineSpacing(5)
+                    .multilineTextAlignment(.leading)
                 //.padding()
             }
         }
-        .navigationTitle("\(trackInfo.trackTitle ?? "Unknown track")")
-        .navigationBarItems(leading:
-                                VStack {
-            HStack (spacing: 5) {
-                Text("BPM User: ")
-                if trackInfoAfter.rpmUser != nil {
-                    TextField("RPM User", text: Binding($trackInfo.rpmUser)!).disabled(!isEditable)
+        .toolbar{
+            ToolbarItem(placement:.topBarLeading){
+                HStack {
+                    VStack {
+                        HStack (spacing: 0) {
+                            Text("Dancebility: \(String(format: "%.3f", trackInfo.danceability))")
+                        }
+                        HStack (spacing: 0) {
+                            Text("Energy: \(String(format: "%.3f", trackInfo.energy))")
+                            Spacer()
+                        }
+                    }.padding([.trailing])
                 }
+                //.padding()
+                //.frame(width: geometry.size.width)
             }
-            HStack (spacing: 5) {
-                Text("BPM Spotify: \(String(format: "%.0f", trackInfo.bpmSpotify))")
-                Spacer()
+            ToolbarItem(placement:.topBarTrailing){
+                HStack {
+                    VStack {
+                        HStack (spacing: 0) {
+                            Text("RPM User: ")
+                            TextField("RPM User", text: Binding($trackInfo.rpmUser)!).disabled(!isEditable).disableAutocorrection(true)
+                        }
+                        HStack (spacing: 0) {
+                            Text("BPM Spotify: \(String(format: "%.0f", trackInfo.bpmSpotify))")
+                            //TextField("BPM Spotify", value: $trackInfo.bpmSpotify, formatter: amountFormatter).keyboardType(.decimalPad).disabled(!isEditable)
+                            Spacer()
+                        }
+                    }.padding([.trailing])
+                }
+                //.padding()
+                //.frame(width: geometry.size.width)
             }
         }
-                            //.padding()
-                            //.frame(width: geometry.size.width)
-        )
+        .navigationTitle("\(trackInfo.trackTitle ?? "Unknown track")")
     }
 }
 
@@ -65,40 +109,4 @@ struct IC_TrackDetailView_Previews: PreviewProvider {
     }
 }
 
-
-// Create a detail view that shows the track information and allows the user to enter and save custom information
-struct IC_TrackDetailViewOld: View {
-    @Environment(\.managedObjectContext) private var viewContext
-    @ObservedObject var trackInfo: IC_TrackInfo
-    
-    var body: some View {
-        VStack {
-            TextField("Enter custom information", text: Binding($trackInfo.customInfo)!)
-                .padding()
-                .border(Color.gray)
-            
-            TextEditor(text: Binding($trackInfo.customInfo)!)
-                .foregroundColor(Color.gray)
-                .font(.custom("HelveticaNeue", size: 25))
-                .lineSpacing(5)
-            Button("Save") {
-                //trackInfo.customInfo = customInfo
-                try? viewContext.save()
-            }
-            .padding()
-            .foregroundColor(.white)
-            .background(Color.green)
-            .cornerRadius(10)
-            Button("Delete") {
-                // Delete the TrackInfo object from Core Data
-                //viewContext.delete(trackInfo.first!)
-                //try? viewContext.save()
-            }
-            .padding()
-            .foregroundColor(.white)
-            .background(Color.red)
-            .cornerRadius(10)
-        }
-    }
-}
 
