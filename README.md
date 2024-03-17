@@ -6,3 +6,8 @@ Vorraussetzungen bei der Entwicklung:
 - SwiftUi
 - Informationen zu aktuellem und naechsten Track/Titel
 - 
+
+
+TODOs
+- Gesamtzeit der Playlist
+- 
