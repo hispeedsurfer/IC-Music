@@ -40,7 +40,7 @@ extension NSPersistentContainer {
                     do {
                         try FileManager.default.removeItem(at: destination!)
                     } catch {
-                        throw CopyPersistentStoreErrors.destinationNotRemoved("Can't overwrite destination at \(destination)")
+                        throw CopyPersistentStoreErrors.destinationNotRemoved("Can't overwrite destination at \(String(describing: destination))")
                     }
                 }
                 try FileManager.default.createDirectory(at: destinationURL!, withIntermediateDirectories: true, attributes: nil)

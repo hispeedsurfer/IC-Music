@@ -37,7 +37,7 @@ class IC_SpotifyAPIDefaultHandler: NSObject, ObservableObject {
         var requestBodyComponents = URLComponents()
         let scopeAsString = stringScopes.joined(separator: " ")
 
-        guard let nonOptionalResponseCode = responseCode else {
+        guard responseCode != nil else {
             return Fail(error: APIError.invalidRequestError("Invalid response code"))
                 .eraseToAnyPublisher()
         }
