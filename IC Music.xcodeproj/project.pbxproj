@@ -20,6 +20,7 @@
 		A99C0B432B9E578900AFD370 /* IC_SliderMusic.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99C0B422B9E578900AFD370 /* IC_SliderMusic.swift */; };
 		A99C0B452B9E585600AFD370 /* IC_ToggleEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99C0B442B9E585600AFD370 /* IC_ToggleEdit.swift */; };
 		A9A4CC492B8DF05100DE9B22 /* IC_SpinningPlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A4CC482B8DF05100DE9B22 /* IC_SpinningPlaylistView.swift */; };
+		A9B0ECD02BA61E2800A81BD5 /* FileImportExportCtrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B0ECCF2BA61E2800A81BD5 /* FileImportExportCtrl.swift */; };
 		A9C377822BA0C45200E8C49D /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9C377812BA0C45200E8C49D /* SpotifyiOS.framework */; };
 		A9C4D2C72B9C2E3600CA1233 /* IC_SpotifyLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4D2C62B9C2E3600CA1233 /* IC_SpotifyLoginViewModel.swift */; };
 		A9C4D2C92B9C2F2F00CA1233 /* IC_SpotifyAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4D2C82B9C2F2F00CA1233 /* IC_SpotifyAccessToken.swift */; };
@@ -29,6 +30,7 @@
 		A9C4D2D42B9C34BD00CA1233 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A9C4D2D32B9C34BD00CA1233 /* README.md */; };
 		A9C4ED1D2B8DF7840024C4B3 /* IC_TrackDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4ED1C2B8DF7840024C4B3 /* IC_TrackDetailView.swift */; };
 		A9C4ED1E2B8DFC530024C4B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A942B6042B8BA34000BC2D73 /* Assets.xcassets */; };
+		A9DF0CBF2BA4406700A4F4B6 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DF0CBE2BA4406700A4F4B6 /* OptionsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +51,7 @@
 		A99C0B422B9E578900AFD370 /* IC_SliderMusic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_SliderMusic.swift; sourceTree = "<group>"; };
 		A99C0B442B9E585600AFD370 /* IC_ToggleEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_ToggleEdit.swift; sourceTree = "<group>"; };
 		A9A4CC482B8DF05100DE9B22 /* IC_SpinningPlaylistView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IC_SpinningPlaylistView.swift; sourceTree = "<group>"; };
+		A9B0ECCF2BA61E2800A81BD5 /* FileImportExportCtrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileImportExportCtrl.swift; sourceTree = "<group>"; };
 		A9C377812BA0C45200E8C49D /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
 		A9C4D2C62B9C2E3600CA1233 /* IC_SpotifyLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_SpotifyLoginViewModel.swift; sourceTree = "<group>"; };
 		A9C4D2C82B9C2F2F00CA1233 /* IC_SpotifyAccessToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IC_SpotifyAccessToken.swift; sourceTree = "<group>"; };
@@ -57,6 +60,7 @@
 		A9C4D2CE2B9C316700CA1233 /* IC_Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IC_Constants.swift; sourceTree = "<group>"; };
 		A9C4D2D32B9C34BD00CA1233 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A9C4ED1C2B8DF7840024C4B3 /* IC_TrackDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IC_TrackDetailView.swift; sourceTree = "<group>"; };
+		A9DF0CBE2BA4406700A4F4B6 /* OptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,7 @@
 				A99C0B402B9E53FF00AFD370 /* IC_FileImporter.swift */,
 				A942B60B2B8BA34000BC2D73 /* IC_Music.xcdatamodeld */,
 				A942B6002B8BA33E00BC2D73 /* IC_MusicApp.swift */,
+				A99C0B422B9E578900AFD370 /* IC_SliderMusic.swift */,
 				A9A4CC482B8DF05100DE9B22 /* IC_SpinningPlaylistView.swift */,
 				A9C4D2C82B9C2F2F00CA1233 /* IC_SpotifyAccessToken.swift */,
 				A9C4D2CA2B9C2F8100CA1233 /* IC_SpotifyAPIDefaultHandler.swift */,
@@ -106,6 +111,7 @@
 				A90268CB2B932DC500052FB3 /* IC_SpotifyDefaultViewModel.swift */,
 				A942B69B2B8BC5ED00BC2D73 /* IC_SpotifyLoginView.swift */,
 				A9C4D2C62B9C2E3600CA1233 /* IC_SpotifyLoginViewModel.swift */,
+				A99C0B442B9E585600AFD370 /* IC_ToggleEdit.swift */,
 				A9C4ED1C2B8DF7840024C4B3 /* IC_TrackDetailView.swift */,
 				A942B6902B8BA89700BC2D73 /* IC-Music-Bridging-Header.h */,
 				A942B68E2B8BA60500BC2D73 /* IC-Music-Info.plist */,
@@ -113,8 +119,8 @@
 				A942B6092B8BA34000BC2D73 /* Persistence.swift */,
 				A942B6062B8BA34000BC2D73 /* Preview Content */,
 				A965A5242B94F3D500FB98BE /* ZipFile.swift */,
-				A99C0B422B9E578900AFD370 /* IC_SliderMusic.swift */,
-				A99C0B442B9E585600AFD370 /* IC_ToggleEdit.swift */,
+				A9DF0CBE2BA4406700A4F4B6 /* OptionsView.swift */,
+				A9B0ECCF2BA61E2800A81BD5 /* FileImportExportCtrl.swift */,
 			);
 			path = "IC Music";
 			sourceTree = "<group>";
@@ -225,6 +231,8 @@
 				A9C4D2C92B9C2F2F00CA1233 /* IC_SpotifyAccessToken.swift in Sources */,
 				A9C4D2C72B9C2E3600CA1233 /* IC_SpotifyLoginViewModel.swift in Sources */,
 				A9A4CC492B8DF05100DE9B22 /* IC_SpinningPlaylistView.swift in Sources */,
+				A9B0ECD02BA61E2800A81BD5 /* FileImportExportCtrl.swift in Sources */,
+				A9DF0CBF2BA4406700A4F4B6 /* OptionsView.swift in Sources */,
 				A9C4D2CB2B9C2F8100CA1233 /* IC_SpotifyAPIDefaultHandler.swift in Sources */,
 				A90268CC2B932DC500052FB3 /* IC_SpotifyDefaultViewModel.swift in Sources */,
 				A99C0B412B9E53FF00AFD370 /* IC_FileImporter.swift in Sources */,

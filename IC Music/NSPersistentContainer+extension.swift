@@ -158,6 +158,8 @@ extension NSPersistentContainer {
                 }
                 
 #if ZIP_FILE
+                // one way to zip files using ZIPFoundation
+                // BEGIN ZIPFoundation
                 let fm = FileManager.default
                 let tmpUrl1 = try! fm.url(
                     for: .documentDirectory,
@@ -173,7 +175,9 @@ extension NSPersistentContainer {
                 try fm.zipItem(at: destinationURL, to: tmpUrl1)
                 // if we encounter an error, store it here
                 var error: NSError?
+                // END ZIPFoundation
 
+                // another way to zip files without 3rd party dependencies
                 let coordinator = NSFileCoordinator()
                 // zip up the documents directory
                 // this method is synchronous and the block will be executed before it returns

@@ -52,17 +52,17 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
                     switch completion {
                     case .finished:
                         break
-                    case .failure(let error):                        
+                    case .failure(let error):
                         print(APIError.fetchingTokenRequestError(error))
                         //print("failture fetchAccessToken.receiveCompletion")
                     }
                 }, receiveValue: { [weak self] spotifyAccessToken in
                     if let accessToken = spotifyAccessToken.accessToken {
-                        /* not in original
+                        /* not in original */
                         if self?.accessToken != accessToken {
                             self?.accessToken = accessToken
-                        }*/
-                          
+                        }
+                        
                         
                         self?.appRemote.connectionParameters.accessToken = accessToken
                         self?.appRemote.connect()
@@ -93,13 +93,15 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
     
     lazy var sessionManager: SPTSessionManager = {
         let manager = SPTSessionManager(configuration: configuration, delegate: self)
+        print("sessionManager init")
         return manager
     }()
     
     lazy var appRemote: SPTAppRemote = {
-        let appRemote = SPTAppRemote(configuration: configuration, logLevel: .debug)
+        let appRemote = SPTAppRemote(configuration: configuration, logLevel: .error)
         // not in original //appRemote.connectionParameters.accessToken = self.accessToken
         appRemote.delegate = self
+        print("appRemote initialized")
         return appRemote
     }()
     
@@ -160,9 +162,12 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
         let parameters = appRemote.authorizationParameters(from: url)
         
         if let code = parameters?["code"] {
+            print("'code' from authorizationParameters(from: url)")
             responseCode = code
         } else if let access_token = parameters?[SPTAppRemoteAccessTokenKey] {
-            accessToken = access_token
+            print("'accessToken' from authorizationParameters(from: url)")
+            self.accessToken = access_token
+            appRemote.connectionParameters.accessToken = accessToken
         } else if let error_description = parameters?[SPTAppRemoteErrorDescriptionKey] {
 #if !USE_API
             print(APIError.noAccessTokenError(error_description))
@@ -172,12 +177,20 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
     
     func didBecomeActive() {
         if let accessToken = appRemote.connectionParameters.accessToken {
+            print("accessToken from appRemote.connectionParameters")
             appRemote.connectionParameters.accessToken = accessToken
-            appRemote.connect()
+            //appRemote.connect()
         } else if let accessToken = accessToken {
+            print("accessToken from userdefault")
             appRemote.connectionParameters.accessToken = accessToken
-            appRemote.connect()
+            //appRemote.connect()
         }
+        else {
+            print("no valid accessToken")
+        }
+        
+        print("appRemote.connect")
+        appRemote.connect()
     }
     
     func willResignActive() {
@@ -190,6 +203,10 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
         guard let _ = self.appRemote.connectionParameters.accessToken else {
             self.appRemote.authorizeAndPlayURI("")
             
+            self.authenticationState = .loading
+            
+            self.appRemote.connect()
+            
             self.authenticationState = .authorized
             
             return
@@ -199,9 +216,12 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
     }
     
     func connectUser() {
+        print("connectUser using sessionManager")
         guard let sessionManager = try? sessionManager else { return }
         sessionManager.initiateSession(with: scopes, options: .clientOnly)
         self.authenticationState = .loading
+        
+        appRemote.connect()
     }
     
     func didPressPlayPauseButton() {
@@ -401,12 +421,12 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
             
             do {
                 /*
-                let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-                
-                let decoder = JSONDecoder()
-                let dataModel = try decoder.decode(AudioFeatures.self, from: data) {
-                    print("Tempo: \(dataModel.tempo)")
-                }*/
+                 let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                 
+                 let decoder = JSONDecoder()
+                 let dataModel = try decoder.decode(AudioFeatures.self, from: data) {
+                 print("Tempo: \(dataModel.tempo)")
+                 }*/
                 let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
                 if let trackData = json {
                     // Parse and use the track data as needed
@@ -441,7 +461,7 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
                             let nsError = error as NSError
                             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
                         }
-                     }
+                    }
                 }
             } catch {
                 print("Error parsing JSON: \(error.localizedDescription)")
@@ -506,7 +526,7 @@ extension IC_SpotifyDefaultViewModel: SPTAppRemoteDelegate{
     
     func appRemote(_ appRemote: SPTAppRemote, didDisconnectWithError error: Error?) {
         // not in original // appRemote.connect()
-	connectUser()
+        connectUser()
         if let error {
 #if !USE_API
             print(APIError.appRemoteDisconnectedWithError(error))
@@ -519,11 +539,14 @@ extension IC_SpotifyDefaultViewModel: SPTAppRemoteDelegate{
     func appRemote(_ appRemote: SPTAppRemote, didFailConnectionAttemptWithError error: Error?) {
         if error != nil {
 #if !USE_API
-            //print(APIError.appRemoteDidFailConnectionAttemptWithError(error))
+            //print(APIError.appRemoteDidFailConnectionAttemptWithError(error!))
 #endif
         }
-        // not in original // connect()
-	connectUser()
+	
+        print("didFailConnectionAttemptWithError")
+	
+        connectUser()
+        
         lastPlayerState = nil
     }
     

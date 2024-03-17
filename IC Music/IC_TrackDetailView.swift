@@ -65,7 +65,9 @@ struct IC_TrackDetailView: View {
                 //.padding()
             }
         }
-        .toolbar{
+        .toolbarBackground(Color(UIColor.lightGray), for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
+        .toolbar (content: ) {
             ToolbarItem(placement:.topBarLeading){
                 HStack {
                     VStack {
@@ -81,6 +83,7 @@ struct IC_TrackDetailView: View {
                 //.padding()
                 //.frame(width: geometry.size.width)
             }
+            
             ToolbarItem(placement:.topBarTrailing){
                 HStack {
                     VStack {
@@ -99,7 +102,9 @@ struct IC_TrackDetailView: View {
                 //.frame(width: geometry.size.width)
             }
         }
+        .id(UUID())// Work around to get disappearing tool bar items visible >> https://stackoverflow.com/questions/77399056/swiftui-toolbaritem-button-disappears-after-rotation-in-ios17
         .navigationTitle("\(trackInfo.trackTitle ?? "Unknown track")")
+        .toolbarTitleDisplayMode(.inline) // for a smaller toolbar
     }
 }
 

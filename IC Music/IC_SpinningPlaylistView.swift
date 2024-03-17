@@ -50,6 +50,8 @@ struct IC_SpinningPlaylistView: View {
     //@State  var trackInfo: IC_TrackInfo?
     @State private var playerState: SPTAppRemotePlayerState?
     
+    @StateObject var fileImportExportCtrl: FileImportExportCtrl = FileImportExportCtrl()
+    
     @State private var document = ""
     
     private var bDep: Bool = true
@@ -134,43 +136,65 @@ struct IC_SpinningPlaylistView: View {
     
     var body: some View {
         
-        IC_FileImporter()
+        //IC_FileImporter()
         
         VStack(spacing:5) {
             HStack(spacing:5){
                 TextField("Enter Spotify URI", text: $playlistURI)
                 //.padding()
                     .border(Color.gray)
-                Button("Fetch Content Item") {
-                    //fetchContent()
-                    spotifyDefaultViewModel.getSearch(playlistURI: playlistURI, playTrack: true){ result in
-                        //self.query = txt
-                        DispatchQueue.main.async {
-                            switch result {
-                            case .success(let success):
-                                self.trackItmems = success.tracks.searchResultIdx.items
-                                self.dictUriIdx = success.tracks.searchResultIdx.dictUriIdx
-                                self.playlistURI = ""
-                                self.contentItem = success.playList
-                            case .failure(let error):
-                                print( "tes \(error.localizedDescription)")
+                HStack (spacing:2) {
+                    Button("Fetch Content Item") {
+                        //fetchContent()
+                        spotifyDefaultViewModel.getSearch(playlistURI: playlistURI, playTrack: true){ result in
+                            //self.query = txt
+                            DispatchQueue.main.async {
+                                switch result {
+                                case .success(let success):
+                                    self.trackItmems = success.tracks.searchResultIdx.items
+                                    self.dictUriIdx = success.tracks.searchResultIdx.dictUriIdx
+                                    self.playlistURI = ""
+                                    self.contentItem = success.playList
+                                case .failure(let error):
+                                    print( "tes \(error.localizedDescription)")
+                                }
                             }
                         }
                     }
+                    //.padding()
+                    .foregroundColor(.white)
+                    .background(Color.green)
+                    .cornerRadius(5)
+                    
+                    OptionsView(fileImportExportCtrl: fileImportExportCtrl)
+                    .fileExporter(isPresented: self.$fileImportExportCtrl.showFileExporter, document: self.fileImportExportCtrl.zipFile, contentType: .zip) { result in
+                        print("Exported ZIP:", result)
+                    }
+                    .fileImporter(isPresented: $fileImportExportCtrl.isImporting,
+                                      allowedContentTypes: [.zip],
+                                      onCompletion: { result in
+                            
+                            switch result {
+                            case .success(let url):
+                                // url contains the URL of the chosen file.
+                                //let newImage = createImage(imageFile: url)
+                                print("url: \(url)")
+                                spotifyDefaultViewModel.restorePersistentStore(url: url)
+                                self.fileImportExportCtrl.importShouldBeShown = false
+                            case .failure(let error):
+                                print(error)
+                            }
+                        })
                 }
-                //.padding()
-                .foregroundColor(.white)
-                .background(Color.green)
-                .cornerRadius(5)
             }
         }
         
         IC_SliderMusic()
         
         //if(bDep) {
-            NavigationView {
-                ScrollViewReader { reader in
-                    
+        NavigationView {
+            ScrollViewReader { reader in
+                
                 Toggle(isEditable ? "Edit Mode" : "Read Mode", isOn: $isEditable)
                     .onChange(of: isEditable) {
                         if !isEditable && viewContext.hasChanges {
@@ -182,76 +206,76 @@ struct IC_SpinningPlaylistView: View {
                             }
                         }
                     }
-                    List (selection: binding(for: spotifyDefaultViewModel.currentTrackUri)){
-                        let sortedKeysAndValues = trackItmems.sorted() { $0.0 < $1.0 }
-                        ForEach(sortedKeysAndValues, id: \.key) { idx, trackInfo in
-                            NavigationLink(destination: IC_TrackDetailView(trackInfo: trackInfo, isEditable: self.$isEditable, trackInfoAfter: trackItmems[idx+1] ?? trackInfoEmpty), tag: idx, selection: binding(for: spotifyDefaultViewModel.currentTrackUri)) {
-                                Text("\(trackInfo.trackTitle ?? "")")
-                                    .id(idx)
-                                    .foregroundColor(trackInfo.trackURI==spotifyDefaultViewModel.currentTrackUri ? .white : .black)
-                            }
+                List (selection: binding(for: spotifyDefaultViewModel.currentTrackUri)){
+                    let sortedKeysAndValues = trackItmems.sorted() { $0.0 < $1.0 }
+                    ForEach(sortedKeysAndValues, id: \.key) { idx, trackInfo in
+                        NavigationLink(destination: IC_TrackDetailView(trackInfo: trackInfo, isEditable: self.$isEditable, trackInfoAfter: trackItmems[idx+1] ?? trackInfoEmpty), tag: idx, selection: binding(for: spotifyDefaultViewModel.currentTrackUri)) {
+                            Text("\(trackInfo.trackTitle ?? "")")
+                                .id(idx)
+                                .foregroundColor(trackInfo.trackURI==spotifyDefaultViewModel.currentTrackUri ? .white : .black)
                         }
                     }
-                    //.listStyle(.sidebar) if active sidebar in this case is nomore hidding when in split view expanded
-                    .onChange(of: spotifyDefaultViewModel.currentTrackUri) { oldValue, newValue in
-                        //print("currentSongBeingPlayed: \(newValue)")
-                        //fetchPlayerState()
-                        var idx = dictUriIdx[newValue] ?? -2
-                        if idx != -2 {
-                            if idx < dictUriIdx.count {
-                                idx = idx - 1
-                            }
-                            reader.scrollTo(idx, anchor: .top)
-                        }
-                    }
-                    .navigationTitle(contentItem?.title ?? "")
-                    //.listStyle(GroupedListStyle()).navigationBarTitle("Settings")
                 }
+                //.listStyle(.sidebar) if active sidebar in this case is nomore hidding when in split view expanded
+                .onChange(of: spotifyDefaultViewModel.currentTrackUri) { oldValue, newValue in
+                    //print("currentSongBeingPlayed: \(newValue)")
+                    //fetchPlayerState()
+                    var idx = dictUriIdx[newValue] ?? -2
+                    if idx != -2 {
+                        if idx < dictUriIdx.count {
+                            idx = idx - 1
+                        }
+                        reader.scrollTo(idx, anchor: .top)
+                    }
+                }
+                .navigationTitle(contentItem?.title ?? "")
+                //.listStyle(GroupedListStyle()).navigationBarTitle("Settings")
             }
-            .onChange(of: spotifyDefaultViewModel.currentSongBeingPlayed) { oldValue, newValue in
-                //print("currentSongBeingPlayed: \(newValue)")
-                fetchPlayerState()
-            }
-            .padding(0)
+        }
+        .onChange(of: spotifyDefaultViewModel.currentSongBeingPlayed) { oldValue, newValue in
+            //print("currentSongBeingPlayed: \(newValue)")
+            fetchPlayerState()
+        }
+        .padding(0)
         /*}
-        else {
-            NavigationSplitView(columnVisibility: $columnVisibility) {
-                ScrollViewReader { reader in
-                    
-                    IC_ToggleEdit(isEditable: isEditable)
-                    
-                    List(sortedTrackItems, id: \.key, selection: $selectedTrackInfoIdx) { key, trackInfo in
-                        NavigationLink(trackInfo.trackTitle ?? "", selection: $selectedTrackInfoIdx) {
-                            IC_TrackDetailView(trackInfo: trackInfo, isEditable: self.$isEditable, trackInfoAfter: trackInfoEmpty)
-                        }
-                        .tag(key)
-                        .id(key)
-                    }
-                    .onChange(of: spotifyDefaultViewModel.currentTrackUri) { oldValue, newValue in
-                        //print("currentSongBeingPlayed: \(newValue)")
-                        //fetchPlayerState()
-                        var idx = dictUriIdx[newValue] ?? -2
-                        if idx != -2 {
-                            
-                            selectedTrackInfoIdx = idx
-                            
-                            if idx < dictUriIdx.count {
-                                idx = idx - 1
-                            }
-                            reader.scrollTo(idx, anchor: .top)
-                        }
-                    }
-                    .navigationTitle(contentItem?.title ?? "")
-                }
-            } detail: {
-                Text("Select a track")
-            }
-            .navigationSplitViewStyle(.balanced)
-            .onChange(of: spotifyDefaultViewModel.currentSongBeingPlayed) { oldValue, newValue in
-                fetchPlayerState()
-            }
-            //.padding(0)
-        }*/
+         else {
+         NavigationSplitView(columnVisibility: $columnVisibility) {
+         ScrollViewReader { reader in
+         
+         IC_ToggleEdit(isEditable: isEditable)
+         
+         List(sortedTrackItems, id: \.key, selection: $selectedTrackInfoIdx) { key, trackInfo in
+         NavigationLink(trackInfo.trackTitle ?? "", selection: $selectedTrackInfoIdx) {
+         IC_TrackDetailView(trackInfo: trackInfo, isEditable: self.$isEditable, trackInfoAfter: trackInfoEmpty)
+         }
+         .tag(key)
+         .id(key)
+         }
+         .onChange(of: spotifyDefaultViewModel.currentTrackUri) { oldValue, newValue in
+         //print("currentSongBeingPlayed: \(newValue)")
+         //fetchPlayerState()
+         var idx = dictUriIdx[newValue] ?? -2
+         if idx != -2 {
+         
+         selectedTrackInfoIdx = idx
+         
+         if idx < dictUriIdx.count {
+         idx = idx - 1
+         }
+         reader.scrollTo(idx, anchor: .top)
+         }
+         }
+         .navigationTitle(contentItem?.title ?? "")
+         }
+         } detail: {
+         Text("Select a track")
+         }
+         .navigationSplitViewStyle(.balanced)
+         .onChange(of: spotifyDefaultViewModel.currentSongBeingPlayed) { oldValue, newValue in
+         fetchPlayerState()
+         }
+         //.padding(0)
+         }*/
     }
     
 }
