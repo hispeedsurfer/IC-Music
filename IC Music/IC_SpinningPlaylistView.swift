@@ -189,12 +189,20 @@ struct IC_SpinningPlaylistView: View {
             }
         }
         
-        IC_SliderMusic()
+        HStack(spacing: 2) {
+            IC_SliderMusic()
+            
+            Spacer(minLength: 50)
+            
+            IC_ToggleEdit(isEditable: $isEditable)
+                .frame(maxWidth: 180)
+        }
         
         //if(bDep) {
         NavigationView {
             ScrollViewReader { reader in
                 
+                /*
                 Toggle(isEditable ? "Edit Mode" : "Read Mode", isOn: $isEditable)
                     .onChange(of: isEditable) {
                         if !isEditable && viewContext.hasChanges {
@@ -206,6 +214,7 @@ struct IC_SpinningPlaylistView: View {
                             }
                         }
                     }
+                 */
                 List (selection: binding(for: spotifyDefaultViewModel.currentTrackUri)){
                     let sortedKeysAndValues = trackItmems.sorted() { $0.0 < $1.0 }
                     ForEach(sortedKeysAndValues, id: \.key) { idx, trackInfo in
@@ -241,8 +250,6 @@ struct IC_SpinningPlaylistView: View {
          else {
          NavigationSplitView(columnVisibility: $columnVisibility) {
          ScrollViewReader { reader in
-         
-         IC_ToggleEdit(isEditable: isEditable)
          
          List(sortedTrackItems, id: \.key, selection: $selectedTrackInfoIdx) { key, trackInfo in
          NavigationLink(trackInfo.trackTitle ?? "", selection: $selectedTrackInfoIdx) {
