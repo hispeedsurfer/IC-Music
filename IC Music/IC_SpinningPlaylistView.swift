@@ -243,6 +243,14 @@ struct IC_SpinningPlaylistView: View {
         }
         .onChange(of: spotifyDefaultViewModel.currentSongBeingPlayed) { oldValue, newValue in
             //print("currentSongBeingPlayed: \(newValue)")
+            if !isEditable && viewContext.hasChanges {
+                do {
+                    try viewContext.save()
+                } catch {
+                    let nsError = error as NSError
+                    fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                }
+            }
             fetchPlayerState()
         }
         .padding(0)
