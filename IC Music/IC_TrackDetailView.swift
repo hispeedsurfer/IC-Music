@@ -15,6 +15,11 @@ struct IC_TrackDetailView: View {
     @Environment(\.managedObjectContext) private var viewContext
     @StateObject var trackInfo: IC_TrackInfo
     
+    @State var refreshID = UUID()
+    
+    @Environment(\.verticalSizeClass) var verticalSizeClass: UserInterfaceSizeClass?
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass: UserInterfaceSizeClass?
+    
     @Binding var isEditable: Bool
     
     @StateObject var trackInfoAfter: IC_TrackInfo
@@ -64,7 +69,12 @@ struct IC_TrackDetailView: View {
                     .multilineTextAlignment(.leading)
                 //.padding()
             }
-        }
+        }.onChange(of: verticalSizeClass, { oldValue, newValue in
+            refreshID = UUID()
+        })
+        .onChange(of: horizontalSizeClass, { oldValue, newValue in
+            refreshID = UUID()
+        })
         .toolbarBackground(Color(UIColor.lightGray), for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbar (content: ) {
@@ -102,7 +112,7 @@ struct IC_TrackDetailView: View {
                 //.frame(width: geometry.size.width)
             }
         }
-        .id(UUID())// Work around to get disappearing tool bar items visible >> https://stackoverflow.com/questions/77399056/swiftui-toolbaritem-button-disappears-after-rotation-in-ios17
+        .id(refreshID)// Work around to get disappearing tool bar items visible >> https://stackoverflow.com/questions/77399056/swiftui-toolbaritem-button-disappears-after-rotation-in-ios17
         .navigationTitle("\(trackInfo.trackTitle ?? "Unknown track")")
         .toolbarTitleDisplayMode(.inline) // for a smaller toolbar
     }
