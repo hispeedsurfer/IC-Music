@@ -8,7 +8,7 @@
 import Foundation
 
 let accessTokenKey = "access-token-key"
-let redirectURI = URL(string: "hispeedsurfericmusic://")!//URL(string: "es://hispeedsurfer")!
+let redirectURI = URL(string: "hispeedsurfericmusic://callback")!//URL(string: "es://hispeedsurfer")!
 let spotifyClientID = "5f308760d35546d3aa83003c0958af66"//"f99de9449183486c9d106b5f36a39e1b"
 let spotifyCLientSecretKey = "ed0ba77269f14dc2baae58cbdbccd298"// "08b56e0806d54767a8975772161006bf"
 
