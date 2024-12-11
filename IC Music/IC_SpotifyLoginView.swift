@@ -55,11 +55,11 @@ struct IC_SpotifyLoginView: View {
             }
         case .loading:
             //ProgressView()
-            IC_SpinningPlaylistView(/*spotifyDefaultViewModel: spotifyDefaultViewModel*/)
+            IC_SpinningPlaylistView()
         case .error:
             Text("ERROR")
         case .authorized:
-            IC_SpinningPlaylistView(/*spotifyDefaultViewModel: spotifyDefaultViewModel*/)
+            IC_SpinningPlaylistView()
         }
     }
 }

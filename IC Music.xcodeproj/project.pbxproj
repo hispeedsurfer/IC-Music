@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -16,12 +16,13 @@
 		A942B69C2B8BC5ED00BC2D73 /* IC_SpotifyLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942B69B2B8BC5ED00BC2D73 /* IC_SpotifyLoginView.swift */; };
 		A965A5252B94F3D500FB98BE /* ZipFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A965A5242B94F3D500FB98BE /* ZipFile.swift */; };
 		A99118E72B9C4DCD00110793 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A99118E42B9C4BED00110793 /* Localizable.strings */; };
+		A996335E2CC0787400C2AA26 /* SpotifyiOS.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A996335D2CC077EF00C2AA26 /* SpotifyiOS.xcframework */; };
+		A996335F2CC0787400C2AA26 /* SpotifyiOS.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A996335D2CC077EF00C2AA26 /* SpotifyiOS.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A99C0B412B9E53FF00AFD370 /* IC_FileImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99C0B402B9E53FF00AFD370 /* IC_FileImporter.swift */; };
 		A99C0B432B9E578900AFD370 /* IC_SliderMusic.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99C0B422B9E578900AFD370 /* IC_SliderMusic.swift */; };
 		A99C0B452B9E585600AFD370 /* IC_ToggleEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99C0B442B9E585600AFD370 /* IC_ToggleEdit.swift */; };
 		A9A4CC492B8DF05100DE9B22 /* IC_SpinningPlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A4CC482B8DF05100DE9B22 /* IC_SpinningPlaylistView.swift */; };
 		A9B0ECD02BA61E2800A81BD5 /* FileImportExportCtrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B0ECCF2BA61E2800A81BD5 /* FileImportExportCtrl.swift */; };
-		A9C377822BA0C45200E8C49D /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9C377812BA0C45200E8C49D /* SpotifyiOS.framework */; };
 		A9C4D2C72B9C2E3600CA1233 /* IC_SpotifyLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4D2C62B9C2E3600CA1233 /* IC_SpotifyLoginViewModel.swift */; };
 		A9C4D2C92B9C2F2F00CA1233 /* IC_SpotifyAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4D2C82B9C2F2F00CA1233 /* IC_SpotifyAccessToken.swift */; };
 		A9C4D2CB2B9C2F8100CA1233 /* IC_SpotifyAPIDefaultHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4D2CA2B9C2F8100CA1233 /* IC_SpotifyAPIDefaultHandler.swift */; };
@@ -32,6 +33,20 @@
 		A9C4ED1E2B8DFC530024C4B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A942B6042B8BA34000BC2D73 /* Assets.xcassets */; };
 		A9DF0CBF2BA4406700A4F4B6 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DF0CBE2BA4406700A4F4B6 /* OptionsView.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A99633602CC0787400C2AA26 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A996335F2CC0787400C2AA26 /* SpotifyiOS.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		A90268CB2B932DC500052FB3 /* IC_SpotifyDefaultViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IC_SpotifyDefaultViewModel.swift; sourceTree = "<group>"; };
@@ -47,12 +62,12 @@
 		A942B69B2B8BC5ED00BC2D73 /* IC_SpotifyLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_SpotifyLoginView.swift; sourceTree = "<group>"; };
 		A965A5242B94F3D500FB98BE /* ZipFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipFile.swift; sourceTree = "<group>"; };
 		A99118E32B9C4BED00110793 /* IC Music */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "IC Music"; path = Localizable.strings; sourceTree = "<group>"; };
+		A996335D2CC077EF00C2AA26 /* SpotifyiOS.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:2FNC3A47ZF:Spotify"; lastKnownFileType = wrapper.xcframework; path = SpotifyiOS.xcframework; sourceTree = "<group>"; };
 		A99C0B402B9E53FF00AFD370 /* IC_FileImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_FileImporter.swift; sourceTree = "<group>"; };
 		A99C0B422B9E578900AFD370 /* IC_SliderMusic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_SliderMusic.swift; sourceTree = "<group>"; };
 		A99C0B442B9E585600AFD370 /* IC_ToggleEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_ToggleEdit.swift; sourceTree = "<group>"; };
 		A9A4CC482B8DF05100DE9B22 /* IC_SpinningPlaylistView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IC_SpinningPlaylistView.swift; sourceTree = "<group>"; };
 		A9B0ECCF2BA61E2800A81BD5 /* FileImportExportCtrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileImportExportCtrl.swift; sourceTree = "<group>"; };
-		A9C377812BA0C45200E8C49D /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
 		A9C4D2C62B9C2E3600CA1233 /* IC_SpotifyLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_SpotifyLoginViewModel.swift; sourceTree = "<group>"; };
 		A9C4D2C82B9C2F2F00CA1233 /* IC_SpotifyAccessToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IC_SpotifyAccessToken.swift; sourceTree = "<group>"; };
 		A9C4D2CA2B9C2F8100CA1233 /* IC_SpotifyAPIDefaultHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_SpotifyAPIDefaultHandler.swift; sourceTree = "<group>"; };
@@ -68,8 +83,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A996335E2CC0787400C2AA26 /* SpotifyiOS.xcframework in Frameworks */,
 				A90269752B93743A00052FB3 /* ZIPFoundation in Frameworks */,
-				A9C377822BA0C45200E8C49D /* SpotifyiOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,7 +151,7 @@
 		A942B6932B8BAABE00BC2D73 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A9C377812BA0C45200E8C49D /* SpotifyiOS.framework */,
+				A996335D2CC077EF00C2AA26 /* SpotifyiOS.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -159,6 +174,7 @@
 				A942B5F92B8BA33E00BC2D73 /* Sources */,
 				A942B5FA2B8BA33E00BC2D73 /* Frameworks */,
 				A942B5FB2B8BA33E00BC2D73 /* Resources */,
+				A99633602CC0787400C2AA26 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -200,6 +216,7 @@
 			mainGroup = A942B5F42B8BA33E00BC2D73;
 			packageReferences = (
 				A90269732B93743A00052FB3 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
+				A996335A2CC077E500C2AA26 /* XCRemoteSwiftPackageReference "ios-sdk" */,
 			);
 			productRefGroup = A942B5FE2B8BA33E00BC2D73 /* Products */;
 			projectDirPath = "";
@@ -386,7 +403,9 @@
 		A942B6112B8BA34000BC2D73 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = AppIconDev;
+				"ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES[sdk=*]" = AppIconDev;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconDev;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
@@ -416,7 +435,7 @@
 				OTHER_CFLAGS = DEPRECATED;
 				OTHER_LDFLAGS = "-ObjC";
 				OTHER_SWIFT_FLAGS = "-DZIP_FILE";
-				PRODUCT_BUNDLE_IDENTIFIER = "de.andreasfranke.IC-Music";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.andreasfranke.IC-MusicDev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -429,6 +448,8 @@
 		A942B6122B8BA34000BC2D73 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = AppIcon;
+				"ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES[sdk=*]" = AppIcon;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
@@ -499,6 +520,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 0.9.18;
+			};
+		};
+		A996335A2CC077E500C2AA26 /* XCRemoteSwiftPackageReference "ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/spotify/ios-sdk";
+			requirement = {
+				branch = v3.0.0;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
