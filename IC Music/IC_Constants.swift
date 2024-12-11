@@ -17,8 +17,8 @@ let redirectURI = URL(
   string: "hispeedsurfericmusic://callback"
 )!
 #endif
-let spotifyClientID = "5f308760d35546d3aa83003c0958af66"
-let spotifyCLientSecretKey = "ed0ba77269f14dc2baae58cbdbccd298"
+let spotifyClientID = ""
+let spotifyCLientSecretKey = ""
 
 let scopes: SPTScope = [
   .userReadEmail,
