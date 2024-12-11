@@ -12,12 +12,12 @@ import SwiftUI
 class FileImportExportCtrl: ObservableObject {
     
     @StateObject var spotifyDefaultViewModel: IC_SpotifyDefaultViewModel = { IC_SpotifyDefaultViewModel.shared } ()
-    
-    @AppStorage("InitialImport") var importShouldBeShown = true
-    
+
+    @AppStorage(UserKeys.initialImport.rawValue) var importShouldBeShown = true
+
     @Published var showFileExporter = false
     
-    @Published var isImporting: Bool = false
+    @Published var isImporting = false
     
     @Published var zipFile: ZipFile?
     
