@@ -10,7 +10,7 @@ import Foundation
 let accessTokenKey = "access-token-key"
 #if DEBUG
 let redirectURI = URL(
-  string: "hispeedsurfericmusic://devcallback"
+  string: "hispeedsurfericmusicdev://devcallback"
 )!
 #else
 let redirectURI = URL(
