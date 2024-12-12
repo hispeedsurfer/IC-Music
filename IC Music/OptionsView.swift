@@ -18,6 +18,9 @@ struct OptionsView: View {
         } label: {
             Label("Options", systemImage: "plus")
         }
+      Text("Import only working from own").foregroundColor(.red)
+      Text("local APP folder").foregroundColor(.red)
+      Text("(IC-Music/IC-MusicDev)").foregroundColor(.red)
     }
 }
 
