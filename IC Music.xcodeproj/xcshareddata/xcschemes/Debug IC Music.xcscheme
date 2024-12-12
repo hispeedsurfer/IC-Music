@@ -44,12 +44,21 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
+            BlueprintIdentifier = "A90DB9CF2D0B23A7004779C6"
+            BuildableName = "IC MusicDev.app"
+            BlueprintName = "IC MusicDev"
+            ReferencedContainer = "container:IC Music.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
             BlueprintIdentifier = "A942B5FC2B8BA33E00BC2D73"
             BuildableName = "IC Music.app"
             BlueprintName = "IC Music"
             ReferencedContainer = "container:IC Music.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

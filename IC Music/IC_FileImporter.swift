@@ -7,48 +7,65 @@
 
 import SwiftUI
 
-struct IC_FileImporter: View {
-    
-    @StateObject var spotifyDefaultViewModel: IC_SpotifyDefaultViewModel = { IC_SpotifyDefaultViewModel.shared } ()
-    
-    @ObservedObject var fileImportExportCtrl: FileImportExportCtrl
-    
-    var body: some View {
-        
-        HStack {
-            Button(action: {
-                UserDefaults.standard.removeObject(forKey: accessTokenKey)
-            }) {
-                Text("Clear UserDefault accessTokenKey")
-            }
-            
-            //if importShouldBeShown {
-                Button(action: {
-                    self.fileImportExportCtrl.showingConfirmationDialog = true
-                }) {
-                    Text("Import File")
-                }
-                .disabled(!fileImportExportCtrl.importShouldBeShown)
-                .confirmationDialog("Are you sure you want to disable the import button?", isPresented: $fileImportExportCtrl.showingConfirmationDialog) {
-                    Button("Disable", role: .destructive) {
-                        self.fileImportExportCtrl.importShouldBeShown = false
-                    }
-                    Button("Cancel", role: .cancel) {}
-                    Button("Import") {
-                        self.fileImportExportCtrl.isImporting = true
-                    }
-                }
-            //}
-            
-            Button(action: fileImportExportCtrl.export) {
-                Label("Export ZIP", systemImage: "square.and.arrow.up")
-                    .imageScale(.large)
-                    .foregroundColor(.accentColor)
-            }
-        }
+extension UserDefaults {
+  func resetUser(){
+    UserKeys.allCases.forEach{
+      removeObject(forKey: $0.rawValue)
     }
+  }
+}
+
+
+struct IC_FileImporter: View {
+
+  @ObservedObject var fileImportExportCtrl: FileImportExportCtrl
+
+  var body: some View {
+
+    HStack {
+      Button(action: {
+        UserDefaults.standard.removeObject(forKey: accessTokenKey)
+      }) {
+        Text("Clear UserDefault accessTokenKey")
+      }
+
+      Button(action: {
+        self.fileImportExportCtrl.isImporting = true
+      }) {
+        Text("Import File")
+      }
+      .disabled(!fileImportExportCtrl.importShouldBeShown)
+      .confirmationDialog(
+        "Are you sure you want to disable the import button?",
+        isPresented: $fileImportExportCtrl.showingConfirmationDialog
+      ) {
+        Button("Disable", role: .destructive) {
+          self.fileImportExportCtrl.importShouldBeShown = false
+        }
+        Button("Cancel", role: .cancel) {}
+        Button("Import") {
+          self.fileImportExportCtrl.isImporting = true
+        }
+      } message: {
+        Text("Select a new color")
+      }
+
+      Button(action: fileImportExportCtrl.export) {
+        Label("Export ZIP", systemImage: "square.and.arrow.up")
+          .imageScale(.large)
+          .foregroundColor(.accentColor)
+      }
+
+      Button(action:{
+        UserDefaults.standard.resetUser()
+      }){
+        Text("Reset File")
+      }
+
+    }
+  }
 }
 
 #Preview {
-    IC_FileImporter(fileImportExportCtrl: FileImportExportCtrl())
+  IC_FileImporter(fileImportExportCtrl: FileImportExportCtrl())
 }

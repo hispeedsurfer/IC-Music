@@ -10,6 +10,33 @@
 		A90268CC2B932DC500052FB3 /* IC_SpotifyDefaultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90268CB2B932DC500052FB3 /* IC_SpotifyDefaultViewModel.swift */; };
 		A90269722B936D1000052FB3 /* NSPersistentContainer+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90269712B936D1000052FB3 /* NSPersistentContainer+extension.swift */; };
 		A90269752B93743A00052FB3 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = A90269742B93743A00052FB3 /* ZIPFoundation */; };
+		A90DB9D32D0B23A7004779C6 /* IC_SpotifyAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4D2C82B9C2F2F00CA1233 /* IC_SpotifyAccessToken.swift */; };
+		A90DB9D42D0B23A7004779C6 /* IC_SpotifyLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4D2C62B9C2E3600CA1233 /* IC_SpotifyLoginViewModel.swift */; };
+		A90DB9D52D0B23A7004779C6 /* IC_SpinningPlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A4CC482B8DF05100DE9B22 /* IC_SpinningPlaylistView.swift */; };
+		A90DB9D62D0B23A7004779C6 /* FileImportExportCtrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B0ECCF2BA61E2800A81BD5 /* FileImportExportCtrl.swift */; };
+		A90DB9D72D0B23A7004779C6 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DF0CBE2BA4406700A4F4B6 /* OptionsView.swift */; };
+		A90DB9D82D0B23A7004779C6 /* IC_SpotifyAPIDefaultHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4D2CA2B9C2F8100CA1233 /* IC_SpotifyAPIDefaultHandler.swift */; };
+		A90DB9D92D0B23A7004779C6 /* IC_SpotifyDefaultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90268CB2B932DC500052FB3 /* IC_SpotifyDefaultViewModel.swift */; };
+		A90DB9DA2D0B23A7004779C6 /* IC_FileImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99C0B402B9E53FF00AFD370 /* IC_FileImporter.swift */; };
+		A90DB9DB2D0B23A7004779C6 /* ZipFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A965A5242B94F3D500FB98BE /* ZipFile.swift */; };
+		A90DB9DC2D0B23A7004779C6 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942B6092B8BA34000BC2D73 /* Persistence.swift */; };
+		A90DB9DD2D0B23A7004779C6 /* IC_Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4D2CE2B9C316700CA1233 /* IC_Constants.swift */; };
+		A90DB9DE2D0B23A7004779C6 /* IC_SpotifyLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942B69B2B8BC5ED00BC2D73 /* IC_SpotifyLoginView.swift */; };
+		A90DB9DF2D0B23A7004779C6 /* IC_Music.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A942B60B2B8BA34000BC2D73 /* IC_Music.xcdatamodeld */; };
+		A90DB9E02D0B23A7004779C6 /* IC_MusicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942B6002B8BA33E00BC2D73 /* IC_MusicApp.swift */; };
+		A90DB9E12D0B23A7004779C6 /* NSPersistentContainer+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90269712B936D1000052FB3 /* NSPersistentContainer+extension.swift */; };
+		A90DB9E22D0B23A7004779C6 /* IC_ToggleEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99C0B442B9E585600AFD370 /* IC_ToggleEdit.swift */; };
+		A90DB9E32D0B23A7004779C6 /* IC_SpotifyAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4D2CC2B9C2FB300CA1233 /* IC_SpotifyAPIError.swift */; };
+		A90DB9E42D0B23A7004779C6 /* IC_SliderMusic.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99C0B422B9E578900AFD370 /* IC_SliderMusic.swift */; };
+		A90DB9E52D0B23A7004779C6 /* IC_TrackDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4ED1C2B8DF7840024C4B3 /* IC_TrackDetailView.swift */; };
+		A90DB9E72D0B23A7004779C6 /* SpotifyiOS.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A996335D2CC077EF00C2AA26 /* SpotifyiOS.xcframework */; };
+		A90DB9E82D0B23A7004779C6 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = A90DB9D02D0B23A7004779C6 /* ZIPFoundation */; };
+		A90DB9EA2D0B23A7004779C6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A99118E42B9C4BED00110793 /* Localizable.strings */; };
+		A90DB9EB2D0B23A7004779C6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A9C4D2D32B9C34BD00CA1233 /* README.md */; };
+		A90DB9EC2D0B23A7004779C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A942B6042B8BA34000BC2D73 /* Assets.xcassets */; };
+		A90DB9EE2D0B23A7004779C6 /* SpotifyiOS.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A996335D2CC077EF00C2AA26 /* SpotifyiOS.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A90DB9F62D0B38A7004779C6 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = A90DB9F52D0B38A7004779C6 /* Zip */; };
+		A90DB9F82D0B38BF004779C6 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = A90DB9F72D0B38BF004779C6 /* Zip */; };
 		A942B6012B8BA33E00BC2D73 /* IC_MusicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942B6002B8BA33E00BC2D73 /* IC_MusicApp.swift */; };
 		A942B60A2B8BA34000BC2D73 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942B6092B8BA34000BC2D73 /* Persistence.swift */; };
 		A942B60D2B8BA34000BC2D73 /* IC_Music.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A942B60B2B8BA34000BC2D73 /* IC_Music.xcdatamodeld */; };
@@ -35,6 +62,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		A90DB9ED2D0B23A7004779C6 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A90DB9EE2D0B23A7004779C6 /* SpotifyiOS.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A99633602CC0787400C2AA26 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -51,6 +89,8 @@
 /* Begin PBXFileReference section */
 		A90268CB2B932DC500052FB3 /* IC_SpotifyDefaultViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IC_SpotifyDefaultViewModel.swift; sourceTree = "<group>"; };
 		A90269712B936D1000052FB3 /* NSPersistentContainer+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSPersistentContainer+extension.swift"; sourceTree = "<group>"; };
+		A90DB9F22D0B23A7004779C6 /* IC MusicDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IC MusicDev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A90DB9F32D0B23A7004779C6 /* IC Music copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "IC Music copy-Info.plist"; path = "/Users/andreasfranke/development/Xcode/hispeedsurfer/IC Music/IC Music copy-Info.plist"; sourceTree = "<absolute>"; };
 		A942B5FD2B8BA33E00BC2D73 /* IC Music.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IC Music.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A942B6002B8BA33E00BC2D73 /* IC_MusicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_MusicApp.swift; sourceTree = "<group>"; };
 		A942B6042B8BA34000BC2D73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -79,10 +119,21 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A90DB9E62D0B23A7004779C6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A90DB9F62D0B38A7004779C6 /* Zip in Frameworks */,
+				A90DB9E72D0B23A7004779C6 /* SpotifyiOS.xcframework in Frameworks */,
+				A90DB9E82D0B23A7004779C6 /* ZIPFoundation in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A942B5FA2B8BA33E00BC2D73 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A90DB9F82D0B38BF004779C6 /* Zip in Frameworks */,
 				A996335E2CC0787400C2AA26 /* SpotifyiOS.xcframework in Frameworks */,
 				A90269752B93743A00052FB3 /* ZIPFoundation in Frameworks */,
 			);
@@ -99,6 +150,7 @@
 				A942B5FF2B8BA33E00BC2D73 /* IC Music */,
 				A942B5FE2B8BA33E00BC2D73 /* Products */,
 				A942B6932B8BAABE00BC2D73 /* Frameworks */,
+				A90DB9F32D0B23A7004779C6 /* IC Music copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -106,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				A942B5FD2B8BA33E00BC2D73 /* IC Music.app */,
+				A90DB9F22D0B23A7004779C6 /* IC MusicDev.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -167,6 +220,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		A90DB9CF2D0B23A7004779C6 /* IC MusicDev */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A90DB9EF2D0B23A7004779C6 /* Build configuration list for PBXNativeTarget "IC MusicDev" */;
+			buildPhases = (
+				A90DB9D22D0B23A7004779C6 /* Sources */,
+				A90DB9E62D0B23A7004779C6 /* Frameworks */,
+				A90DB9E92D0B23A7004779C6 /* Resources */,
+				A90DB9ED2D0B23A7004779C6 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "IC MusicDev";
+			packageProductDependencies = (
+				A90DB9D02D0B23A7004779C6 /* ZIPFoundation */,
+				A90DB9F52D0B38A7004779C6 /* Zip */,
+			);
+			productName = "IC Music";
+			productReference = A90DB9F22D0B23A7004779C6 /* IC MusicDev.app */;
+			productType = "com.apple.product-type.application";
+		};
 		A942B5FC2B8BA33E00BC2D73 /* IC Music */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A942B6102B8BA34000BC2D73 /* Build configuration list for PBXNativeTarget "IC Music" */;
@@ -183,6 +258,7 @@
 			name = "IC Music";
 			packageProductDependencies = (
 				A90269742B93743A00052FB3 /* ZIPFoundation */,
+				A90DB9F72D0B38BF004779C6 /* Zip */,
 			);
 			productName = "IC Music";
 			productReference = A942B5FD2B8BA33E00BC2D73 /* IC Music.app */;
@@ -217,17 +293,29 @@
 			packageReferences = (
 				A90269732B93743A00052FB3 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 				A996335A2CC077E500C2AA26 /* XCRemoteSwiftPackageReference "ios-sdk" */,
+				A90DB9F42D0B3743004779C6 /* XCRemoteSwiftPackageReference "Zip" */,
 			);
 			productRefGroup = A942B5FE2B8BA33E00BC2D73 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				A942B5FC2B8BA33E00BC2D73 /* IC Music */,
+				A90DB9CF2D0B23A7004779C6 /* IC MusicDev */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		A90DB9E92D0B23A7004779C6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A90DB9EA2D0B23A7004779C6 /* Localizable.strings in Resources */,
+				A90DB9EB2D0B23A7004779C6 /* README.md in Resources */,
+				A90DB9EC2D0B23A7004779C6 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A942B5FB2B8BA33E00BC2D73 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -241,6 +329,32 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A90DB9D22D0B23A7004779C6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A90DB9D32D0B23A7004779C6 /* IC_SpotifyAccessToken.swift in Sources */,
+				A90DB9D42D0B23A7004779C6 /* IC_SpotifyLoginViewModel.swift in Sources */,
+				A90DB9D52D0B23A7004779C6 /* IC_SpinningPlaylistView.swift in Sources */,
+				A90DB9D62D0B23A7004779C6 /* FileImportExportCtrl.swift in Sources */,
+				A90DB9D72D0B23A7004779C6 /* OptionsView.swift in Sources */,
+				A90DB9D82D0B23A7004779C6 /* IC_SpotifyAPIDefaultHandler.swift in Sources */,
+				A90DB9D92D0B23A7004779C6 /* IC_SpotifyDefaultViewModel.swift in Sources */,
+				A90DB9DA2D0B23A7004779C6 /* IC_FileImporter.swift in Sources */,
+				A90DB9DB2D0B23A7004779C6 /* ZipFile.swift in Sources */,
+				A90DB9DC2D0B23A7004779C6 /* Persistence.swift in Sources */,
+				A90DB9DD2D0B23A7004779C6 /* IC_Constants.swift in Sources */,
+				A90DB9DE2D0B23A7004779C6 /* IC_SpotifyLoginView.swift in Sources */,
+				A90DB9DF2D0B23A7004779C6 /* IC_Music.xcdatamodeld in Sources */,
+				A90DB9E02D0B23A7004779C6 /* IC_MusicApp.swift in Sources */,
+				A90DB9E12D0B23A7004779C6 /* NSPersistentContainer+extension.swift in Sources */,
+				A90DB9E22D0B23A7004779C6 /* IC_ToggleEdit.swift in Sources */,
+				A90DB9E32D0B23A7004779C6 /* IC_SpotifyAPIError.swift in Sources */,
+				A90DB9E42D0B23A7004779C6 /* IC_SliderMusic.swift in Sources */,
+				A90DB9E52D0B23A7004779C6 /* IC_TrackDetailView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A942B5F92B8BA33E00BC2D73 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -281,6 +395,98 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		A90DB9F02D0B23A7004779C6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = AppIconDev;
+				"ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES[sdk=*]" = AppIconDev;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconDev;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"IC Music/Preview Content\"";
+				DEVELOPMENT_TEAM = 98FL64PG3R;
+				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/IC\\ Music/Preview\\ Content",
+					"$(PROJECT_DIR)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "IC Music copy-Info.plist";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_CFLAGS = DEPRECATED;
+				OTHER_LDFLAGS = "-ObjC";
+				OTHER_SWIFT_FLAGS = "-DZIP_FILE";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.andreasfranke.IC-MusicDev";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "IC Music/IC-Music-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				URL_SCHEME = hispeedsurfericmusicdev;
+			};
+			name = Debug;
+		};
+		A90DB9F12D0B23A7004779C6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = AppIcon;
+				"ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES[sdk=*]" = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"IC Music/Preview Content\"";
+				DEVELOPMENT_TEAM = 98FL64PG3R;
+				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/IC\\ Music/Preview\\ Content",
+					"$(PROJECT_DIR)",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "IC Music copy-Info.plist";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_CFLAGS = DEPRECATED;
+				OTHER_LDFLAGS = "-ObjC";
+				OTHER_SWIFT_FLAGS = "-DZIP_FILE";
+				PRODUCT_BUNDLE_IDENTIFIER = "de.andreasfranke.IC-Music";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "IC Music/IC-Music-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				URL_SCHEME = hispeedsurfericmusic;
+			};
+			name = Release;
+		};
 		A942B60E2B8BA34000BC2D73 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -442,6 +648,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "IC Music/IC-Music-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				URL_SCHEME = hispeedsurfericmusicdev;
 			};
 			name = Debug;
 		};
@@ -487,12 +694,22 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "IC Music/IC-Music-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				URL_SCHEME = hispeedsurfericmusic;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A90DB9EF2D0B23A7004779C6 /* Build configuration list for PBXNativeTarget "IC MusicDev" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A90DB9F02D0B23A7004779C6 /* Debug */,
+				A90DB9F12D0B23A7004779C6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A942B5F82B8BA33E00BC2D73 /* Build configuration list for PBXProject "IC Music" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -522,12 +739,28 @@
 				minimumVersion = 0.9.18;
 			};
 		};
+		A90DB9D12D0B23A7004779C6 /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/weichsel/ZIPFoundation.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.18;
+			};
+		};
+		A90DB9F42D0B3743004779C6 /* XCRemoteSwiftPackageReference "Zip" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/marmelroy/Zip.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.2;
+			};
+		};
 		A996335A2CC077E500C2AA26 /* XCRemoteSwiftPackageReference "ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/spotify/ios-sdk";
 			requirement = {
-				branch = v3.0.0;
-				kind = branch;
+				kind = exactVersion;
+				version = 3.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -537,6 +770,21 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A90269732B93743A00052FB3 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
 			productName = ZIPFoundation;
+		};
+		A90DB9D02D0B23A7004779C6 /* ZIPFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A90DB9D12D0B23A7004779C6 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
+			productName = ZIPFoundation;
+		};
+		A90DB9F52D0B38A7004779C6 /* Zip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A90DB9F42D0B3743004779C6 /* XCRemoteSwiftPackageReference "Zip" */;
+			productName = Zip;
+		};
+		A90DB9F72D0B38BF004779C6 /* Zip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A90DB9F42D0B3743004779C6 /* XCRemoteSwiftPackageReference "Zip" */;
+			productName = Zip;
 		};
 /* End XCSwiftPackageProductDependency section */
 
