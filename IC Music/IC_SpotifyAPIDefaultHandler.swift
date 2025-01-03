@@ -35,7 +35,7 @@ class IC_SpotifyAPIDefaultHandler: NSObject, ObservableObject {
         request.allHTTPHeaderFields = ["Authorization": spotifyAuthKey,
                                        "Content-Type": "application/x-www-form-urlencoded"]
         var requestBodyComponents = URLComponents()
-        let scopeAsString = stringScopes.joined(separator: " ")
+        let scopeAsString = stringScopes.joined(separator: ",")
 
         guard responseCode != nil else {
             return Fail(error: APIError.invalidRequestError("Invalid response code"))
