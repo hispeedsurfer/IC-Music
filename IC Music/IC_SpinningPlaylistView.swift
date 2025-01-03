@@ -121,8 +121,6 @@ struct IC_SpinningPlaylistView: View {
               self.dictUriIdx = success.tracks.searchResultIdx.dictUriIdx
               //self.playlistURI = ""
               self.contentItem = success.playList
-
-              spotifyDefaultViewModel.currentTrackUri = playerState.track.uri
             case .failure(let error):
               print( "tes \(error.localizedDescription)")
             }
@@ -141,8 +139,6 @@ struct IC_SpinningPlaylistView: View {
                 self.dictUriIdx = success.tracks.searchResultIdx.dictUriIdx
                 //self.playlistURI = ""
                 self.contentItem = success.playList
-
-                spotifyDefaultViewModel.currentTrackUri = playerState.track.uri
               case .failure(let error):
                 print( "tes \(error.localizedDescription)")
               }
