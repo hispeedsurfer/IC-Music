@@ -368,7 +368,7 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
     var playlistURI = playlistURI
     var trackUris = [TrackInit]()
 
-    if(playlistURI.contains("playlist"))
+    if(playlistURI.contains("playlist") || playlistURI.contains("album"))
     {
       if(playlistURI.contains("?"))
       {
@@ -434,6 +434,47 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
     else
     {
       //error = NSError(domain: "SpinningPlaylistView", code: 1, userInfo: [NSLocalizedDescriptionKey: "Invalid Spotify playlist URI"])
+      if (playlistURI.contains("track")){
+        appRemote.contentAPI?.fetchContentItem(
+          forURI: playlistURI,
+          callback: { (result, error) in
+            if let error = error {
+              //self.error = error
+              print(error.localizedDescription)
+            } else if let contentItem = result as? SPTAppRemoteContentItem {
+              print(contentItem.title!) // playlist title
+              /* do not play, but its working with play*/
+              if playTrack {
+                self.appRemote.playerAPI?.play(contentItem.uri, callback: { (result, error) in
+                  if let error = error {
+                    print(error.localizedDescription)
+                  } else {
+                    print("Playing \(contentItem.title ?? "No title")")
+                  }
+                })
+              }
+
+              trackUris
+                .append(
+                  TrackInit(
+                    trackUri: playlistURI,
+                    trackTitle: contentItem.title ?? "No title",
+                    durationSeconds: 0
+                  )
+                )
+
+              let result: SearchResult = SearchResult(
+                tracks: SearchResultTracks(
+                  searchResultIdx: self.trackItemsLoad(trackUris: trackUris)
+                ),
+                playList: contentItem
+              )
+              completion(.success(result))
+
+
+            }
+          })
+      }
     }
   }
 
@@ -460,8 +501,8 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
       }
 
       if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
-          print("statusCode should be 200, but is \(httpStatus.statusCode)")
-          //print("response = \(String(describing: response))")
+        print("statusCode should be 200, but is \(httpStatus.statusCode)")
+        //print("response = \(String(describing: response))")
         return
       }
 
@@ -472,7 +513,7 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
          let decoder = JSONDecoder()
          let dataModel = try decoder.decode(AudioFeatures.self, from: data) {
          print("Tempo: \(dataModel.tempo)")
-         }*/        
+         }*/
         let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
         if let trackData = json {
           // Parse and use the track data as needed
@@ -595,7 +636,7 @@ extension IC_SpotifyDefaultViewModel: SPTAppRemoteDelegate{
 
     lastPlayerState = nil
   }
-
+  
 
 }
 
