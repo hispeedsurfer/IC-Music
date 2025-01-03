@@ -33,7 +33,7 @@ struct ItemCard: View {
 
 struct IC_SpinningPlaylistView: View {
   @StateObject var spotifyDefaultViewModel: IC_SpotifyDefaultViewModel = { IC_SpotifyDefaultViewModel.shared } ()
-  
+
   init() {
     UINavigationBar
       .appearance().largeTitleTextAttributes = [.font : UIFont.preferredFont(
@@ -42,9 +42,9 @@ struct IC_SpinningPlaylistView: View {
     UINavigationBar
       .appearance().titleTextAttributes = [.font : UIFont.preferredFont(forTextStyle: .subheadline)]
   }
-  
+
   //@StateObject var spinningPlaylistsViewModel = IC_SpinningPlaylistViewModel()
-  
+
   @Environment(\.managedObjectContext) var viewContext
   @State var playlistURI = ""
   @State var contentItem: SPTAppRemoteContentItem?
@@ -54,11 +54,13 @@ struct IC_SpinningPlaylistView: View {
   @State var currentSongBeingPlayed: String = ""
   //@State  var trackInfo: IC_TrackInfo?
   @State private var playerState: SPTAppRemotePlayerState?
-  
+
   @State private var document = ""
-  
+
   private var bDep: Bool = true
-  
+
+  @AppStorage(UserKeys.fontoSize.rawValue) var fontoSize: Double = 22.0
+
   var trackInfoEmpty: IC_TrackInfo {
     let trackInfo = IC_TrackInfo(context: viewContext)
     trackInfo.trackTitle = "Unknown Track"
@@ -66,33 +68,33 @@ struct IC_SpinningPlaylistView: View {
     trackInfo.rpmUser = "Unknown"
     return trackInfo
   }
-  
+
   private func binding(for key: String) -> Binding<Int?> {
     return .init(
       get: { self.dictUriIdx[key, default: 0] },
       set: { _ in self.dictUriIdx[key] = self.dictUriIdx[key] })
   }
-  
+
   private func getPlayerState() {
     spotifyDefaultViewModel.appRemote.playerAPI?.getPlayerState { (result, error) -> Void in
       guard error == nil else { return }
-      
+
       //let playerState = result as! SPTAppRemotePlayerState
       //self.updateViewWithPlayerState(playerState)
     }
   }
-  
+
   func appRemoteConnected() {
     getPlayerState()
-    
+
     //enableInterface(true)
   }
-  
-  
+
+
   @State var isEditable = false
-  
+
   @State private var selectedTrackInfoIdx: Int?
-  
+
   func fetchPlayerState() {
     spotifyDefaultViewModel.appRemote.playerAPI?.getPlayerState({ (playerState, error) in
       if let error = error {
@@ -102,14 +104,15 @@ struct IC_SpinningPlaylistView: View {
       }
     })
   }
-  
+
   func update(playerState: SPTAppRemotePlayerState) {
     let playlistUri = playerState.contextURI.absoluteString
-    
-    if playlistUri != self.playlistURI {
+
+    if playlistUri != self.playlistURI || playlistUri == "spotify:search"{
       self.playlistURI = playlistUri
-      
-      if self.playlistURI != "" {
+
+      if self.playlistURI != "" && self.playlistURI != "spotify:search" {
+        trackItmems.removeAll()
         spotifyDefaultViewModel.getSearch(playlistURI: playlistURI, playTrack: false){ result in
           DispatchQueue.main.async {
             switch result {
@@ -118,29 +121,52 @@ struct IC_SpinningPlaylistView: View {
               self.dictUriIdx = success.tracks.searchResultIdx.dictUriIdx
               //self.playlistURI = ""
               self.contentItem = success.playList
+
+              spotifyDefaultViewModel.currentTrackUri = playerState.track.uri
             case .failure(let error):
               print( "tes \(error.localizedDescription)")
             }
           }
         }
       }
+      else {
+        self.currentSongBeingPlayed = playerState.track.uri
+        if self.currentSongBeingPlayed != "" {
+          trackItmems.removeAll()
+          spotifyDefaultViewModel.getSearch(playlistURI: currentSongBeingPlayed, playTrack: false){ result in
+            DispatchQueue.main.async {
+              switch result {
+              case .success(let success):
+                self.trackItmems = success.tracks.searchResultIdx.items
+                self.dictUriIdx = success.tracks.searchResultIdx.dictUriIdx
+                //self.playlistURI = ""
+                self.contentItem = success.playList
+
+                spotifyDefaultViewModel.currentTrackUri = playerState.track.uri
+              case .failure(let error):
+                print( "tes \(error.localizedDescription)")
+              }
+            }
+          }
+        }
+      }
     }
   }
-  
+
   var sortedTrackItems: [(key: Int, value: IC_TrackInfo)] {
     trackItmems.sorted { $0.key < $1.key }
   }
-  
+
   @State private var scrollToIndex: Int = 1
-  
+
   @State private var columnVisibility = NavigationSplitViewVisibility.all
-  
+
   @State private var showingSettings = false
-  
+
   var body: some View {
-    
+
     //IC_FileImporter()
-    
+
     VStack(spacing:5) {
       HStack(spacing:5){
         TextField("Enter Spotify URI", text: $playlistURI)
@@ -168,7 +194,7 @@ struct IC_SpinningPlaylistView: View {
           .foregroundColor(.white)
           .background(Color.green)
           .cornerRadius(5)
-          
+
           Button(action: {
             showingSettings.toggle()
           }) {
@@ -181,24 +207,24 @@ struct IC_SpinningPlaylistView: View {
           .sheet(isPresented: $showingSettings) {
             SettingsDialog()
           }
-          
+
         }
       }
     }
-    
+
     HStack(spacing: 2) {
       IC_SliderMusic()
-      
+
       Spacer(minLength: 50)
-      
+
       IC_ToggleEdit(isEditable: $isEditable)
         .frame(maxWidth: 180)
     }
-    
+
     //if(bDep) {
     NavigationView {
       ScrollViewReader { reader in
-        
+
         /*
          Toggle(isEditable ? "Edit Mode" : "Read Mode", isOn: $isEditable)
          .onChange(of: isEditable) {
@@ -214,8 +240,9 @@ struct IC_SpinningPlaylistView: View {
          */
         List (selection: binding(for: spotifyDefaultViewModel.currentTrackUri)){
           let sortedKeysAndValues = trackItmems.sorted() { $0.0 < $1.0 }
+
           ForEach(sortedKeysAndValues, id: \.key) {
- idx,
+            idx,
             trackInfo in
             NavigationLink(
               destination: IC_TrackDetailView(
@@ -248,6 +275,9 @@ struct IC_SpinningPlaylistView: View {
         }
         .navigationTitle(contentItem?.title ?? "")
         //.listStyle(GroupedListStyle()).navigationBarTitle("Settings")
+        HStack(spacing: 5){
+          IC_SliderFontSize(fontoSize: $fontoSize)
+        }
       }
     }
     .onChange(of: spotifyDefaultViewModel.currentSongBeingPlayed) { oldValue, newValue in
@@ -267,7 +297,7 @@ struct IC_SpinningPlaylistView: View {
      else {
      NavigationSplitView(columnVisibility: $columnVisibility) {
      ScrollViewReader { reader in
-     
+
      List(sortedTrackItems, id: \.key, selection: $selectedTrackInfoIdx) { key, trackInfo in
      NavigationLink(trackInfo.trackTitle ?? "", selection: $selectedTrackInfoIdx) {
      IC_TrackDetailView(trackInfo: trackInfo, isEditable: self.$isEditable, trackInfoAfter: trackInfoEmpty)
@@ -280,9 +310,9 @@ struct IC_SpinningPlaylistView: View {
      //fetchPlayerState()
      var idx = dictUriIdx[newValue] ?? -2
      if idx != -2 {
-     
+
      selectedTrackInfoIdx = idx
-     
+
      if idx < dictUriIdx.count {
      idx = idx - 1
      }
@@ -301,23 +331,23 @@ struct IC_SpinningPlaylistView: View {
      //.padding(0)
      }*/
   }
-  
+
 }
 
 struct SettingsDialog: View {
   @Environment(\.presentationMode) var presentationMode
-  
+
   @StateObject var spotifyDefaultViewModel = { IC_SpotifyDefaultViewModel.shared } ()
-  
+
   @StateObject var fileImportExportCtrl: FileImportExportCtrl = FileImportExportCtrl()
-  
+
   var body: some View {
     VStack {
       Text("Settings")
         .font(.headline)
         .padding()
-      
-      
+
+
       OptionsView(fileImportExportCtrl: fileImportExportCtrl)
         .fileExporter(
           isPresented: self.$fileImportExportCtrl.showFileExporter,
@@ -329,7 +359,7 @@ struct SettingsDialog: View {
         .fileImporter(isPresented: self.$fileImportExportCtrl.isImporting,
                       allowedContentTypes: [.zip],
                       onCompletion: { result in
-          
+
           switch result {
           case .success(let url):
             // url contains the URL of the chosen file.
@@ -341,7 +371,7 @@ struct SettingsDialog: View {
             print(error)
           }
         })
-      
+
       Button("Close") {
         presentationMode.wrappedValue.dismiss()
       }
