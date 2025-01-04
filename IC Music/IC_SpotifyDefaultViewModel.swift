@@ -105,9 +105,6 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
     return appRemote
   }()
 
-  private var lastPlayerState: SPTAppRemotePlayerState?
-
-
   lazy var backupURL: URL = {
     let appSupportDirectory = try! FileManager.default.url(
       for: .documentDirectory,
@@ -146,21 +143,6 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
     }
 
     return sUrl
-  }
-  func fetchPlayerState() {
-    appRemote.playerAPI?.getPlayerState({ [weak self] (playerState, error) in
-      if let error = error {
-#if !USE_API
-        print(APIError.fetchingPlayerStateFailedWithError(error))
-#endif
-      } else if let playerState = playerState as? SPTAppRemotePlayerState {
-        self?.update(playerState: playerState)
-      }
-    })
-  }
-
-  func update(playerState: SPTAppRemotePlayerState) {
-    lastPlayerState = playerState
   }
 
   func onOpenURL(url: URL) {
@@ -562,7 +544,6 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
 extension IC_SpotifyDefaultViewModel: SPTAppRemotePlayerStateDelegate {
 
   func playerStateDidChange(_ playerState: SPTAppRemotePlayerState) {
-    lastPlayerState = playerState
     currentSongBeingPlayed = playerState.track.name
     currentTrackUri = playerState.track.uri
     self.playerState = playerState
@@ -607,8 +588,6 @@ extension IC_SpotifyDefaultViewModel: SPTAppRemoteDelegate{
 
       self.authenticationState = .authorized
     })
-
-    fetchPlayerState()
   }
 
   func appRemote(_ appRemote: SPTAppRemote, didDisconnectWithError error: Error?) {
@@ -619,8 +598,6 @@ extension IC_SpotifyDefaultViewModel: SPTAppRemoteDelegate{
       print(APIError.appRemoteDisconnectedWithError(error))
 #endif
     }
-
-    lastPlayerState = nil
   }
 
   func appRemote(_ appRemote: SPTAppRemote, didFailConnectionAttemptWithError error: Error?) {
@@ -634,7 +611,6 @@ extension IC_SpotifyDefaultViewModel: SPTAppRemoteDelegate{
 
     connectUser()
 
-    lastPlayerState = nil
   }
   
 
