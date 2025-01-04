@@ -51,7 +51,7 @@ struct IC_SpinningPlaylistView: View {
   @State var trackItmems = [Int : IC_TrackInfo]()
   @State var dictUriIdx = [String : Int]()
   @State var error: Error?
-  @State var currentSongBeingPlayed: String = ""
+  @State var currentTrackUri: String = ""
   //@State  var trackInfo: IC_TrackInfo?
   @State private var playerState: SPTAppRemotePlayerState?
 
@@ -62,10 +62,17 @@ struct IC_SpinningPlaylistView: View {
   @AppStorage(UserKeys.fontoSize.rawValue) var fontoSize: Double = 22.0
 
   var trackInfoEmpty: IC_TrackInfo {
-    let trackInfo = IC_TrackInfo(context: viewContext)
+    let result = PersistenceController(inMemory: true)
+    let viewContextMemory = result.container.viewContext
+    let trackInfo = IC_TrackInfo(context: viewContextMemory)
     trackInfo.trackTitle = "Unknown Track"
     trackInfo.bpmSpotify = 0
     trackInfo.rpmUser = "Unknown"
+    trackInfo.trackURI = "spotify:track:0"
+    trackInfo.energy = 0
+    trackInfo.danceability = 0
+    trackInfo.durationSeconds = 0
+    trackInfo.customInfo = "Unknown"
     return trackInfo
   }
 
@@ -121,6 +128,7 @@ struct IC_SpinningPlaylistView: View {
               self.dictUriIdx = success.tracks.searchResultIdx.dictUriIdx
               //self.playlistURI = ""
               self.contentItem = success.playList
+              self.spotifyDefaultViewModel.objectWillChange.send() //to force view update
             case .failure(let error):
               print( "tes \(error.localizedDescription)")
             }
@@ -128,21 +136,25 @@ struct IC_SpinningPlaylistView: View {
         }
       }
       else {
-        self.currentSongBeingPlayed = playerState.track.uri
-        if self.currentSongBeingPlayed != "" {
-          trackItmems.removeAll()
-          spotifyDefaultViewModel.getSearch(playlistURI: currentSongBeingPlayed, playTrack: false){ result in
-            DispatchQueue.main.async {
-              switch result {
-              case .success(let success):
-                self.trackItmems = success.tracks.searchResultIdx.items
-                self.dictUriIdx = success.tracks.searchResultIdx.dictUriIdx
-                //self.playlistURI = ""
-                self.contentItem = success.playList
-              case .failure(let error):
-                print( "tes \(error.localizedDescription)")
+        if self.currentTrackUri != playerState.track.uri {
+          self.currentTrackUri = playerState.track.uri
+          if self.currentTrackUri != "" {
+            trackItmems.removeAll()
+            spotifyDefaultViewModel
+              .getSearch(playlistURI: currentTrackUri, playTrack: false){ result in
+                DispatchQueue.main.async {
+                  switch result {
+                  case .success(let success):
+                    self.trackItmems = success.tracks.searchResultIdx.items
+                    self.dictUriIdx = success.tracks.searchResultIdx.dictUriIdx
+                    //self.playlistURI = ""
+                    self.contentItem = success.playList
+                    self.spotifyDefaultViewModel.objectWillChange.send() //to force view update
+                  case .failure(let error):
+                    print( "tes \(error.localizedDescription)")
+                  }
+                }
               }
-            }
           }
         }
       }
