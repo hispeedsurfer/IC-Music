@@ -1,3 +1,6 @@
+![IC_Music](https://github.com/user-attachments/assets/ff00f477-cc91-4bf3-b1e2-ad40736028f7)
+
+
 Vorraussetzungen bei der Entwicklung:
 - Offline faehig
 - Benutzung Spotify Sessionmanager.connection
