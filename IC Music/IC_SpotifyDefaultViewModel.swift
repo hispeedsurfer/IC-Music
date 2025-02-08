@@ -17,6 +17,12 @@ enum AuthenticationState: Equatable, CaseIterable {
   case authorized
 }
 
+enum PlaylistState: Equatable, CaseIterable  {
+    case notInitiated
+    case loading
+    case loadedAllSongs
+}
+
 //@MainActor
 final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
 
@@ -28,15 +34,18 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
   @Published var authenticationState: AuthenticationState = .idle
   @Published var currentSongBeingPlayed: String = ""
   @Published var currentTrackUri = ""
-  @Published var currentDuration: UInt = 0
+  @Published var currentDurationMs: UInt = 0
+  @Published var nCurrentPlaylistDurationSeconds: Int = 0
   @Published var currentDurationLabel = ""
-  @Published var currentTimeInSecondsPass: Double = 0
+  //@Published var currentTimeInSecondsPass: Double = 0
   @Published var position:Float = 0.0
-  @Published var elapsedTimeLabel = ""
-  @Published var playbackPosition: Double = 0.0
+  //@Published var elapsedTimeLabel = ""
+  @Published var playbackPositionMs: Double = 0.0
+  @Published var playbackPositionPlaylistMs: Double = 0.0
   @Published var playerState: SPTAppRemotePlayerState?
   @Published var contextUri: URL?
   @Published var trackItem: IC_TrackInfo?
+  @Published var nTotalDurationMSec: Int = 0
   @Published var accessToken = UserDefaults.standard.string(forKey: accessTokenKey) {
     didSet {
       let defaults = UserDefaults.standard
@@ -115,6 +124,15 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
     let destinationDirectoryURL = appSupportDirectory.appendingPathComponent("IC_Music")
     return destinationDirectoryURL
   }()
+
+  //@Published private var spotifyPlaylistAPIHandler: IC_SpotifyAPIPlaylistHandler = { IC_SpotifyAPIPlaylistHandler.shared } ()
+
+  @Published var numberOfTracksLoaded: Int = 0
+  @Published var tracks: IC_TracksForPlaylist = IC_TracksForPlaylist(name: "", total: 0, trackObject: [IC_TrackObject(name: "", uri: "", nDurationMs: 0)])
+  @Published var remainingTracksToLoad: Int = 0
+  @Published var playlistState: PlaylistState = PlaylistState.notInitiated
+
+  //@Published private var playlist: Playlist = Playlist(name: "", description: "", playlistID: "", externalURLs: ExternalURLs(spotify: ""), tracks: Tracks(href: "", total: 0))
 
   @objc
   func restorePersistentStore(url: URL? = nil) {
@@ -204,7 +222,7 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
 
   func connectUser() {
     print("connectUser using sessionManager")
-    guard let sessionManager = try? sessionManager else { return }
+    // guard let sessionManager = try? sessionManager else { return }
     //sessionManager.initiateSession(with: scopes, options: .clientOnly, campaign: "utm-campaign")
     sessionManager.initiateSession(with: scopes, options: .clientOnly, campaign: nil)
     self.authenticationState = .loading
@@ -228,7 +246,9 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
     return String(format: "%02d:%02d", minutes, seconds)
   }// A variable to store the current elapsed time in seconds
 
-  var currentElapsedTime = 0
+  var currentElapsedTimeSec = 0
+
+  var nCurrentPlaylistElapsedTimeSeconds = 0
 
   // A variable to store the timer object
   var timer: Timer?
@@ -238,15 +258,25 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
     // Invalidate any existing timer
     timer?.invalidate()
 
+
+    //self.nCurrentPlaylistElapsedTimeSeconds += currentElapsedTimeSec
+
     // Create a new timer that fires every second
     timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
       // Increment the current elapsed time by one
-      self.currentElapsedTime += 1
-      self.playbackPosition += 1000
+      self.currentElapsedTimeSec += 1
+
+      self.nCurrentPlaylistElapsedTimeSeconds = self.nCurrentPlaylistDurationSeconds
+      self.nCurrentPlaylistElapsedTimeSeconds += self.currentElapsedTimeSec
+
+      self.playbackPositionMs += 1000
+
+      self.playbackPositionPlaylistMs = Double(self.nCurrentPlaylistElapsedTimeSeconds*1000) + self.playbackPositionMs
+
 
       // Format the current elapsed time and update the label
-      let formattedTime = self.formatElapsedTime(seconds: self.currentElapsedTime)
-      self.elapsedTimeLabel = formattedTime
+      //let formattedTime = self.formatElapsedTime(seconds: self.currentElapsedTime)
+      //self.elapsedTimeLabel = formattedTime
     }
   }
 
@@ -264,25 +294,14 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
     appRemote.playerAPI?.resume()
   }
 
-  struct SearchResult {
-    let tracks: SearchResultTracks
-    let playList: SPTAppRemoteContentItem
-  }
 
-  struct SearchResultIdx: Hashable {
-    let items: [Int: IC_TrackInfo]
-    let dictUriIdx: [String : Int]
-  }
 
-  struct SearchResultTracks: Hashable {
-    let searchResultIdx: SearchResultIdx
-  }
 
   func trackItemsLoad(trackUris: [TrackInit]) -> SearchResultIdx
   {
     var trackItems = [Int: IC_TrackInfo]()
     var dictUriIdx = [String : Int]()
-    var trackItemCurrent: IC_TrackInfo
+    // var trackItemCurrent: IC_TrackInfo // disabled due deprecated audio-feature in web api call
 
     for idx in trackUris.indices {
       let item = trackUris[idx]
@@ -296,16 +315,33 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
 
       do {
         let fetchedCustomers = try viewContext.fetch(fetchRequest)
-        if let existingCustomer = fetchedCustomers.first {
+        if var existingCustomer = fetchedCustomers.first {
           existingCustomer.trackTitle = item.trackTitle
+          print("existingCustomer.durationSeconds \(existingCustomer.durationSeconds), trackTitle: \(existingCustomer.trackTitle ?? "")")
+          if item.durationMSeconds > 0 {
+            if existingCustomer.durationSeconds == 0 {
+              existingCustomer.durationSeconds = item.durationMSeconds/1000
+            }
+          }
+          else {
+            print("no durationSeconds available")
+          }
+
           trackItems[idx]  = existingCustomer
-          trackItemCurrent = existingCustomer
+          // trackItemCurrent = existingCustomer // disabled due deprecated audio-feature in web api call
         }
         else {
           let newTrackInfo = IC_TrackInfo(context: viewContext)
           newTrackInfo.trackURI = item.trackUri
           newTrackInfo.trackTitle = item.trackTitle
-          newTrackInfo.durationSeconds = item.durationSeconds
+          if item.durationMSeconds > 0 {
+            if newTrackInfo.durationSeconds == 0 {
+              newTrackInfo.durationSeconds = item.durationMSeconds/1000
+            }
+          }
+          else {
+            print("no durationSeconds available")
+          }
 
           var sportifyId = item.trackUri
 
@@ -317,12 +353,14 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
 
           newTrackInfo.spotifyId = sportifyId
           trackItems[idx] = newTrackInfo
-          trackItemCurrent = newTrackInfo
+          // trackItemCurrent = newTrackInfo // disabled due deprecated audio-feature in web api call
         }
 
+        /* disabled due deprecated audio-feature in web api call
         if let spotifyId = trackItemCurrent.spotifyId {
-          // fetchTrackData(trackInfo: trackItemCurrent, spotifyId: spotifyId) // disabled due deprecated audio-feature in web api call
+          fetchTrackData(trackInfo: trackItemCurrent, spotifyId: spotifyId) // disabled due deprecated audio-feature in web api call
         }
+        */
 
         dictUriIdx[item.trackUri] = idx
       } catch {
@@ -332,10 +370,12 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
     }
 
     do {
-      try viewContext.save()
+      if viewContext.hasChanges {
+        try viewContext.save()
+      }
     } catch {
       let nsError = error as NSError
-      fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+      fatalError("Unresolved error save viewContext\(nsError), \(nsError.userInfo)")
     }
 
     return SearchResultIdx(items: trackItems, dictUriIdx: dictUriIdx)
@@ -344,7 +384,7 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
   public func getSearch(
     playlistURI: String,
     playTrack: Bool,
-    completion: @escaping (Result<SearchResult, Error>) -> Void
+    completion: @escaping (Result<IC_SearchResult, Error>) -> Void
   ) {
 
     var playlistURI = playlistURI
@@ -395,16 +435,17 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
                         TrackInit(
                           trackUri: item.uri,
                           trackTitle: item.title ?? "No title",
-                          durationSeconds: 0
+                          durationMSeconds: 0
                         )
                       )
                   }
 
-                  let result: SearchResult = SearchResult(
+                  let result: IC_SearchResult = IC_SearchResult(
                     tracks: SearchResultTracks(
                       searchResultIdx: self.trackItemsLoad(trackUris: trackUris)
                     ),
-                    playList: contentItem
+                    playList: contentItem.title ?? "",
+                    nTotalDurationMSec: 0
                   )
                   completion(.success(result))
                 }
@@ -441,15 +482,16 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
                   TrackInit(
                     trackUri: playlistURI,
                     trackTitle: contentItem.title ?? "No title",
-                    durationSeconds: 0
+                    durationMSeconds: 0
                   )
                 )
 
-              let result: SearchResult = SearchResult(
+              let result: IC_SearchResult = IC_SearchResult(
                 tracks: SearchResultTracks(
                   searchResultIdx: self.trackItemsLoad(trackUris: trackUris)
                 ),
-                playList: contentItem
+                playList: contentItem.title ?? "",
+                nTotalDurationMSec: 0
               )
               completion(.success(result))
 
@@ -460,6 +502,7 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
     }
   }
 
+  /*
   func fetchTrackData(trackInfo: IC_TrackInfo, spotifyId: String) {
     // Replace 'TRACK_ID' with the ID of the track you want to fetch data for
 
@@ -539,37 +582,185 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
 
     task.resume()
   }
+   */
+
+  func getUserPlayListTracks(playlistID: String,
+                             completion: @escaping (Result<IC_SearchResult, Error>) -> Void
+  ) {
+    var trackUris = [TrackInit]()
+    getTracksForPlaylist(playlistID: playlistID)
+      .sink(receiveCompletion: { completion in
+
+        switch completion {
+        case .finished:
+          break
+        case .failure(let error):
+          if case APIError.validationError(let reason) = error {
+            print(reason)
+          }
+          else if case APIError.serverError(statusCode: _, reason: let reason, retryAfter: _) = error {
+            print(reason ?? "Server error")
+          }
+          else {
+            print(error.localizedDescription)
+          }
+        }
+      }, receiveValue: { [weak self] spotifyPlaylists in
+        let items = self!.mapSpotifyPlaylist(spotifyPlaylists: spotifyPlaylists)
+
+        var nTotalDurationMSec = 0
+
+        for item in items {
+          //print(item.title ?? "No title")
+          //print("title \(item.title ?? "No title"), uri \(item.uri)")
+          print("durations \(item.nDurationMs)")
+
+          trackUris
+            .append(
+              TrackInit(
+                trackUri: item.uri,
+                trackTitle: item.name,
+                durationMSeconds: Int32(item.nDurationMs)
+              )
+            )
+
+          nTotalDurationMSec += item.nDurationMs
+        }
+
+        let result: IC_SearchResult = IC_SearchResult(
+          tracks: SearchResultTracks(
+            searchResultIdx: (self?.trackItemsLoad(trackUris: trackUris))!
+          ),
+          playList: spotifyPlaylists.name ?? "",
+          nTotalDurationMSec: nTotalDurationMSec
+        )
+        completion(.success(result))
+      }).store(in: &bag)
+  }
+
+  private func getTracksForPlaylist(playlistID: String) -> AnyPublisher<IC_SimplifiedPlaylistObject, Error> {
+      let queryItems = [URLQueryItem(name: "additional_types", value: "track")]
+      var urlComponents = URLComponents(string: "https://api.spotify.com/v1/\(playlistID)")
+      urlComponents?.queryItems = queryItems
+
+      guard let nonOptionalurlComponents = urlComponents else {
+          return Fail(error: APIError.invalidRequestError("Invalid URLComponents"))
+              .eraseToAnyPublisher()
+      }
+
+      guard let url = nonOptionalurlComponents.url else {
+          return Fail(error: APIError.invalidRequestError("Invalid URL"))
+              .eraseToAnyPublisher()
+      }
+
+      var request = URLRequest(url: url)
+      request.httpMethod = "GET"
+    request.setValue("Bearer " + (appRemote.connectionParameters.accessToken ?? ""), forHTTPHeaderField: "Authorization")
+
+      let dataTaskPublisher = URLSession.shared.dataTaskPublisher(for: request)
+          .mapError { error in
+              return APIError.transportError(error)
+          }
+
+          .tryMap { (data, response) -> (data: Data, response: URLResponse) in
+
+              guard let urlResponse = response as? HTTPURLResponse else {
+                  throw APIError.invalidResponse
+              }
+
+              if (200..<300) ~= urlResponse.statusCode {
+              } else {
+                  let decoder = JSONDecoder()
+                  let apiError = try decoder.decode(APIErrorMessage.self, from: data)
+
+                  if urlResponse.statusCode == 400 {
+                      throw APIError.validationError(apiError.reason)
+                  }
+
+                  if (500..<600) ~= urlResponse.statusCode {
+                      let retryAfter = urlResponse.value(forHTTPHeaderField: "Retry-After")
+                      throw APIError.serverError(statusCode: urlResponse.statusCode, reason: apiError.reason, retryAfter: retryAfter)
+                  }
+              }
+              return (data, response)
+          }
+
+      return dataTaskPublisher
+          .tryCatch { error -> AnyPublisher<(data: Data, response: URLResponse), Error> in
+              if case APIError.serverError = error {
+                  return Just(Void())
+                      .delay(for: 3, scheduler: DispatchQueue.global())
+                      .flatMap { _ in
+                          return dataTaskPublisher
+                      }
+                      .eraseToAnyPublisher()
+              }
+              throw error
+          }
+          .map(\.data)
+          .tryMap { data -> IC_SimplifiedPlaylistObject in
+              let decoder = JSONDecoder()
+              do {
+                  //let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                  //print(json)
+                  return try decoder.decode(IC_SimplifiedPlaylistObject.self, from: data)
+              } catch {
+                  throw APIError.decodingError(error)
+              }
+          }
+          .receive(on: RunLoop.main)
+          .eraseToAnyPublisher()
+  }
+  
+  private func mapSpotifyPlaylist(spotifyPlaylists: IC_SimplifiedPlaylistObject) -> [IC_TrackObject] {
+
+    //var nTotalDuration = 0
+    let items: [IC_TrackObject] = spotifyPlaylists.tracks!.items.map { (track) in
+      //nTotalDuration += track?.track?.duration_ms ?? 0
+      return IC_TrackObject(name: track?.track?.name ?? track?.name ?? "empty", uri: track?.track?.uri ?? track?.uri ?? "spotify:uri:empty", nDurationMs: track?.track?.duration_ms ?? 0)
+        }
+
+    // iterate items
+    for item in items {
+      print("name: \(item.name)")
+    }
+    //print("Total duration: \(nTotalDuration)")
+
+    return items
+  }
 }
 
 extension IC_SpotifyDefaultViewModel: SPTAppRemotePlayerStateDelegate {
 
   func playerStateDidChange(_ playerState: SPTAppRemotePlayerState) {
-    currentSongBeingPlayed = playerState.track.name
-    currentTrackUri = playerState.track.uri
-    self.playerState = playerState
-    //self.position = playerState.playbackPosition
-    self.contextUri = playerState.contextURI
 
-    // Get the elapsed time in seconds
-    self.playbackPosition = Double(playerState.playbackPosition)
-    let elapsedTime = Int(playerState.playbackPosition / 1000)
+    //if currentTrackUri != playerState.track.uri && !playerState.isEqual(self.playerState){ -> not working
+      currentSongBeingPlayed = playerState.track.name
+      currentTrackUri = playerState.track.uri
+      self.playerState = playerState
+      //self.position = playerState.playbackPosition
+      self.contextUri = playerState.contextURI
 
-    // Format the elapsed time and update the label
-    //let formattedTime = self.formatElapsedTime(seconds: elapsedTime)
-    //self.elapsedTimeLabel.text = formattedTime
-    // Update the current elapsed time variable
-    self.currentElapsedTime = elapsedTime
+      // Get the elapsed time in seconds
+      self.playbackPositionMs = Double(playerState.playbackPosition)
 
-    self.currentDuration = playerState.track.duration
+      // Format the elapsed time and update the label
+      //let formattedTime = self.formatElapsedTime(seconds: elapsedTime)
+      //self.elapsedTimeLabel.text = formattedTime
+      // Update the current elapsed time variable
+      self.currentElapsedTimeSec = Int(playerState.playbackPosition / 1000)
 
-    self.currentDurationLabel = formatElapsedTime(seconds: Int(playerState.track.duration / 1000))
+      self.currentDurationMs = playerState.track.duration
 
-    // Start or stop the timer depending on the playback state
-    if playerState.isPaused {
-      self.stopTimer()
-    } else {
-      self.startTimer()
-    }
+      self.currentDurationLabel = formatElapsedTime(seconds: Int(playerState.track.duration / 1000))
+
+      // Start or stop the timer depending on the playback state
+      if playerState.isPaused {
+        self.stopTimer()
+      } else {
+        self.startTimer()
+      }
+    //}
   }
 }
 

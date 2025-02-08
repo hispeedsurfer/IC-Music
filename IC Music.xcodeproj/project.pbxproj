@@ -3,18 +3,38 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		A90268CC2B932DC500052FB3 /* IC_SpotifyDefaultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90268CB2B932DC500052FB3 /* IC_SpotifyDefaultViewModel.swift */; };
 		A90269722B936D1000052FB3 /* NSPersistentContainer+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90269712B936D1000052FB3 /* NSPersistentContainer+extension.swift */; };
 		A90269752B93743A00052FB3 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = A90269742B93743A00052FB3 /* ZIPFoundation */; };
+		A90602522D564487006FEE19 /* IC_SimplifiedPlaylistObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90602512D564487006FEE19 /* IC_SimplifiedPlaylistObject.swift */; };
+		A90602532D564487006FEE19 /* IC_SimplifiedPlaylistObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90602512D564487006FEE19 /* IC_SimplifiedPlaylistObject.swift */; };
+		A90602552D56449F006FEE19 /* IC_SpotifyExternalURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90602542D56449F006FEE19 /* IC_SpotifyExternalURLs.swift */; };
+		A90602562D56449F006FEE19 /* IC_SpotifyExternalURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90602542D56449F006FEE19 /* IC_SpotifyExternalURLs.swift */; };
+		A90602582D5644B0006FEE19 /* IC_SpotifyImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90602572D5644B0006FEE19 /* IC_SpotifyImages.swift */; };
+		A90602592D5644B0006FEE19 /* IC_SpotifyImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90602572D5644B0006FEE19 /* IC_SpotifyImages.swift */; };
+		A906025B2D5644BE006FEE19 /* IC_SpotifyOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A906025A2D5644BE006FEE19 /* IC_SpotifyOwner.swift */; };
+		A906025C2D5644BE006FEE19 /* IC_SpotifyOwner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A906025A2D5644BE006FEE19 /* IC_SpotifyOwner.swift */; };
+		A906025E2D5644C9006FEE19 /* IC_SpotifyFollowers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A906025D2D5644C9006FEE19 /* IC_SpotifyFollowers.swift */; };
+		A906025F2D5644C9006FEE19 /* IC_SpotifyFollowers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A906025D2D5644C9006FEE19 /* IC_SpotifyFollowers.swift */; };
+		A90602672D5644FB006FEE19 /* IC_SpotifyTracks.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90602662D5644FB006FEE19 /* IC_SpotifyTracks.swift */; };
+		A90602682D5644FB006FEE19 /* IC_SpotifyTracks.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90602662D5644FB006FEE19 /* IC_SpotifyTracks.swift */; };
+		A906026A2D564509006FEE19 /* IC_SpotifyPlaylistTrackObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90602692D564509006FEE19 /* IC_SpotifyPlaylistTrackObject.swift */; };
+		A906026B2D564509006FEE19 /* IC_SpotifyPlaylistTrackObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90602692D564509006FEE19 /* IC_SpotifyPlaylistTrackObject.swift */; };
+		A906026D2D564514006FEE19 /* IC_SpotifyTrackObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A906026C2D564514006FEE19 /* IC_SpotifyTrackObject.swift */; };
+		A906026E2D564514006FEE19 /* IC_SpotifyTrackObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A906026C2D564514006FEE19 /* IC_SpotifyTrackObject.swift */; };
+		A90602762D5658B7006FEE19 /* IC_TrackObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90602752D5658B7006FEE19 /* IC_TrackObject.swift */; };
+		A90602772D5658B7006FEE19 /* IC_TrackObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90602752D5658B7006FEE19 /* IC_TrackObject.swift */; };
+		A90B15E92D402EA300462DF2 /* IC_SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90B15E82D402EA300462DF2 /* IC_SearchResult.swift */; };
+		A90B15EA2D402EA300462DF2 /* IC_SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90B15E82D402EA300462DF2 /* IC_SearchResult.swift */; };
 		A90DB9D32D0B23A7004779C6 /* IC_SpotifyAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4D2C82B9C2F2F00CA1233 /* IC_SpotifyAccessToken.swift */; };
 		A90DB9D42D0B23A7004779C6 /* IC_SpotifyLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4D2C62B9C2E3600CA1233 /* IC_SpotifyLoginViewModel.swift */; };
 		A90DB9D52D0B23A7004779C6 /* IC_SpinningPlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A4CC482B8DF05100DE9B22 /* IC_SpinningPlaylistView.swift */; };
-		A90DB9D62D0B23A7004779C6 /* FileImportExportCtrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B0ECCF2BA61E2800A81BD5 /* FileImportExportCtrl.swift */; };
-		A90DB9D72D0B23A7004779C6 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DF0CBE2BA4406700A4F4B6 /* OptionsView.swift */; };
+		A90DB9D62D0B23A7004779C6 /* IC_FileImportExportCtrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B0ECCF2BA61E2800A81BD5 /* IC_FileImportExportCtrl.swift */; };
+		A90DB9D72D0B23A7004779C6 /* IC_OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DF0CBE2BA4406700A4F4B6 /* IC_OptionsView.swift */; };
 		A90DB9D82D0B23A7004779C6 /* IC_SpotifyAPIDefaultHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4D2CA2B9C2F8100CA1233 /* IC_SpotifyAPIDefaultHandler.swift */; };
 		A90DB9D92D0B23A7004779C6 /* IC_SpotifyDefaultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90268CB2B932DC500052FB3 /* IC_SpotifyDefaultViewModel.swift */; };
 		A90DB9DA2D0B23A7004779C6 /* IC_FileImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99C0B402B9E53FF00AFD370 /* IC_FileImporter.swift */; };
@@ -37,11 +57,19 @@
 		A90DB9EE2D0B23A7004779C6 /* SpotifyiOS.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A996335D2CC077EF00C2AA26 /* SpotifyiOS.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A90DB9F62D0B38A7004779C6 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = A90DB9F52D0B38A7004779C6 /* Zip */; };
 		A90DB9F82D0B38BF004779C6 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = A90DB9F72D0B38BF004779C6 /* Zip */; };
+		A9160CE22D19B98A00030EEB /* TapTempoButton in Frameworks */ = {isa = PBXBuildFile; productRef = A9160CE12D19B98A00030EEB /* TapTempoButton */; };
+		A9160CE42D19BA8F00030EEB /* TapTempoButton in Frameworks */ = {isa = PBXBuildFile; productRef = A9160CE32D19BA8F00030EEB /* TapTempoButton */; };
 		A942B6012B8BA33E00BC2D73 /* IC_MusicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942B6002B8BA33E00BC2D73 /* IC_MusicApp.swift */; };
 		A942B60A2B8BA34000BC2D73 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942B6092B8BA34000BC2D73 /* Persistence.swift */; };
 		A942B60D2B8BA34000BC2D73 /* IC_Music.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A942B60B2B8BA34000BC2D73 /* IC_Music.xcdatamodeld */; };
 		A942B69C2B8BC5ED00BC2D73 /* IC_SpotifyLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942B69B2B8BC5ED00BC2D73 /* IC_SpotifyLoginView.swift */; };
+		A950ADC52D4BFB210043314B /* IC_CSVFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A950ADC42D4BFB210043314B /* IC_CSVFile.swift */; };
+		A950ADC62D4BFB210043314B /* IC_CSVFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A950ADC42D4BFB210043314B /* IC_CSVFile.swift */; };
 		A965A5252B94F3D500FB98BE /* ZipFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A965A5242B94F3D500FB98BE /* ZipFile.swift */; };
+		A973EABB2D268003005FC630 /* IC_SliderFontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = A973EABA2D267FFE005FC630 /* IC_SliderFontSize.swift */; };
+		A973EABC2D268003005FC630 /* IC_SliderFontSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = A973EABA2D267FFE005FC630 /* IC_SliderFontSize.swift */; };
+		A98CBC5F2D53B40500A6AAC3 /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = A98CBC5E2D53B40500A6AAC3 /* SwiftUIIntrospect */; };
+		A98CBC612D53B41E00A6AAC3 /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = A98CBC602D53B41E00A6AAC3 /* SwiftUIIntrospect */; };
 		A99118E72B9C4DCD00110793 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A99118E42B9C4BED00110793 /* Localizable.strings */; };
 		A996335E2CC0787400C2AA26 /* SpotifyiOS.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A996335D2CC077EF00C2AA26 /* SpotifyiOS.xcframework */; };
 		A996335F2CC0787400C2AA26 /* SpotifyiOS.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A996335D2CC077EF00C2AA26 /* SpotifyiOS.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -49,7 +77,11 @@
 		A99C0B432B9E578900AFD370 /* IC_SliderMusic.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99C0B422B9E578900AFD370 /* IC_SliderMusic.swift */; };
 		A99C0B452B9E585600AFD370 /* IC_ToggleEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99C0B442B9E585600AFD370 /* IC_ToggleEdit.swift */; };
 		A9A4CC492B8DF05100DE9B22 /* IC_SpinningPlaylistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A4CC482B8DF05100DE9B22 /* IC_SpinningPlaylistView.swift */; };
-		A9B0ECD02BA61E2800A81BD5 /* FileImportExportCtrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B0ECCF2BA61E2800A81BD5 /* FileImportExportCtrl.swift */; };
+		A9AE5D662D49702100F6B1EC /* IC_SettingsDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AE5D652D49702100F6B1EC /* IC_SettingsDialog.swift */; };
+		A9AE5D672D49702100F6B1EC /* IC_SettingsDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9AE5D652D49702100F6B1EC /* IC_SettingsDialog.swift */; };
+		A9B0ECD02BA61E2800A81BD5 /* IC_FileImportExportCtrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B0ECCF2BA61E2800A81BD5 /* IC_FileImportExportCtrl.swift */; };
+		A9C0814D2D2A6C780033C7AA /* IC_TracksForPlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C0814C2D2A6C780033C7AA /* IC_TracksForPlaylist.swift */; };
+		A9C0814E2D2A6C780033C7AA /* IC_TracksForPlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C0814C2D2A6C780033C7AA /* IC_TracksForPlaylist.swift */; };
 		A9C4D2C72B9C2E3600CA1233 /* IC_SpotifyLoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4D2C62B9C2E3600CA1233 /* IC_SpotifyLoginViewModel.swift */; };
 		A9C4D2C92B9C2F2F00CA1233 /* IC_SpotifyAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4D2C82B9C2F2F00CA1233 /* IC_SpotifyAccessToken.swift */; };
 		A9C4D2CB2B9C2F8100CA1233 /* IC_SpotifyAPIDefaultHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4D2CA2B9C2F8100CA1233 /* IC_SpotifyAPIDefaultHandler.swift */; };
@@ -58,7 +90,7 @@
 		A9C4D2D42B9C34BD00CA1233 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A9C4D2D32B9C34BD00CA1233 /* README.md */; };
 		A9C4ED1D2B8DF7840024C4B3 /* IC_TrackDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4ED1C2B8DF7840024C4B3 /* IC_TrackDetailView.swift */; };
 		A9C4ED1E2B8DFC530024C4B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A942B6042B8BA34000BC2D73 /* Assets.xcassets */; };
-		A9DF0CBF2BA4406700A4F4B6 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DF0CBE2BA4406700A4F4B6 /* OptionsView.swift */; };
+		A9DF0CBF2BA4406700A4F4B6 /* IC_OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DF0CBE2BA4406700A4F4B6 /* IC_OptionsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -89,25 +121,39 @@
 /* Begin PBXFileReference section */
 		A90268CB2B932DC500052FB3 /* IC_SpotifyDefaultViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IC_SpotifyDefaultViewModel.swift; sourceTree = "<group>"; };
 		A90269712B936D1000052FB3 /* NSPersistentContainer+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSPersistentContainer+extension.swift"; sourceTree = "<group>"; };
+		A906024C2D564183006FEE19 /* IC-MusicDev-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "IC-MusicDev-Info.plist"; path = "../IC-MusicDev-Info.plist"; sourceTree = "<group>"; };
+		A90602512D564487006FEE19 /* IC_SimplifiedPlaylistObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IC_SimplifiedPlaylistObject.swift; path = ../IC_SimplifiedPlaylistObject.swift; sourceTree = "<group>"; };
+		A90602542D56449F006FEE19 /* IC_SpotifyExternalURLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IC_SpotifyExternalURLs.swift; path = ../IC_SpotifyExternalURLs.swift; sourceTree = "<group>"; };
+		A90602572D5644B0006FEE19 /* IC_SpotifyImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IC_SpotifyImages.swift; path = ../IC_SpotifyImages.swift; sourceTree = "<group>"; };
+		A906025A2D5644BE006FEE19 /* IC_SpotifyOwner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IC_SpotifyOwner.swift; path = ../IC_SpotifyOwner.swift; sourceTree = "<group>"; };
+		A906025D2D5644C9006FEE19 /* IC_SpotifyFollowers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IC_SpotifyFollowers.swift; path = ../IC_SpotifyFollowers.swift; sourceTree = "<group>"; };
+		A90602662D5644FB006FEE19 /* IC_SpotifyTracks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IC_SpotifyTracks.swift; path = ../IC_SpotifyTracks.swift; sourceTree = "<group>"; };
+		A90602692D564509006FEE19 /* IC_SpotifyPlaylistTrackObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IC_SpotifyPlaylistTrackObject.swift; path = ../IC_SpotifyPlaylistTrackObject.swift; sourceTree = "<group>"; };
+		A906026C2D564514006FEE19 /* IC_SpotifyTrackObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IC_SpotifyTrackObject.swift; path = ../IC_SpotifyTrackObject.swift; sourceTree = "<group>"; };
+		A90602752D5658B7006FEE19 /* IC_TrackObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_TrackObject.swift; sourceTree = "<group>"; };
+		A90B15E82D402EA300462DF2 /* IC_SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_SearchResult.swift; sourceTree = "<group>"; };
 		A90DB9F22D0B23A7004779C6 /* IC MusicDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IC MusicDev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A90DB9F32D0B23A7004779C6 /* IC Music copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "IC Music copy-Info.plist"; path = "/Users/andreasfranke/development/Xcode/hispeedsurfer/IC Music/IC Music copy-Info.plist"; sourceTree = "<absolute>"; };
 		A942B5FD2B8BA33E00BC2D73 /* IC Music.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IC Music.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A942B6002B8BA33E00BC2D73 /* IC_MusicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_MusicApp.swift; sourceTree = "<group>"; };
 		A942B6042B8BA34000BC2D73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A942B6072B8BA34000BC2D73 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A942B6092B8BA34000BC2D73 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		A942B60C2B8BA34000BC2D73 /* IC_Music.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IC_Music.xcdatamodel; sourceTree = "<group>"; };
-		A942B68E2B8BA60500BC2D73 /* IC-Music-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "IC-Music-Info.plist"; sourceTree = SOURCE_ROOT; };
+		A942B68E2B8BA60500BC2D73 /* IC-Music-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IC-Music-Info.plist"; sourceTree = SOURCE_ROOT; };
 		A942B6902B8BA89700BC2D73 /* IC-Music-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IC-Music-Bridging-Header.h"; sourceTree = "<group>"; };
 		A942B69B2B8BC5ED00BC2D73 /* IC_SpotifyLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_SpotifyLoginView.swift; sourceTree = "<group>"; };
+		A950ADC42D4BFB210043314B /* IC_CSVFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_CSVFile.swift; sourceTree = "<group>"; };
 		A965A5242B94F3D500FB98BE /* ZipFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipFile.swift; sourceTree = "<group>"; };
+		A973EABA2D267FFE005FC630 /* IC_SliderFontSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_SliderFontSize.swift; sourceTree = "<group>"; };
 		A99118E32B9C4BED00110793 /* IC Music */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "IC Music"; path = Localizable.strings; sourceTree = "<group>"; };
 		A996335D2CC077EF00C2AA26 /* SpotifyiOS.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:2FNC3A47ZF:Spotify"; lastKnownFileType = wrapper.xcframework; path = SpotifyiOS.xcframework; sourceTree = "<group>"; };
 		A99C0B402B9E53FF00AFD370 /* IC_FileImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_FileImporter.swift; sourceTree = "<group>"; };
 		A99C0B422B9E578900AFD370 /* IC_SliderMusic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_SliderMusic.swift; sourceTree = "<group>"; };
 		A99C0B442B9E585600AFD370 /* IC_ToggleEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_ToggleEdit.swift; sourceTree = "<group>"; };
 		A9A4CC482B8DF05100DE9B22 /* IC_SpinningPlaylistView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IC_SpinningPlaylistView.swift; sourceTree = "<group>"; };
-		A9B0ECCF2BA61E2800A81BD5 /* FileImportExportCtrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileImportExportCtrl.swift; sourceTree = "<group>"; };
+		A9AE5D652D49702100F6B1EC /* IC_SettingsDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_SettingsDialog.swift; sourceTree = "<group>"; };
+		A9B0ECCF2BA61E2800A81BD5 /* IC_FileImportExportCtrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_FileImportExportCtrl.swift; sourceTree = "<group>"; };
+		A9C0814C2D2A6C780033C7AA /* IC_TracksForPlaylist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_TracksForPlaylist.swift; sourceTree = "<group>"; };
 		A9C4D2C62B9C2E3600CA1233 /* IC_SpotifyLoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_SpotifyLoginViewModel.swift; sourceTree = "<group>"; };
 		A9C4D2C82B9C2F2F00CA1233 /* IC_SpotifyAccessToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IC_SpotifyAccessToken.swift; sourceTree = "<group>"; };
 		A9C4D2CA2B9C2F8100CA1233 /* IC_SpotifyAPIDefaultHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_SpotifyAPIDefaultHandler.swift; sourceTree = "<group>"; };
@@ -115,7 +161,7 @@
 		A9C4D2CE2B9C316700CA1233 /* IC_Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IC_Constants.swift; sourceTree = "<group>"; };
 		A9C4D2D32B9C34BD00CA1233 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A9C4ED1C2B8DF7840024C4B3 /* IC_TrackDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IC_TrackDetailView.swift; sourceTree = "<group>"; };
-		A9DF0CBE2BA4406700A4F4B6 /* OptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsView.swift; sourceTree = "<group>"; };
+		A9DF0CBE2BA4406700A4F4B6 /* IC_OptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_OptionsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,8 +169,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9160CE42D19BA8F00030EEB /* TapTempoButton in Frameworks */,
 				A90DB9F62D0B38A7004779C6 /* Zip in Frameworks */,
 				A90DB9E72D0B23A7004779C6 /* SpotifyiOS.xcframework in Frameworks */,
+				A98CBC612D53B41E00A6AAC3 /* SwiftUIIntrospect in Frameworks */,
 				A90DB9E82D0B23A7004779C6 /* ZIPFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -133,8 +181,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9160CE22D19B98A00030EEB /* TapTempoButton in Frameworks */,
 				A90DB9F82D0B38BF004779C6 /* Zip in Frameworks */,
 				A996335E2CC0787400C2AA26 /* SpotifyiOS.xcframework in Frameworks */,
+				A98CBC5F2D53B40500A6AAC3 /* SwiftUIIntrospect in Frameworks */,
 				A90269752B93743A00052FB3 /* ZIPFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -142,6 +192,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A906024F2D5643FF006FEE19 /* ApiDecode */ = {
+			isa = PBXGroup;
+			children = (
+				A90602512D564487006FEE19 /* IC_SimplifiedPlaylistObject.swift */,
+				A90602542D56449F006FEE19 /* IC_SpotifyExternalURLs.swift */,
+				A906025D2D5644C9006FEE19 /* IC_SpotifyFollowers.swift */,
+				A90602572D5644B0006FEE19 /* IC_SpotifyImages.swift */,
+				A906025A2D5644BE006FEE19 /* IC_SpotifyOwner.swift */,
+				A90602692D564509006FEE19 /* IC_SpotifyPlaylistTrackObject.swift */,
+				A906026C2D564514006FEE19 /* IC_SpotifyTrackObject.swift */,
+				A90602662D5644FB006FEE19 /* IC_SpotifyTracks.swift */,
+			);
+			path = ApiDecode;
+			sourceTree = "<group>";
+		};
 		A942B5F42B8BA33E00BC2D73 = {
 			isa = PBXGroup;
 			children = (
@@ -150,7 +215,6 @@
 				A942B5FF2B8BA33E00BC2D73 /* IC Music */,
 				A942B5FE2B8BA33E00BC2D73 /* Products */,
 				A942B6932B8BAABE00BC2D73 /* Frameworks */,
-				A90DB9F32D0B23A7004779C6 /* IC Music copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -166,11 +230,18 @@
 		A942B5FF2B8BA33E00BC2D73 /* IC Music */ = {
 			isa = PBXGroup;
 			children = (
+				A906024F2D5643FF006FEE19 /* ApiDecode */,
 				A942B6042B8BA34000BC2D73 /* Assets.xcassets */,
 				A9C4D2CE2B9C316700CA1233 /* IC_Constants.swift */,
+				A950ADC42D4BFB210043314B /* IC_CSVFile.swift */,
 				A99C0B402B9E53FF00AFD370 /* IC_FileImporter.swift */,
+				A9B0ECCF2BA61E2800A81BD5 /* IC_FileImportExportCtrl.swift */,
 				A942B60B2B8BA34000BC2D73 /* IC_Music.xcdatamodeld */,
 				A942B6002B8BA33E00BC2D73 /* IC_MusicApp.swift */,
+				A9DF0CBE2BA4406700A4F4B6 /* IC_OptionsView.swift */,
+				A90B15E82D402EA300462DF2 /* IC_SearchResult.swift */,
+				A9AE5D652D49702100F6B1EC /* IC_SettingsDialog.swift */,
+				A973EABA2D267FFE005FC630 /* IC_SliderFontSize.swift */,
 				A99C0B422B9E578900AFD370 /* IC_SliderMusic.swift */,
 				A9A4CC482B8DF05100DE9B22 /* IC_SpinningPlaylistView.swift */,
 				A9C4D2C82B9C2F2F00CA1233 /* IC_SpotifyAccessToken.swift */,
@@ -181,14 +252,15 @@
 				A9C4D2C62B9C2E3600CA1233 /* IC_SpotifyLoginViewModel.swift */,
 				A99C0B442B9E585600AFD370 /* IC_ToggleEdit.swift */,
 				A9C4ED1C2B8DF7840024C4B3 /* IC_TrackDetailView.swift */,
+				A90602752D5658B7006FEE19 /* IC_TrackObject.swift */,
+				A9C0814C2D2A6C780033C7AA /* IC_TracksForPlaylist.swift */,
 				A942B6902B8BA89700BC2D73 /* IC-Music-Bridging-Header.h */,
 				A942B68E2B8BA60500BC2D73 /* IC-Music-Info.plist */,
+				A906024C2D564183006FEE19 /* IC-MusicDev-Info.plist */,
 				A90269712B936D1000052FB3 /* NSPersistentContainer+extension.swift */,
 				A942B6092B8BA34000BC2D73 /* Persistence.swift */,
 				A942B6062B8BA34000BC2D73 /* Preview Content */,
 				A965A5242B94F3D500FB98BE /* ZipFile.swift */,
-				A9DF0CBE2BA4406700A4F4B6 /* OptionsView.swift */,
-				A9B0ECCF2BA61E2800A81BD5 /* FileImportExportCtrl.swift */,
 			);
 			path = "IC Music";
 			sourceTree = "<group>";
@@ -237,6 +309,8 @@
 			packageProductDependencies = (
 				A90DB9D02D0B23A7004779C6 /* ZIPFoundation */,
 				A90DB9F52D0B38A7004779C6 /* Zip */,
+				A9160CE32D19BA8F00030EEB /* TapTempoButton */,
+				A98CBC602D53B41E00A6AAC3 /* SwiftUIIntrospect */,
 			);
 			productName = "IC Music";
 			productReference = A90DB9F22D0B23A7004779C6 /* IC MusicDev.app */;
@@ -259,6 +333,8 @@
 			packageProductDependencies = (
 				A90269742B93743A00052FB3 /* ZIPFoundation */,
 				A90DB9F72D0B38BF004779C6 /* Zip */,
+				A9160CE12D19B98A00030EEB /* TapTempoButton */,
+				A98CBC5E2D53B40500A6AAC3 /* SwiftUIIntrospect */,
 			);
 			productName = "IC Music";
 			productReference = A942B5FD2B8BA33E00BC2D73 /* IC Music.app */;
@@ -272,7 +348,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1520;
-				LastUpgradeCheck = 1520;
+				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					A942B5FC2B8BA33E00BC2D73 = {
 						CreatedOnToolsVersion = 15.2;
@@ -280,7 +356,6 @@
 				};
 			};
 			buildConfigurationList = A942B5F82B8BA33E00BC2D73 /* Build configuration list for PBXProject "IC Music" */;
-			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -294,7 +369,10 @@
 				A90269732B93743A00052FB3 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 				A996335A2CC077E500C2AA26 /* XCRemoteSwiftPackageReference "ios-sdk" */,
 				A90DB9F42D0B3743004779C6 /* XCRemoteSwiftPackageReference "Zip" */,
+				A9160CE02D19B98A00030EEB /* XCRemoteSwiftPackageReference "TapTempoButton" */,
+				A98CBC5D2D53B40500A6AAC3 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
+			preferredProjectObjectVersion = 77;
 			productRefGroup = A942B5FE2B8BA33E00BC2D73 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -335,22 +413,36 @@
 			files = (
 				A90DB9D32D0B23A7004779C6 /* IC_SpotifyAccessToken.swift in Sources */,
 				A90DB9D42D0B23A7004779C6 /* IC_SpotifyLoginViewModel.swift in Sources */,
+				A90602552D56449F006FEE19 /* IC_SpotifyExternalURLs.swift in Sources */,
 				A90DB9D52D0B23A7004779C6 /* IC_SpinningPlaylistView.swift in Sources */,
-				A90DB9D62D0B23A7004779C6 /* FileImportExportCtrl.swift in Sources */,
-				A90DB9D72D0B23A7004779C6 /* OptionsView.swift in Sources */,
+				A906025B2D5644BE006FEE19 /* IC_SpotifyOwner.swift in Sources */,
+				A90DB9D62D0B23A7004779C6 /* IC_FileImportExportCtrl.swift in Sources */,
+				A90DB9D72D0B23A7004779C6 /* IC_OptionsView.swift in Sources */,
 				A90DB9D82D0B23A7004779C6 /* IC_SpotifyAPIDefaultHandler.swift in Sources */,
+				A90602772D5658B7006FEE19 /* IC_TrackObject.swift in Sources */,
+				A906026E2D564514006FEE19 /* IC_SpotifyTrackObject.swift in Sources */,
+				A90602532D564487006FEE19 /* IC_SimplifiedPlaylistObject.swift in Sources */,
+				A9C0814E2D2A6C780033C7AA /* IC_TracksForPlaylist.swift in Sources */,
+				A973EABC2D268003005FC630 /* IC_SliderFontSize.swift in Sources */,
+				A9AE5D662D49702100F6B1EC /* IC_SettingsDialog.swift in Sources */,
 				A90DB9D92D0B23A7004779C6 /* IC_SpotifyDefaultViewModel.swift in Sources */,
+				A906026B2D564509006FEE19 /* IC_SpotifyPlaylistTrackObject.swift in Sources */,
+				A906025E2D5644C9006FEE19 /* IC_SpotifyFollowers.swift in Sources */,
 				A90DB9DA2D0B23A7004779C6 /* IC_FileImporter.swift in Sources */,
 				A90DB9DB2D0B23A7004779C6 /* ZipFile.swift in Sources */,
 				A90DB9DC2D0B23A7004779C6 /* Persistence.swift in Sources */,
 				A90DB9DD2D0B23A7004779C6 /* IC_Constants.swift in Sources */,
 				A90DB9DE2D0B23A7004779C6 /* IC_SpotifyLoginView.swift in Sources */,
 				A90DB9DF2D0B23A7004779C6 /* IC_Music.xcdatamodeld in Sources */,
+				A90602682D5644FB006FEE19 /* IC_SpotifyTracks.swift in Sources */,
 				A90DB9E02D0B23A7004779C6 /* IC_MusicApp.swift in Sources */,
 				A90DB9E12D0B23A7004779C6 /* NSPersistentContainer+extension.swift in Sources */,
+				A90602592D5644B0006FEE19 /* IC_SpotifyImages.swift in Sources */,
 				A90DB9E22D0B23A7004779C6 /* IC_ToggleEdit.swift in Sources */,
+				A950ADC62D4BFB210043314B /* IC_CSVFile.swift in Sources */,
 				A90DB9E32D0B23A7004779C6 /* IC_SpotifyAPIError.swift in Sources */,
 				A90DB9E42D0B23A7004779C6 /* IC_SliderMusic.swift in Sources */,
+				A90B15EA2D402EA300462DF2 /* IC_SearchResult.swift in Sources */,
 				A90DB9E52D0B23A7004779C6 /* IC_TrackDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -361,22 +453,36 @@
 			files = (
 				A9C4D2C92B9C2F2F00CA1233 /* IC_SpotifyAccessToken.swift in Sources */,
 				A9C4D2C72B9C2E3600CA1233 /* IC_SpotifyLoginViewModel.swift in Sources */,
+				A90602562D56449F006FEE19 /* IC_SpotifyExternalURLs.swift in Sources */,
 				A9A4CC492B8DF05100DE9B22 /* IC_SpinningPlaylistView.swift in Sources */,
-				A9B0ECD02BA61E2800A81BD5 /* FileImportExportCtrl.swift in Sources */,
-				A9DF0CBF2BA4406700A4F4B6 /* OptionsView.swift in Sources */,
+				A906025C2D5644BE006FEE19 /* IC_SpotifyOwner.swift in Sources */,
+				A9B0ECD02BA61E2800A81BD5 /* IC_FileImportExportCtrl.swift in Sources */,
+				A9DF0CBF2BA4406700A4F4B6 /* IC_OptionsView.swift in Sources */,
 				A9C4D2CB2B9C2F8100CA1233 /* IC_SpotifyAPIDefaultHandler.swift in Sources */,
+				A90602762D5658B7006FEE19 /* IC_TrackObject.swift in Sources */,
+				A906026D2D564514006FEE19 /* IC_SpotifyTrackObject.swift in Sources */,
+				A90602522D564487006FEE19 /* IC_SimplifiedPlaylistObject.swift in Sources */,
+				A9C0814D2D2A6C780033C7AA /* IC_TracksForPlaylist.swift in Sources */,
+				A973EABB2D268003005FC630 /* IC_SliderFontSize.swift in Sources */,
+				A9AE5D672D49702100F6B1EC /* IC_SettingsDialog.swift in Sources */,
 				A90268CC2B932DC500052FB3 /* IC_SpotifyDefaultViewModel.swift in Sources */,
+				A906026A2D564509006FEE19 /* IC_SpotifyPlaylistTrackObject.swift in Sources */,
+				A906025F2D5644C9006FEE19 /* IC_SpotifyFollowers.swift in Sources */,
 				A99C0B412B9E53FF00AFD370 /* IC_FileImporter.swift in Sources */,
 				A965A5252B94F3D500FB98BE /* ZipFile.swift in Sources */,
 				A942B60A2B8BA34000BC2D73 /* Persistence.swift in Sources */,
 				A9C4D2CF2B9C316700CA1233 /* IC_Constants.swift in Sources */,
 				A942B69C2B8BC5ED00BC2D73 /* IC_SpotifyLoginView.swift in Sources */,
 				A942B60D2B8BA34000BC2D73 /* IC_Music.xcdatamodeld in Sources */,
+				A90602672D5644FB006FEE19 /* IC_SpotifyTracks.swift in Sources */,
 				A942B6012B8BA33E00BC2D73 /* IC_MusicApp.swift in Sources */,
 				A90269722B936D1000052FB3 /* NSPersistentContainer+extension.swift in Sources */,
+				A90602582D5644B0006FEE19 /* IC_SpotifyImages.swift in Sources */,
 				A99C0B452B9E585600AFD370 /* IC_ToggleEdit.swift in Sources */,
+				A950ADC52D4BFB210043314B /* IC_CSVFile.swift in Sources */,
 				A9C4D2CD2B9C2FB300CA1233 /* IC_SpotifyAPIError.swift in Sources */,
 				A99C0B432B9E578900AFD370 /* IC_SliderMusic.swift in Sources */,
+				A90B15E92D402EA300462DF2 /* IC_SearchResult.swift in Sources */,
 				A9C4ED1D2B8DF7840024C4B3 /* IC_TrackDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -414,14 +520,14 @@
 					"$(PROJECT_DIR)",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "IC Music copy-Info.plist";
+				INFOPLIST_FILE = "IC-MusicDev-Info.plist";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -460,14 +566,14 @@
 					"$(PROJECT_DIR)",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "IC Music copy-Info.plist";
+				INFOPLIST_FILE = "IC-MusicDev-Info.plist";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -632,7 +738,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -678,7 +784,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -755,6 +861,22 @@
 				minimumVersion = 2.1.2;
 			};
 		};
+		A9160CE02D19B98A00030EEB /* XCRemoteSwiftPackageReference "TapTempoButton" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/yannxou/TapTempoButton.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.1;
+			};
+		};
+		A98CBC5D2D53B40500A6AAC3 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.0;
+			};
+		};
 		A996335A2CC077E500C2AA26 /* XCRemoteSwiftPackageReference "ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/spotify/ios-sdk";
@@ -785,6 +907,25 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A90DB9F42D0B3743004779C6 /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
+		};
+		A9160CE12D19B98A00030EEB /* TapTempoButton */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A9160CE02D19B98A00030EEB /* XCRemoteSwiftPackageReference "TapTempoButton" */;
+			productName = TapTempoButton;
+		};
+		A9160CE32D19BA8F00030EEB /* TapTempoButton */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = TapTempoButton;
+		};
+		A98CBC5E2D53B40500A6AAC3 /* SwiftUIIntrospect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A98CBC5D2D53B40500A6AAC3 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = SwiftUIIntrospect;
+		};
+		A98CBC602D53B41E00A6AAC3 /* SwiftUIIntrospect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A98CBC5D2D53B40500A6AAC3 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = SwiftUIIntrospect;
 		};
 /* End XCSwiftPackageProductDependency section */
 

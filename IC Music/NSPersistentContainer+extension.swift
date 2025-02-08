@@ -20,7 +20,7 @@ extension NSPersistentContainer {
     case copyStoreError(String)
     case invalidSource(String)
   }
-  
+
   /// Restore backup persistent stores located in the directory referenced by `backupURL`.
   ///
   /// **Be very careful with this**. To restore a persistent store, the current persistent store must be removed from the container. When that happens, **all currently loaded Core Data objects** will become invalid. Using them after restoring will cause your app to crash. When calling this method you **must** ensure that you do not continue to use any previously fetched managed objects or existing fetched results controllers. **If this method does not throw, that does not mean your app is safe.** You need to take extra steps to prevent crashes. The details vary depending on the nature of your app.
@@ -31,7 +31,7 @@ extension NSPersistentContainer {
     guard backupURL.isFileURL else {
       throw CopyPersistentStoreErrors.invalidSource("Backup URL must be a file URL")
     }
-    
+
     var destinationURL = destination?.deletingLastPathComponent()
     if backupURL.pathExtension == "zip" {
       //destinationURL!.appendPathComponent("directory")
@@ -58,7 +58,7 @@ extension NSPersistentContainer {
     else {
       destinationURL = backupURL
     }
-    
+
     var isDirectory: ObjCBool = false
     if FileManager.default.fileExists(atPath: destination!.path, isDirectory: &isDirectory) {
       if !isDirectory.boolValue {
@@ -67,7 +67,7 @@ extension NSPersistentContainer {
     } else {
       throw CopyPersistentStoreErrors.invalidSource("Source URL must exist")
     }
-    
+
     for persistentStoreDescription in persistentStoreDescriptions {
       guard let loadedStoreURL = persistentStoreDescription.url else {
         continue
@@ -80,8 +80,8 @@ extension NSPersistentContainer {
         let storeOptions = persistentStoreDescription.options
         let configurationName = persistentStoreDescription.configuration
         let storeType = persistentStoreDescription.type
-        
-        
+
+
         // Replace the current store with the backup copy. This has a side effect of removing the current store from the Core Data stack.
         // When restoring, it's necessary to use the current persistent store coordinator.
         try persistentStoreCoordinator
@@ -106,7 +106,7 @@ extension NSPersistentContainer {
       }
     }
   }
-  
+
   /// Copy all loaded persistent stores to a new directory. Each currently loaded file-based persistent store will be copied (including journal files, external binary storage, and anything else Core Data needs) into the destination directory to a persistent store with the same name and type as the existing store. In-memory stores, if any, are skipped.
   /// - Parameters:
   ///   - destinationURL: Destination for new persistent store files. Must be a file URL. If `overwriting` is `false` and `destinationURL` exists, it must be a directory.
@@ -116,11 +116,11 @@ extension NSPersistentContainer {
   func copyPersistentStores(to destinationURL: URL, overwriting: Bool = true) throws -> String {
     // this will hold the URL of the zip file
     var archiveUrl: URL?
-    
+
     guard destinationURL.isFileURL else {
       throw CopyPersistentStoreErrors.invalidDestination("Destination URL must be a file URL")
     }
-    
+
     // If the destination exists and we aren't overwriting it, then it must be a directory. (If we are overwriting, we'll remove it anyway, so it doesn't matter whether it's a directory).
     var isDirectory: ObjCBool = false
     if !overwriting && FileManager.default
@@ -139,7 +139,7 @@ extension NSPersistentContainer {
           .destinationNotRemoved("Can't overwrite destination at \(destinationURL)")
       }
     }
-    
+
     // Create the destination directory
     do {
       try FileManager.default
@@ -148,7 +148,7 @@ extension NSPersistentContainer {
       throw CopyPersistentStoreErrors
         .destinationError("Could not create destination directory at \(destinationURL)")
     }
-    
+
     for persistentStoreDescription in persistentStoreDescriptions {
       guard let storeURL = persistentStoreDescription.url else {
         continue
@@ -157,7 +157,7 @@ extension NSPersistentContainer {
         continue
       }
       let destinationStoreURL = destinationURL.appendingPathComponent(storeURL.lastPathComponent)
-      
+
       if !overwriting && FileManager.default.fileExists(atPath: destinationStoreURL.path) {
         // If the destination exists, the replacePersistentStore call will update it in place. That's fine unless we're not overwriting.
         throw CopyPersistentStoreErrors
@@ -175,25 +175,25 @@ extension NSPersistentContainer {
             sourceOptions: persistentStoreDescription.options,
             ofType: persistentStoreDescription.type
           )
-        
+
         let resourceKeys : [URLResourceKey] = [.creationDateKey, .isDirectoryKey]
         let enumerator = FileManager.default.enumerator(
-at: destinationURL,
-                                                        includingPropertiesForKeys: resourceKeys,
-options: [.skipsHiddenFiles],
-errorHandler: { (
-  url,
-  error
-) -> Bool in
-  print("directoryEnumerator error at \(url): ", error)
-  return true
-})!
-        
+          at: destinationURL,
+          includingPropertiesForKeys: resourceKeys,
+          options: [.skipsHiddenFiles],
+          errorHandler: { (
+            url,
+            error
+          ) -> Bool in
+            print("directoryEnumerator error at \(url): ", error)
+            return true
+          })!
+
         for case let fileURL as URL in enumerator {
           let resourceValues = try fileURL.resourceValues(forKeys: Set(resourceKeys))
           print(fileURL.path, resourceValues.creationDate!, resourceValues.isDirectory!)
         }
-        
+
 #if ZIP_FILE
         // one way to zip files using ZIPFoundation
         // BEGIN ZIPFoundation
@@ -204,8 +204,8 @@ errorHandler: { (
           appropriateFor: destinationURL,
           create: true
         ).appendingPathComponent("IC_test.zip")
-        
-        
+
+
         if fm.fileExists(atPath: tmpUrl1.path) {
           try fm.removeItem(at: tmpUrl1)
         }
@@ -213,7 +213,7 @@ errorHandler: { (
         // if we encounter an error, store it here
         var error: NSError?
         // END ZIPFoundation
-        
+
         // another way to zip files without 3rd party dependencies
         let coordinator = NSFileCoordinator()
         // zip up the documents directory
@@ -234,11 +234,11 @@ errorHandler: { (
             ).appendingPathComponent(zipUrl.lastPathComponent)
             try? fm.removeItem(at: tmpUrl)
             try! fm.moveItem(at: zipUrl, to: tmpUrl)
-          
+
             // store the URL so we can use it outside the block
             archiveUrl = tmpUrl
           }
-        
+
         /*if let archiveUrl = archiveUrl {
          // bring up the share sheet so we can send the archive with AirDrop for example
          //let avc = UIActivityViewController(activityItems: [archiveUrl], applicationActivities: nil)
@@ -251,7 +251,7 @@ errorHandler: { (
         throw CopyPersistentStoreErrors.copyStoreError("\(error.localizedDescription)")
       }
     }
-    
+
     return archiveUrl?.path ?? ""
   }
 }

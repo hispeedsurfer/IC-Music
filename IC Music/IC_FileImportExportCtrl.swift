@@ -9,7 +9,7 @@ import Foundation
 
 import SwiftUI
 
-class FileImportExportCtrl: ObservableObject {
+class IC_FileImportExportCtrl: ObservableObject {
     
     @StateObject var spotifyDefaultViewModel: IC_SpotifyDefaultViewModel = { IC_SpotifyDefaultViewModel.shared } ()
 

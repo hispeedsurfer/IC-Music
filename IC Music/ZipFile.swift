@@ -15,26 +15,31 @@ extension UTType
     static let zip = UTType(filenameExtension: "zip")!
 }
 
-struct ZipFile: FileDocument
-{
+// Wrapper class for FileWrapper
+final class FileWrapperContainer: @unchecked Sendable {
     let file: FileWrapper
-    
+
+    init(file: FileWrapper) {
+        self.file = file
+    }
+}
+
+struct ZipFile: FileDocument {
+    let container: FileWrapperContainer
+
     static var readableContentTypes: [UTType] { [.zip] }
     static var writableContentTypes: [UTType] { [.zip] }
-    
-    init(zipURL: URL) throws
-    {
-        self.file = try FileWrapper(url: zipURL, options: .immediate)
-    }
-    
-    init(configuration: ReadConfiguration) throws
-    {
-        self.file = configuration.file
-    }
-    
-    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper
-    {
-        return self.file
+
+    init(zipURL: URL) throws {
+        let fileWrapper = try FileWrapper(url: zipURL, options: .immediate)
+        self.container = FileWrapperContainer(file: fileWrapper)
     }
 
+    init(configuration: ReadConfiguration) throws {
+        self.container = FileWrapperContainer(file: configuration.file)
+    }
+
+    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+        return self.container.file
+    }
 }

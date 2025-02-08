@@ -17,18 +17,7 @@ import CoreData
 struct TrackInit {
   var trackUri: String
   var trackTitle: String
-  var durationSeconds: Int32
-  //var spotifyId: String
-  //var tempo: Double
-}
-
-struct ItemCard: View {
-  @ObservedObject var item: IC_TrackInfo
-  var body: some View {
-    Text(
-      "\(item.trackTitle ?? "")"
-    ) // The ?? value is just to work around NavigationLink hanging on to this View and body being run after it was deleted which crashes if it was force unwrapped.
-  }
+  var durationMSeconds: Int32
 }
 
 struct IC_SpinningPlaylistView: View {
@@ -43,21 +32,20 @@ struct IC_SpinningPlaylistView: View {
       .appearance().titleTextAttributes = [.font : UIFont.preferredFont(forTextStyle: .subheadline)]
   }
 
-  //@StateObject var spinningPlaylistsViewModel = IC_SpinningPlaylistViewModel()
-
   @Environment(\.managedObjectContext) var viewContext
   @State var playlistURI = ""
-  @State var contentItem: SPTAppRemoteContentItem?
+  @State var playlistId = ""
+  @State var sPlaylistTitle: String?
   @State var trackItmems = [Int : IC_TrackInfo]()
   @State var dictUriIdx = [String : Int]()
   @State var error: Error?
   @State var currentTrackUri: String = ""
-  //@State  var trackInfo: IC_TrackInfo?
   @State private var playerState: SPTAppRemotePlayerState?
-
-  @State private var document = ""
-
-  private var bDep: Bool = true
+  @State var isEditable = false
+  @State private var selectedTrackInfoIdx: Int?
+  @State private var showingSettings = false
+  @State private var selectedTrackIdx: Int? = nil
+  @State private var selectedTrackObject: IC_TrackInfo? = nil
 
   @AppStorage(UserKeys.fontoSize.rawValue) var fontoSize: Double = 22.0
 
@@ -85,22 +73,14 @@ struct IC_SpinningPlaylistView: View {
   private func getPlayerState() {
     spotifyDefaultViewModel.appRemote.playerAPI?.getPlayerState { (result, error) -> Void in
       guard error == nil else { return }
-
-      //let playerState = result as! SPTAppRemotePlayerState
-      //self.updateViewWithPlayerState(playerState)
     }
   }
 
   func appRemoteConnected() {
     getPlayerState()
-
-    //enableInterface(true)
   }
 
 
-  @State var isEditable = false
-
-  @State private var selectedTrackInfoIdx: Int?
 
   func fetchPlayerState() {
     spotifyDefaultViewModel.appRemote.playerAPI?.getPlayerState({ (playerState, error) in
@@ -112,10 +92,108 @@ struct IC_SpinningPlaylistView: View {
     })
   }
 
+  func fetchedData(searchResult: IC_SearchResult) {
+    self.trackItmems = searchResult.tracks.searchResultIdx.items
+    self.dictUriIdx = searchResult.tracks.searchResultIdx.dictUriIdx
+    //self.playlistURI = ""
+    self.sPlaylistTitle = searchResult.playList
+    self.spotifyDefaultViewModel.nTotalDurationMSec = (searchResult.nTotalDurationMSec)
+    self.spotifyDefaultViewModel.objectWillChange.send() //to force view update
+  }
+
+  // export the info of trackItmens to a csv file
+  func exportToCSV() {
+    let csvData = convertToCSV()
+
+    saveCSVFile(data: csvData, fileName: "\(String(describing: sPlaylistTitle)).csv")
+
+  }
+
+  func escapeCSVField(_ field: String) -> String {
+    var escapedField = field.replacingOccurrences(of: "\"", with: "\"\"")
+    if field.contains(",") || field.contains("\n") || field.contains("\r") {
+      escapedField = "\"\(escapedField)\""
+    }
+    return escapedField
+  }
+
+
+  func convertToCSV() -> String {
+    var csvText = "Track Title;Duration;BPM;Custom Info\r" // headers of the csv file
+    // sort the track items by the index
+    let trackItmems = trackItmems.sorted { $0.key < $1.key }
+
+    for (_, trackInfo) in trackItmems {
+      let tracktitle = escapeCSVField(trackInfo.trackTitle ?? "")
+      let customInfo = escapeCSVField(trackInfo.customInfo ?? "")
+      let newLine = "\(tracktitle);\(trackInfo.durationSeconds);\(trackInfo.bpmSpotify);\(customInfo)\r" // content of the csv file
+      csvText.append(contentsOf: newLine) // append the content to the csv file
+    }
+    return csvText
+  }
+
+  func saveCSVFile(data: String, fileName: String) {
+    let fileManager = FileManager.default
+    do {
+      let documentDirectory = try fileManager.url(
+        for: .documentDirectory,
+        in: .userDomainMask,
+        appropriateFor: nil,
+        create: true
+      )
+      let fileURL = documentDirectory.appendingPathComponent(fileName)
+      try data.write(to: fileURL, atomically: true, encoding: .utf8)
+      print("File saved: \(fileURL)")
+    } catch {
+      print("Error saving file: \(error)")
+    }
+  }
+
+
+
   func update(playerState: SPTAppRemotePlayerState) {
     let playlistUri = playerState.contextURI.absoluteString
 
-    if playlistUri != self.playlistURI || playlistUri == "spotify:search"{
+    var playlistId = ""
+    var listType = ""
+
+    if playlistUri != "spotify:search", let sIdx = playlistUri.lastIndex(of: ":") {
+      //let lastPart = sportifyId[idx>..]
+      playlistId = String(playlistUri.suffix(from: sIdx).dropFirst())
+      var sIdxType = playlistUri.index(before: sIdx)
+      let range = ...sIdxType
+      let playlistUri2 = String(playlistUri[range])
+      sIdxType = playlistUri2.lastIndex(of: ":") ?? playlistUri2.startIndex
+      listType = String(playlistUri2.suffix(from: sIdxType).dropFirst())
+
+      if listType != "" && !listType.hasSuffix(String("s")) {
+        listType = listType + "s"
+      }
+
+      if listType != "" {
+        playlistId = "\(listType)/\(playlistId)"
+      }
+      else {
+        playlistId = ""
+      }
+    }
+
+    if playlistId != "" && playlistId != self.playlistId {
+      self.playlistURI = playlistUri
+      self.playlistId = playlistId
+      trackItmems.removeAll()
+      spotifyDefaultViewModel.getUserPlayListTracks(playlistID: String(playlistId)){ result in
+        DispatchQueue.main.async {
+          switch result {
+          case .success(let success):
+            self.fetchedData(searchResult: success)
+          case .failure(let error):
+            print( "tes \(error.localizedDescription)")
+          }
+        }
+      }
+    }
+    else if playlistUri != self.playlistURI || playlistUri == "spotify:search"{
       self.playlistURI = playlistUri
 
       if self.playlistURI != "" && self.playlistURI != "spotify:search" {
@@ -124,11 +202,7 @@ struct IC_SpinningPlaylistView: View {
           DispatchQueue.main.async {
             switch result {
             case .success(let success):
-              self.trackItmems = success.tracks.searchResultIdx.items
-              self.dictUriIdx = success.tracks.searchResultIdx.dictUriIdx
-              //self.playlistURI = ""
-              self.contentItem = success.playList
-              self.spotifyDefaultViewModel.objectWillChange.send() //to force view update
+              self.fetchedData(searchResult: success)
             case .failure(let error):
               print( "tes \(error.localizedDescription)")
             }
@@ -145,11 +219,7 @@ struct IC_SpinningPlaylistView: View {
                 DispatchQueue.main.async {
                   switch result {
                   case .success(let success):
-                    self.trackItmems = success.tracks.searchResultIdx.items
-                    self.dictUriIdx = success.tracks.searchResultIdx.dictUriIdx
-                    //self.playlistURI = ""
-                    self.contentItem = success.playList
-                    self.spotifyDefaultViewModel.objectWillChange.send() //to force view update
+                    self.fetchedData(searchResult: success)
                   case .failure(let error):
                     print( "tes \(error.localizedDescription)")
                   }
@@ -159,21 +229,27 @@ struct IC_SpinningPlaylistView: View {
         }
       }
     }
+
+    if !trackItmems.isEmpty {
+      if let idx = dictUriIdx[playerState.track.uri] {
+        var nCurrentPlaylistDurationSeconds = 0
+        var sCurrentPlaylistTitle = ""
+        for x in 0..<idx {
+          if let trackInfo = trackItmems[x] {
+            nCurrentPlaylistDurationSeconds += Int(trackInfo.durationSeconds)
+            sCurrentPlaylistTitle = trackInfo.trackTitle ?? ""
+          }
+        }
+
+        print (
+          "Playlist duration \(nCurrentPlaylistDurationSeconds) up to including title: \(sCurrentPlaylistTitle)"
+        )
+        spotifyDefaultViewModel.nCurrentPlaylistDurationSeconds = nCurrentPlaylistDurationSeconds
+      }
+    }
   }
-
-  var sortedTrackItems: [(key: Int, value: IC_TrackInfo)] {
-    trackItmems.sorted { $0.key < $1.key }
-  }
-
-  @State private var scrollToIndex: Int = 1
-
-  @State private var columnVisibility = NavigationSplitViewVisibility.all
-
-  @State private var showingSettings = false
 
   var body: some View {
-
-    //IC_FileImporter()
 
     VStack(spacing:5) {
       HStack(spacing:5){
@@ -188,10 +264,7 @@ struct IC_SpinningPlaylistView: View {
               DispatchQueue.main.async {
                 switch result {
                 case .success(let success):
-                  self.trackItmems = success.tracks.searchResultIdx.items
-                  self.dictUriIdx = success.tracks.searchResultIdx.dictUriIdx
-                  self.playlistURI = ""
-                  self.contentItem = success.playList
+                  self.fetchedData(searchResult: success)
                 case .failure(let error):
                   print( "tes \(error.localizedDescription)")
                 }
@@ -213,10 +286,17 @@ struct IC_SpinningPlaylistView: View {
           }
           .buttonStyle(PlainButtonStyle())
           .sheet(isPresented: $showingSettings) {
-            SettingsDialog()
+            IC_SettingsDialog()
           }
 
+          Button("Export") {
+            exportToCSV()
+          }
+          .foregroundColor(.white)
+          .background(Color.green)
+          .cornerRadius(5)
         }
+
       }
     }
 
@@ -229,67 +309,61 @@ struct IC_SpinningPlaylistView: View {
         .frame(maxWidth: 180)
     }
 
-    //if(bDep) {
-    NavigationView {
+    NavigationSplitView {
+      // Sidebar
       ScrollViewReader { reader in
-
-        /*
-         Toggle(isEditable ? "Edit Mode" : "Read Mode", isOn: $isEditable)
-         .onChange(of: isEditable) {
-         if !isEditable && viewContext.hasChanges {
-         do {
-         try viewContext.save()
-         } catch {
-         let nsError = error as NSError
-         fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-         }
-         }
-         }
-         */
-        List (selection: binding(for: spotifyDefaultViewModel.currentTrackUri)){
-          let sortedKeysAndValues = trackItmems.sorted() { $0.0 < $1.0 }
+        List(selection: $selectedTrackIdx) {
+          let sortedKeysAndValues = trackItmems.sorted { $0.0 < $1.0 }
 
           ForEach(sortedKeysAndValues, id: \.key) {
             idx,
             trackInfo in
             NavigationLink(
-              destination: IC_TrackDetailView(
-                trackInfo: trackInfo,
-                isEditable: self.$isEditable,
-                trackInfoAfter: trackItmems[idx+1] ?? trackInfoEmpty
-              ),
-              tag: idx,
-              selection: binding(for: spotifyDefaultViewModel.currentTrackUri)
+              value: idx
             ) {
               Text("\(trackInfo.trackTitle ?? "")")
                 .id(idx)
                 .foregroundColor(
-                  trackInfo.trackURI==spotifyDefaultViewModel.currentTrackUri ? .blue : .black
+                  trackInfo.trackURI == spotifyDefaultViewModel.currentTrackUri ? .blue : .black
                 )
             }
           }
         }
-        //.listStyle(.sidebar) if active sidebar in this case is nomore hidding when in split view expanded
         .onChange(of: spotifyDefaultViewModel.currentTrackUri) { oldValue, newValue in
-          //print("currentSongBeingPlayed: \(newValue)")
-          //fetchPlayerState()
-          var idx = dictUriIdx[newValue] ?? -2
-          if idx != -2 {
-            if idx < dictUriIdx.count {
-              idx = idx - 1
-            }
-            reader.scrollTo(idx, anchor: .top)
+          guard let idx = dictUriIdx[newValue] else {
+            selectedTrackIdx = nil
+            selectedTrackObject = nil
+            return }
+          var idx2 = idx
+          if idx < dictUriIdx.count {
+            idx2 = idx - 1
           }
+          reader.scrollTo(idx2, anchor: .top)
+          selectedTrackIdx = idx
+          selectedTrackObject = trackItmems[idx] ?? nil
         }
-        .navigationTitle(contentItem?.title ?? "")
-        //.listStyle(GroupedListStyle()).navigationBarTitle("Settings")
+        .navigationTitle(sPlaylistTitle?.isEmpty ?? true ? "No playlist title" : sPlaylistTitle!)
+        .foregroundColor(.orange)
         HStack(spacing: 5){
           IC_SliderFontSize(fontoSize: $fontoSize)
         }
       }
+    } detail: {
+      // Detail view
+      if let selectedTrack = selectedTrackIdx, let _ = selectedTrackObject {
+        IC_TrackDetailView(
+          trackInfo: selectedTrackObject ?? trackInfoEmpty,
+          isEditable: self.$isEditable,
+          trackInfoAfter: trackItmems[selectedTrack + 1] ?? trackInfoEmpty
+        )
+        .id(
+          selectedTrackIdx
+        )// .id is used to force the view to be recreated when the selectedTrackIdx changes
+      } else {
+        Text("Select a track")
+      }
     }
     .onChange(of: spotifyDefaultViewModel.currentSongBeingPlayed) { oldValue, newValue in
-      //print("currentSongBeingPlayed: \(newValue)")
       if !isEditable && viewContext.hasChanges {
         do {
           try viewContext.save()
@@ -300,91 +374,11 @@ struct IC_SpinningPlaylistView: View {
       }
       fetchPlayerState()
     }
-    .padding(0)
-    /*}
-     else {
-     NavigationSplitView(columnVisibility: $columnVisibility) {
-     ScrollViewReader { reader in
-
-     List(sortedTrackItems, id: \.key, selection: $selectedTrackInfoIdx) { key, trackInfo in
-     NavigationLink(trackInfo.trackTitle ?? "", selection: $selectedTrackInfoIdx) {
-     IC_TrackDetailView(trackInfo: trackInfo, isEditable: self.$isEditable, trackInfoAfter: trackInfoEmpty)
-     }
-     .tag(key)
-     .id(key)
-     }
-     .onChange(of: spotifyDefaultViewModel.currentTrackUri) { oldValue, newValue in
-     //print("currentSongBeingPlayed: \(newValue)")
-     //fetchPlayerState()
-     var idx = dictUriIdx[newValue] ?? -2
-     if idx != -2 {
-
-     selectedTrackInfoIdx = idx
-
-     if idx < dictUriIdx.count {
-     idx = idx - 1
-     }
-     reader.scrollTo(idx, anchor: .top)
-     }
-     }
-     .navigationTitle(contentItem?.title ?? "")
-     }
-     } detail: {
-     Text("Select a track")
-     }
-     .navigationSplitViewStyle(.balanced)
-     .onChange(of: spotifyDefaultViewModel.currentSongBeingPlayed) { oldValue, newValue in
-     fetchPlayerState()
-     }
-     //.padding(0)
-     }*/
-  }
-
-}
-
-struct SettingsDialog: View {
-  @Environment(\.presentationMode) var presentationMode
-
-  @StateObject var spotifyDefaultViewModel = { IC_SpotifyDefaultViewModel.shared } ()
-
-  @StateObject var fileImportExportCtrl: FileImportExportCtrl = FileImportExportCtrl()
-
-  var body: some View {
-    VStack {
-      Text("Settings")
-        .font(.headline)
-        .padding()
-
-
-      OptionsView(fileImportExportCtrl: fileImportExportCtrl)
-        .fileExporter(
-          isPresented: self.$fileImportExportCtrl.showFileExporter,
-          document: self.fileImportExportCtrl.zipFile,
-          contentType: .zip
-        ) { result in
-          print("Exported ZIP:", result)
-        }
-        .fileImporter(isPresented: self.$fileImportExportCtrl.isImporting,
-                      allowedContentTypes: [.zip],
-                      onCompletion: { result in
-
-          switch result {
-          case .success(let url):
-            // url contains the URL of the chosen file.
-            //let newImage = createImage(imageFile: url)
-            print("url: \(url)")
-            spotifyDefaultViewModel.restorePersistentStore(url: url)
-            //self.fileImportExportCtrl.importShouldBeShown = false
-          case .failure(let error):
-            print(error)
-          }
-        })
-
-      Button("Close") {
-        presentationMode.wrappedValue.dismiss()
-      }
-      .padding()
+    .onAppear {
+      fetchPlayerState()
     }
-    .frame(width: 300, height: 200)
+    .padding(0)
+
   }
 }
+

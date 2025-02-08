@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct OptionsView: View {
+struct IC_OptionsView: View {
     
-    @ObservedObject var fileImportExportCtrl: FileImportExportCtrl
+    @ObservedObject var fileImportExportCtrl: IC_FileImportExportCtrl
     
     var body: some View {
         
@@ -21,9 +21,16 @@ struct OptionsView: View {
       Text("Import only working from own").foregroundColor(.red)
       Text("local APP folder").foregroundColor(.red)
       Text("(IC-Music/IC-MusicDev)").foregroundColor(.red)
+
+      Button(action: {
+        let shared = PersistenceController()
+        shared.queryCoreDate()
+      }) {
+        Text("queryCoreDate")
+      }
     }
 }
 
 #Preview {
-    OptionsView(fileImportExportCtrl: FileImportExportCtrl())
+    IC_OptionsView(fileImportExportCtrl: IC_FileImportExportCtrl())
 }

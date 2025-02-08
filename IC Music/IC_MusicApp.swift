@@ -71,10 +71,10 @@ struct IC_MusicApp: App {
                 break
                 
             case .inactive:
-                print("inactive scene")
+                //print("inactive scene")
                 break
             case .active:
-                print("aktive scene")
+                //print("aktive scene")
                 break
                 
             default: break

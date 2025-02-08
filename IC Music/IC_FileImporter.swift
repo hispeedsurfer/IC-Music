@@ -18,7 +18,7 @@ extension UserDefaults {
 
 struct IC_FileImporter: View {
 
-  @ObservedObject var fileImportExportCtrl: FileImportExportCtrl
+  @ObservedObject var fileImportExportCtrl: IC_FileImportExportCtrl
 
   var body: some View {
 
@@ -67,5 +67,5 @@ struct IC_FileImporter: View {
 }
 
 #Preview {
-  IC_FileImporter(fileImportExportCtrl: FileImportExportCtrl())
+  IC_FileImporter(fileImportExportCtrl: IC_FileImportExportCtrl())
 }
