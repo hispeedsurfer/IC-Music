@@ -57,8 +57,6 @@
 		A90DB9EE2D0B23A7004779C6 /* SpotifyiOS.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A996335D2CC077EF00C2AA26 /* SpotifyiOS.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A90DB9F62D0B38A7004779C6 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = A90DB9F52D0B38A7004779C6 /* Zip */; };
 		A90DB9F82D0B38BF004779C6 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = A90DB9F72D0B38BF004779C6 /* Zip */; };
-		A9160CE22D19B98A00030EEB /* TapTempoButton in Frameworks */ = {isa = PBXBuildFile; productRef = A9160CE12D19B98A00030EEB /* TapTempoButton */; };
-		A9160CE42D19BA8F00030EEB /* TapTempoButton in Frameworks */ = {isa = PBXBuildFile; productRef = A9160CE32D19BA8F00030EEB /* TapTempoButton */; };
 		A942B6012B8BA33E00BC2D73 /* IC_MusicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942B6002B8BA33E00BC2D73 /* IC_MusicApp.swift */; };
 		A942B60A2B8BA34000BC2D73 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942B6092B8BA34000BC2D73 /* Persistence.swift */; };
 		A942B60D2B8BA34000BC2D73 /* IC_Music.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A942B60B2B8BA34000BC2D73 /* IC_Music.xcdatamodeld */; };
@@ -169,7 +167,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9160CE42D19BA8F00030EEB /* TapTempoButton in Frameworks */,
 				A90DB9F62D0B38A7004779C6 /* Zip in Frameworks */,
 				A90DB9E72D0B23A7004779C6 /* SpotifyiOS.xcframework in Frameworks */,
 				A98CBC612D53B41E00A6AAC3 /* SwiftUIIntrospect in Frameworks */,
@@ -181,7 +178,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9160CE22D19B98A00030EEB /* TapTempoButton in Frameworks */,
 				A90DB9F82D0B38BF004779C6 /* Zip in Frameworks */,
 				A996335E2CC0787400C2AA26 /* SpotifyiOS.xcframework in Frameworks */,
 				A98CBC5F2D53B40500A6AAC3 /* SwiftUIIntrospect in Frameworks */,
@@ -309,7 +305,6 @@
 			packageProductDependencies = (
 				A90DB9D02D0B23A7004779C6 /* ZIPFoundation */,
 				A90DB9F52D0B38A7004779C6 /* Zip */,
-				A9160CE32D19BA8F00030EEB /* TapTempoButton */,
 				A98CBC602D53B41E00A6AAC3 /* SwiftUIIntrospect */,
 			);
 			productName = "IC Music";
@@ -333,7 +328,6 @@
 			packageProductDependencies = (
 				A90269742B93743A00052FB3 /* ZIPFoundation */,
 				A90DB9F72D0B38BF004779C6 /* Zip */,
-				A9160CE12D19B98A00030EEB /* TapTempoButton */,
 				A98CBC5E2D53B40500A6AAC3 /* SwiftUIIntrospect */,
 			);
 			productName = "IC Music";
@@ -369,7 +363,6 @@
 				A90269732B93743A00052FB3 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 				A996335A2CC077E500C2AA26 /* XCRemoteSwiftPackageReference "ios-sdk" */,
 				A90DB9F42D0B3743004779C6 /* XCRemoteSwiftPackageReference "Zip" */,
-				A9160CE02D19B98A00030EEB /* XCRemoteSwiftPackageReference "TapTempoButton" */,
 				A98CBC5D2D53B40500A6AAC3 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			preferredProjectObjectVersion = 77;
@@ -861,14 +854,6 @@
 				minimumVersion = 2.1.2;
 			};
 		};
-		A9160CE02D19B98A00030EEB /* XCRemoteSwiftPackageReference "TapTempoButton" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/yannxou/TapTempoButton.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.1;
-			};
-		};
 		A98CBC5D2D53B40500A6AAC3 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
@@ -907,15 +892,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A90DB9F42D0B3743004779C6 /* XCRemoteSwiftPackageReference "Zip" */;
 			productName = Zip;
-		};
-		A9160CE12D19B98A00030EEB /* TapTempoButton */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A9160CE02D19B98A00030EEB /* XCRemoteSwiftPackageReference "TapTempoButton" */;
-			productName = TapTempoButton;
-		};
-		A9160CE32D19BA8F00030EEB /* TapTempoButton */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = TapTempoButton;
 		};
 		A98CBC5E2D53B40500A6AAC3 /* SwiftUIIntrospect */ = {
 			isa = XCSwiftPackageProductDependency;
