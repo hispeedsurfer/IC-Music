@@ -105,7 +105,7 @@ struct IC_SpinningPlaylistView: View {
   func exportToCSV() {
     let csvData = convertToCSV()
 
-    saveCSVFile(data: csvData, fileName: "\(String(describing: sPlaylistTitle)).csv")
+    saveCSVFile(data: csvData, fileName: "\(sPlaylistTitle ?? "exportCSV″").csv")
 
   }
 
@@ -251,55 +251,6 @@ struct IC_SpinningPlaylistView: View {
 
   var body: some View {
 
-    VStack(spacing:5) {
-      HStack(spacing:5){
-        TextField("Enter Spotify URI", text: $playlistURI)
-        //.padding()
-          .border(Color.gray)
-        HStack (spacing:2) {
-          Button("Fetch") {
-            //fetchContent()
-            spotifyDefaultViewModel.getSearch(playlistURI: playlistURI, playTrack: true){ result in
-              //self.query = txt
-              DispatchQueue.main.async {
-                switch result {
-                case .success(let success):
-                  self.fetchedData(searchResult: success)
-                case .failure(let error):
-                  print( "tes \(error.localizedDescription)")
-                }
-              }
-            }
-          }
-          //.padding()
-          .foregroundColor(.white)
-          .background(Color.green)
-          .cornerRadius(5)
-
-          Button(action: {
-            showingSettings.toggle()
-          }) {
-            Image(systemName: "gearshape.fill")
-              .resizable()
-              .frame(width: 24, height: 24)
-              .padding()
-          }
-          .buttonStyle(PlainButtonStyle())
-          .sheet(isPresented: $showingSettings) {
-            IC_SettingsDialog()
-          }
-
-          Button("Export") {
-            exportToCSV()
-          }
-          .foregroundColor(.white)
-          .background(Color.green)
-          .cornerRadius(5)
-        }
-
-      }
-    }
-
     HStack(spacing: 2) {
       IC_SliderMusic()
 
@@ -344,8 +295,34 @@ struct IC_SpinningPlaylistView: View {
         }
         .navigationTitle(sPlaylistTitle?.isEmpty ?? true ? "No playlist title" : sPlaylistTitle!)
         .foregroundColor(.orange)
-        HStack(spacing: 5){
-          IC_SliderFontSize(fontoSize: $fontoSize)
+        VStack(spacing:0) {
+          HStack(spacing: 5){
+            IC_SliderFontSize(fontoSize: $fontoSize)
+          }
+            HStack (spacing:2) {
+
+              Button(action: {
+                showingSettings.toggle()
+              }) {
+                Image(systemName: "gearshape.fill")
+                  .resizable()
+                  .frame(width: 24, height: 24)
+                  .padding()
+              }
+              .buttonStyle(PlainButtonStyle())
+              .sheet(isPresented: $showingSettings) {
+                IC_SettingsDialog()
+              }
+
+              Spacer()
+
+              Button("Export Playlist CSV") {
+                exportToCSV()
+              }
+              .foregroundColor(.white)
+              .background(Color.green)
+              .cornerRadius(5)
+            }
         }
       }
     } detail: {
