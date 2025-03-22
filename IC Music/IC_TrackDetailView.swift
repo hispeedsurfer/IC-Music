@@ -200,61 +200,107 @@ struct IC_TrackDetailView: View {
                 .disabled(!isEditable)
               }
               HStack {
-                Button(" raus ", action: {
+                Button(action: {
                   // Insert text at the current cursor position
-                  insertTextAtCursor("aus dem Sattel", keepInLine: true)
-                })
+                  insertTextAtCursor(" aus dem Sattel ", keepInLine: true)
+                }){
+                  Text("UP")
+                    .font(.system(size: 15))
+                    .frame(width: 50, height: 50)
+                      .padding(2)
+                      .background(isEditable ? Color.blue : Color.gray)
+                      .foregroundColor(.white)
+                      .opacity(isEditable ? 1.0 : 0.5) // Change opacity when disabled
+                      .clipShape(Circle())
+                      .shadow(radius: 10)
+              }
                 .disabled(!isEditable)
-                .foregroundColor(.white)
-                .background(isEditable ? Color.blue : Color.gray)
-                .cornerRadius(5)
-                Button(" HP ", action: {
+
+                Button(action: {
                   // Insert text at the current cursor position
-                  insertTextAtCursor("HP", keepInLine: true)
-                })
+                  insertTextAtCursor(" setzen ", keepInLine: true)
+                }){
+                  Text("DOWN")
+                    .font(.system(size: 15))
+                    .frame(width: 50, height: 50)
+                      .padding(2)
+                      .background(isEditable ? Color.blue : Color.gray)
+                      .foregroundColor(.white)
+                      .opacity(isEditable ? 1.0 : 0.5) // Change opacity when disabled
+                      .clipShape(Circle())
+                      .shadow(radius: 10)
+              }
                 .disabled(!isEditable)
-                .foregroundColor(.white)
-                .background(isEditable ? Color.blue : Color.gray)
-                .cornerRadius(5)
+
+                Button(action: {
+                  // Insert text at the current cursor position
+                  insertTextAtCursor(" HP", keepInLine: true)
+                }){
+                  Text("HP")
+                    .font(.system(size: 15))
+                    .frame(width: 50, height: 50)
+                      .padding(2)
+                      .background(isEditable ? Color.blue : Color.gray)
+                      .foregroundColor(.white)
+                      .opacity(isEditable ? 1.0 : 0.5) // Change opacity when disabled
+                      .clipShape(Circle())
+                      .shadow(radius: 10)
+              }
+                .disabled(!isEditable)
+
               }
               HStack {
-                Button(" setzen ", action: {
+
+                Button(action: {
                   // Insert text at the current cursor position
-                  insertTextAtCursor("setzen", keepInLine: true)
-                })
-                .disabled(!isEditable)
-                .foregroundColor(.white)
-                .background(isEditable ? Color.blue : Color.gray)
-                .cornerRadius(5)
-                Button(" Oberkoerper ", action: {
-                  // Insert text at the current cursor position
-                  insertTextAtCursor("Oberkoerper still", keepInLine: true)
-                })
-                .disabled(!isEditable)
-                .foregroundColor(.white)
-                .background(isEditable ? Color.blue : Color.gray)
-                .cornerRadius(5)
+                  insertTextAtCursor(" Oberkoerper still ", keepInLine: true)
+                }){
+                  Text("CALM")
+                    .font(.system(size: 15))
+                    .frame(width: 50, height: 50)
+                      .padding(2)
+                      .background(isEditable ? Color.blue : Color.gray)
+                      .foregroundColor(.white)
+                      .opacity(isEditable ? 1.0 : 0.5) // Change opacity when disabled
+                      .clipShape(Circle())
+                      .shadow(radius: 10)
               }
-              HStack {
-                Button(" Jumps ", action: {
-                  // Insert text at the current cursor position
-                  insertTextAtCursor("Jumps", keepInLine: true)
-                })
                 .disabled(!isEditable)
-                .foregroundColor(.white)
-                .background(isEditable ? Color.blue : Color.gray)
-                .cornerRadius(5)
-                Button(" RnB ", action: {
+
+                Button(action: {
                   // Insert text at the current cursor position
-                  insertTextAtCursor("RnB", keepInLine: true)
-                })
-                .disabled(!isEditable)
-                .foregroundColor(.white)
-                .background(isEditable ? Color.blue : Color.gray)
-                .cornerRadius(5)
+                  insertTextAtCursor(" Jumps ", keepInLine: true)
+                }){
+                  Text("JUMP")
+                    .font(.system(size: 15))
+                    .frame(width: 50, height: 50)
+                      .padding(2)
+                      .background(isEditable ? Color.blue : Color.gray)
+                      .foregroundColor(.white)
+                      .opacity(isEditable ? 1.0 : 0.5) // Change opacity when disabled
+                      .clipShape(Circle())
+                      .shadow(radius: 10)
               }
-              Spacer()
+                .disabled(!isEditable)
+
+                Button(action: {
+                  // Insert text at the current cursor position
+                  insertTextAtCursor(" RnB ", keepInLine: true)
+                }){
+                  Text("RnB")
+                    .font(.system(size: 15))
+                    .frame(width: 50, height: 50)
+                      .padding(2)
+                      .background(isEditable ? Color.blue : Color.gray)
+                      .foregroundColor(.white)
+                      .opacity(isEditable ? 1.0 : 0.5) // Change opacity when disabled
+                      .clipShape(Circle())
+                      .shadow(radius: 10)
+              }
+                .disabled(!isEditable)
+              }
             }
+            .padding([.trailing])
           }
           Spacer()
         }
@@ -268,6 +314,12 @@ struct IC_TrackDetailView: View {
             Text("RPM User: \(trackInfoAfter.rpmUser ?? "")")
               .font(.system(size: 15))
               .padding([.leading])
+
+            // symbal picker
+            IC_SymbolPicker(trackInfo: trackInfoAfter, isEditable: $isEditable)
+              //.padding([.trailing])
+
+
             Spacer()
           }
 
@@ -301,10 +353,19 @@ struct IC_TrackDetailView: View {
     .toolbarBackground(Color(UIColor.lightGray), for: .navigationBar)
     .toolbarBackground(.visible, for: .navigationBar)
     .toolbar (content: ) {
-
-      ToolbarItem(placement:.topBarTrailing){
+      ToolbarItem(placement:.navigationBarLeading){
         HStack (spacing: 0){
-          //VStack {
+          IC_SymbolPicker(trackInfo: trackInfo, isEditable: $isEditable)
+            .padding([.leading])
+          Spacer()
+        }
+        .frame(minWidth: 300, maxWidth: 300, minHeight: 20, maxHeight: 20, alignment: .leading)
+        .padding([.leading])
+      }
+
+      ToolbarItem(placement:.navigationBarTrailing){
+        HStack (spacing: 0){
+
           HStack (spacing: 0) {
             Text("RPM: ")
             TextField("", text: Binding($trackInfo.rpmUser)!)
@@ -321,21 +382,6 @@ struct IC_TrackDetailView: View {
               .keyboardType(.decimalPad)
               .disabled(!isEditable)
               .frame(minWidth: 50, maxWidth: 50, minHeight: 20, maxHeight: 20, alignment: .center)
-            /*
-             TapTempoButton(timeout: 2, minTaps: 5, onTempoChange: {
-             trackInfo.bpmSpotify = $0
-             }) {
-             Image(systemName: "hand.tap")
-             .resizable()
-             .frame(width: 24, height: 24)
-             .padding()
-             .background(isEditable ? Color.blue : Color.gray)
-             .foregroundColor(.white)
-             .opacity(isEditable ? 1.0 : 0.5) // Change opacity when disabled
-             .clipShape(Circle())
-             .shadow(radius: 10)
-             }*/
-            /* another solution for bpm button*/
 
             Button(action: buttonTapped) {
               Image(systemName: "hand.tap")
