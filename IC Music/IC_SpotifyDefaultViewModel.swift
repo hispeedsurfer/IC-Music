@@ -34,6 +34,8 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
   @Published var authenticationState: AuthenticationState = .idle
   @Published var currentSongBeingPlayed: String = ""
   @Published var currentTrackUri = ""
+  var tmpCurrTrackUri = ""
+  var bFirstLoad = true
   @Published var currentDurationMs: UInt = 0
   @Published var nCurrentPlaylistDurationSeconds: Int = 0
   @Published var currentDurationLabel = ""
@@ -634,7 +636,14 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
           playList: spotifyPlaylists.name ?? "",
           nTotalDurationMSec: nTotalDurationMSec
         )
+
         completion(.success(result))
+
+        if(self?.bFirstLoad == true) {
+          self?.bFirstLoad = false
+
+          self?.currentTrackUri = self!.tmpCurrTrackUri
+        }
       }).store(in: &bag)
   }
 
@@ -736,7 +745,12 @@ extension IC_SpotifyDefaultViewModel: SPTAppRemotePlayerStateDelegate {
 
     //if currentTrackUri != playerState.track.uri && !playerState.isEqual(self.playerState){ -> not working
       currentSongBeingPlayed = playerState.track.name
+    if(bFirstLoad) {
+      tmpCurrTrackUri = playerState.track.uri
+    }
+    else {
       currentTrackUri = playerState.track.uri
+    }
       self.playerState = playerState
       //self.position = playerState.playbackPosition
       self.contextUri = playerState.contextURI

@@ -47,6 +47,8 @@ struct IC_SpinningPlaylistView: View {
   @State private var selectedTrackIdx: Int? = nil
   @State private var selectedTrackObject: IC_TrackInfo? = nil
 
+  @State var refreshID = UUID()
+
   @AppStorage(UserKeys.fontoSize.rawValue) var fontoSize: Double = 22.0
 
   var trackInfoEmpty: IC_TrackInfo {
@@ -99,6 +101,8 @@ struct IC_SpinningPlaylistView: View {
     self.sPlaylistTitle = searchResult.playList
     self.spotifyDefaultViewModel.nTotalDurationMSec = (searchResult.nTotalDurationMSec)
     self.spotifyDefaultViewModel.objectWillChange.send() //to force view update
+
+    refreshID = UUID()
   }
 
   // export the info of trackItmens to a csv file
@@ -292,6 +296,7 @@ struct IC_SpinningPlaylistView: View {
           reader.scrollTo(idx2, anchor: .top)
           selectedTrackIdx = idx
           selectedTrackObject = trackItmems[idx] ?? nil
+          refreshID = UUID()
         }
         .navigationTitle(sPlaylistTitle?.isEmpty ?? true ? "No playlist title" : sPlaylistTitle!)
         .foregroundColor(.orange)
@@ -333,13 +338,13 @@ struct IC_SpinningPlaylistView: View {
           isEditable: self.$isEditable,
           trackInfoAfter: trackItmems[selectedTrack + 1] ?? trackInfoEmpty
         )
-        .id(
-          selectedTrackIdx
-        )// .id is used to force the view to be recreated when the selectedTrackIdx changes
       } else {
         Text("Select a track")
       }
     }
+    .id(
+      selectedTrackIdx //refreshID
+    )// .id is used to force the view to be recreated when the selectedTrackIdx changes
     .onChange(of: spotifyDefaultViewModel.currentSongBeingPlayed) { oldValue, newValue in
       if !isEditable && viewContext.hasChanges {
         do {
