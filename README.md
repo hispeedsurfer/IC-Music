@@ -5,7 +5,7 @@
 
 # IC_Music
 
-IC_Music is a music player for fitness training. It is designed to play music from Spotify and to provide information about the current song and the next song in the playlist. It also provides information about the current cycle and the next cycle in the playlist. The app is designed to be used during fitness training, such as indoor cycling (that for IC stands for). It is designed to be easy to use and to provide the information you need to keep your workout on track.
+IC_Music is a music instructions for fitness training. It is designed to play music from Spotify and to provide information about the current track and the next one in the playlist. It also provides information about the current cycle and the next cycle in the playlist. The app is designed to be used during fitness training, such as indoor cycling (that for IC stands for). It is designed to be easy to use and to provide the information you need to keep your workout on track.
 
 
 
