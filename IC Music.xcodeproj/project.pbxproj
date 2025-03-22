@@ -88,6 +88,8 @@
 		A9C4D2D42B9C34BD00CA1233 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A9C4D2D32B9C34BD00CA1233 /* README.md */; };
 		A9C4ED1D2B8DF7840024C4B3 /* IC_TrackDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4ED1C2B8DF7840024C4B3 /* IC_TrackDetailView.swift */; };
 		A9C4ED1E2B8DFC530024C4B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A942B6042B8BA34000BC2D73 /* Assets.xcassets */; };
+		A9CA1E682D862B7200CF77B4 /* IC_SymbolPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CA1E672D862B7200CF77B4 /* IC_SymbolPicker.swift */; };
+		A9CA1E692D862B7200CF77B4 /* IC_SymbolPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9CA1E672D862B7200CF77B4 /* IC_SymbolPicker.swift */; };
 		A9DF0CBF2BA4406700A4F4B6 /* IC_OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9DF0CBE2BA4406700A4F4B6 /* IC_OptionsView.swift */; };
 /* End PBXBuildFile section */
 
@@ -159,6 +161,7 @@
 		A9C4D2CE2B9C316700CA1233 /* IC_Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IC_Constants.swift; sourceTree = "<group>"; };
 		A9C4D2D32B9C34BD00CA1233 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A9C4ED1C2B8DF7840024C4B3 /* IC_TrackDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IC_TrackDetailView.swift; sourceTree = "<group>"; };
+		A9CA1E672D862B7200CF77B4 /* IC_SymbolPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_SymbolPicker.swift; sourceTree = "<group>"; };
 		A9DF0CBE2BA4406700A4F4B6 /* IC_OptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_OptionsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -246,6 +249,7 @@
 				A90268CB2B932DC500052FB3 /* IC_SpotifyDefaultViewModel.swift */,
 				A942B69B2B8BC5ED00BC2D73 /* IC_SpotifyLoginView.swift */,
 				A9C4D2C62B9C2E3600CA1233 /* IC_SpotifyLoginViewModel.swift */,
+				A9CA1E672D862B7200CF77B4 /* IC_SymbolPicker.swift */,
 				A99C0B442B9E585600AFD370 /* IC_ToggleEdit.swift */,
 				A9C4ED1C2B8DF7840024C4B3 /* IC_TrackDetailView.swift */,
 				A90602752D5658B7006FEE19 /* IC_TrackObject.swift */,
@@ -421,6 +425,7 @@
 				A90DB9D92D0B23A7004779C6 /* IC_SpotifyDefaultViewModel.swift in Sources */,
 				A906026B2D564509006FEE19 /* IC_SpotifyPlaylistTrackObject.swift in Sources */,
 				A906025E2D5644C9006FEE19 /* IC_SpotifyFollowers.swift in Sources */,
+				A9CA1E692D862B7200CF77B4 /* IC_SymbolPicker.swift in Sources */,
 				A90DB9DA2D0B23A7004779C6 /* IC_FileImporter.swift in Sources */,
 				A90DB9DB2D0B23A7004779C6 /* ZipFile.swift in Sources */,
 				A90DB9DC2D0B23A7004779C6 /* Persistence.swift in Sources */,
@@ -461,6 +466,7 @@
 				A90268CC2B932DC500052FB3 /* IC_SpotifyDefaultViewModel.swift in Sources */,
 				A906026A2D564509006FEE19 /* IC_SpotifyPlaylistTrackObject.swift in Sources */,
 				A906025F2D5644C9006FEE19 /* IC_SpotifyFollowers.swift in Sources */,
+				A9CA1E682D862B7200CF77B4 /* IC_SymbolPicker.swift in Sources */,
 				A99C0B412B9E53FF00AFD370 /* IC_FileImporter.swift in Sources */,
 				A965A5252B94F3D500FB98BE /* ZipFile.swift in Sources */,
 				A942B60A2B8BA34000BC2D73 /* Persistence.swift in Sources */,
