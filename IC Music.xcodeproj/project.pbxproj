@@ -49,14 +49,16 @@
 		A90DB9E32D0B23A7004779C6 /* IC_SpotifyAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4D2CC2B9C2FB300CA1233 /* IC_SpotifyAPIError.swift */; };
 		A90DB9E42D0B23A7004779C6 /* IC_SliderMusic.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99C0B422B9E578900AFD370 /* IC_SliderMusic.swift */; };
 		A90DB9E52D0B23A7004779C6 /* IC_TrackDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C4ED1C2B8DF7840024C4B3 /* IC_TrackDetailView.swift */; };
-		A90DB9E72D0B23A7004779C6 /* SpotifyiOS.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A996335D2CC077EF00C2AA26 /* SpotifyiOS.xcframework */; };
 		A90DB9E82D0B23A7004779C6 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = A90DB9D02D0B23A7004779C6 /* ZIPFoundation */; };
 		A90DB9EA2D0B23A7004779C6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A99118E42B9C4BED00110793 /* Localizable.strings */; };
 		A90DB9EB2D0B23A7004779C6 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A9C4D2D32B9C34BD00CA1233 /* README.md */; };
 		A90DB9EC2D0B23A7004779C6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A942B6042B8BA34000BC2D73 /* Assets.xcassets */; };
-		A90DB9EE2D0B23A7004779C6 /* SpotifyiOS.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A996335D2CC077EF00C2AA26 /* SpotifyiOS.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A90DB9F62D0B38A7004779C6 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = A90DB9F52D0B38A7004779C6 /* Zip */; };
 		A90DB9F82D0B38BF004779C6 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = A90DB9F72D0B38BF004779C6 /* Zip */; };
+		A92C29342EBFE3C90079D3DF /* SpotifyiOS.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A92C29332EBFE3A40079D3DF /* SpotifyiOS.xcframework */; };
+		A92C29352EBFE3C90079D3DF /* SpotifyiOS.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A92C29332EBFE3A40079D3DF /* SpotifyiOS.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A92C29362EBFE3E60079D3DF /* SpotifyiOS.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A92C29332EBFE3A40079D3DF /* SpotifyiOS.xcframework */; };
+		A92C29372EBFE3E60079D3DF /* SpotifyiOS.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A92C29332EBFE3A40079D3DF /* SpotifyiOS.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A942B6012B8BA33E00BC2D73 /* IC_MusicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942B6002B8BA33E00BC2D73 /* IC_MusicApp.swift */; };
 		A942B60A2B8BA34000BC2D73 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = A942B6092B8BA34000BC2D73 /* Persistence.swift */; };
 		A942B60D2B8BA34000BC2D73 /* IC_Music.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A942B60B2B8BA34000BC2D73 /* IC_Music.xcdatamodeld */; };
@@ -69,8 +71,6 @@
 		A98CBC5F2D53B40500A6AAC3 /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = A98CBC5E2D53B40500A6AAC3 /* SwiftUIIntrospect */; };
 		A98CBC612D53B41E00A6AAC3 /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = A98CBC602D53B41E00A6AAC3 /* SwiftUIIntrospect */; };
 		A99118E72B9C4DCD00110793 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A99118E42B9C4BED00110793 /* Localizable.strings */; };
-		A996335E2CC0787400C2AA26 /* SpotifyiOS.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = A996335D2CC077EF00C2AA26 /* SpotifyiOS.xcframework */; };
-		A996335F2CC0787400C2AA26 /* SpotifyiOS.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A996335D2CC077EF00C2AA26 /* SpotifyiOS.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A99C0B412B9E53FF00AFD370 /* IC_FileImporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99C0B402B9E53FF00AFD370 /* IC_FileImporter.swift */; };
 		A99C0B432B9E578900AFD370 /* IC_SliderMusic.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99C0B422B9E578900AFD370 /* IC_SliderMusic.swift */; };
 		A99C0B452B9E585600AFD370 /* IC_ToggleEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = A99C0B442B9E585600AFD370 /* IC_ToggleEdit.swift */; };
@@ -94,13 +94,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		A90DB9ED2D0B23A7004779C6 /* Embed Frameworks */ = {
+		A92C29322EBFE36A0079D3DF /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A90DB9EE2D0B23A7004779C6 /* SpotifyiOS.xcframework in Embed Frameworks */,
+				A92C29352EBFE3C90079D3DF /* SpotifyiOS.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -111,7 +111,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A996335F2CC0787400C2AA26 /* SpotifyiOS.xcframework in Embed Frameworks */,
+				A92C29372EBFE3E60079D3DF /* SpotifyiOS.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -133,6 +133,7 @@
 		A90602752D5658B7006FEE19 /* IC_TrackObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_TrackObject.swift; sourceTree = "<group>"; };
 		A90B15E82D402EA300462DF2 /* IC_SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_SearchResult.swift; sourceTree = "<group>"; };
 		A90DB9F22D0B23A7004779C6 /* IC MusicDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IC MusicDev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A92C29332EBFE3A40079D3DF /* SpotifyiOS.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = SpotifyiOS.xcframework; sourceTree = "<group>"; };
 		A942B5FD2B8BA33E00BC2D73 /* IC Music.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IC Music.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A942B6002B8BA33E00BC2D73 /* IC_MusicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_MusicApp.swift; sourceTree = "<group>"; };
 		A942B6042B8BA34000BC2D73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -146,7 +147,6 @@
 		A965A5242B94F3D500FB98BE /* ZipFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipFile.swift; sourceTree = "<group>"; };
 		A973EABA2D267FFE005FC630 /* IC_SliderFontSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_SliderFontSize.swift; sourceTree = "<group>"; };
 		A99118E32B9C4BED00110793 /* IC Music */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "IC Music"; path = Localizable.strings; sourceTree = "<group>"; };
-		A996335D2CC077EF00C2AA26 /* SpotifyiOS.xcframework */ = {isa = PBXFileReference; expectedSignature = "AppleDeveloperProgram:2FNC3A47ZF:Spotify"; lastKnownFileType = wrapper.xcframework; path = SpotifyiOS.xcframework; sourceTree = "<group>"; };
 		A99C0B402B9E53FF00AFD370 /* IC_FileImporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_FileImporter.swift; sourceTree = "<group>"; };
 		A99C0B422B9E578900AFD370 /* IC_SliderMusic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_SliderMusic.swift; sourceTree = "<group>"; };
 		A99C0B442B9E585600AFD370 /* IC_ToggleEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IC_ToggleEdit.swift; sourceTree = "<group>"; };
@@ -171,8 +171,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A90DB9F62D0B38A7004779C6 /* Zip in Frameworks */,
-				A90DB9E72D0B23A7004779C6 /* SpotifyiOS.xcframework in Frameworks */,
 				A98CBC612D53B41E00A6AAC3 /* SwiftUIIntrospect in Frameworks */,
+				A92C29342EBFE3C90079D3DF /* SpotifyiOS.xcframework in Frameworks */,
 				A90DB9E82D0B23A7004779C6 /* ZIPFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -182,8 +182,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A90DB9F82D0B38BF004779C6 /* Zip in Frameworks */,
-				A996335E2CC0787400C2AA26 /* SpotifyiOS.xcframework in Frameworks */,
 				A98CBC5F2D53B40500A6AAC3 /* SwiftUIIntrospect in Frameworks */,
+				A92C29362EBFE3E60079D3DF /* SpotifyiOS.xcframework in Frameworks */,
 				A90269752B93743A00052FB3 /* ZIPFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,7 +276,7 @@
 		A942B6932B8BAABE00BC2D73 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A996335D2CC077EF00C2AA26 /* SpotifyiOS.xcframework */,
+				A92C29332EBFE3A40079D3DF /* SpotifyiOS.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -299,7 +299,7 @@
 				A90DB9D22D0B23A7004779C6 /* Sources */,
 				A90DB9E62D0B23A7004779C6 /* Frameworks */,
 				A90DB9E92D0B23A7004779C6 /* Resources */,
-				A90DB9ED2D0B23A7004779C6 /* Embed Frameworks */,
+				A92C29322EBFE36A0079D3DF /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -346,7 +346,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1520;
-				LastUpgradeCheck = 1610;
+				LastUpgradeCheck = 2610;
 				TargetAttributes = {
 					A942B5FC2B8BA33E00BC2D73 = {
 						CreatedOnToolsVersion = 15.2;
@@ -365,9 +365,9 @@
 			mainGroup = A942B5F42B8BA33E00BC2D73;
 			packageReferences = (
 				A90269732B93743A00052FB3 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
-				A996335A2CC077E500C2AA26 /* XCRemoteSwiftPackageReference "ios-sdk" */,
 				A90DB9F42D0B3743004779C6 /* XCRemoteSwiftPackageReference "Zip" */,
 				A98CBC5D2D53B40500A6AAC3 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				A92C292B2EBFE2F50079D3DF /* XCRemoteSwiftPackageReference "ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = A942B5FE2B8BA33E00BC2D73 /* Products */;
@@ -511,7 +511,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"IC Music/Preview Content\"";
-				DEVELOPMENT_TEAM = 98FL64PG3R;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -526,7 +525,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -557,7 +556,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"IC Music/Preview Content\"";
-				DEVELOPMENT_TEAM = 98FL64PG3R;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -572,7 +570,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -627,6 +625,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 98FL64PG3R;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -690,6 +689,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 98FL64PG3R;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -722,7 +722,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"IC Music/Preview Content\"";
-				DEVELOPMENT_TEAM = 98FL64PG3R;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -731,13 +730,14 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "IC-Music-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.sports";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -768,7 +768,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"IC Music/Preview Content\"";
-				DEVELOPMENT_TEAM = 98FL64PG3R;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -777,13 +776,14 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "IC-Music-Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.sports";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -860,20 +860,20 @@
 				minimumVersion = 2.1.2;
 			};
 		};
+		A92C292B2EBFE2F50079D3DF /* XCRemoteSwiftPackageReference "ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/spotify/ios-sdk.git";
+			requirement = {
+				kind = exactVersion;
+				version = 5.0.1;
+			};
+		};
 		A98CBC5D2D53B40500A6AAC3 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.3.0;
-			};
-		};
-		A996335A2CC077E500C2AA26 /* XCRemoteSwiftPackageReference "ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/spotify/ios-sdk";
-			requirement = {
-				kind = exactVersion;
-				version = 3.0.0;
+				minimumVersion = 26.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
