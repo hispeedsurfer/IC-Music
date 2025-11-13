@@ -88,7 +88,7 @@ struct IC_TrackDetailView: View {
       ZStack {
         // set TextEditor to read-only on variable isEditable
         TextEditor(text: isEditable ? $trackInfo.customInfo.bound : .constant(trackInfo.customInfo.bound))
-          .introspect(.textEditor, on: .iOS(.v14, .v15, .v16, .v17, .v18)) { textView in
+          .introspect(.textEditor, on: .iOS(.v14, .v15, .v16, .v17, .v18, .v26)) { textView in
             //print(type(of: $0)) // UITextView
             self.textView = textView
           }
