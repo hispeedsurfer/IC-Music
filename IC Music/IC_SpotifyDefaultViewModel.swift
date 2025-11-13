@@ -317,7 +317,7 @@ final class IC_SpotifyDefaultViewModel: NSObject, ObservableObject {
 
       do {
         let fetchedCustomers = try viewContext.fetch(fetchRequest)
-        if var existingCustomer = fetchedCustomers.first {
+          if let existingCustomer = fetchedCustomers.first {
           existingCustomer.trackTitle = item.trackTitle
           print("existingCustomer.durationSeconds \(existingCustomer.durationSeconds), trackTitle: \(existingCustomer.trackTitle ?? "")")
           if item.durationMSeconds > 0 {
