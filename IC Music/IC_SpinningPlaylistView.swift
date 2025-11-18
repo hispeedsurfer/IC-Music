@@ -48,6 +48,8 @@ struct IC_SpinningPlaylistView: View {
   @State private var selectedTrackObject: IC_TrackInfo? = nil
 
   @State var refreshID = UUID()
+    
+    @State private var columnVisibility: NavigationSplitViewVisibility = .all
 
   @AppStorage(UserKeys.fontoSize.rawValue) var fontoSize: Double = 22.0
 
@@ -264,7 +266,7 @@ struct IC_SpinningPlaylistView: View {
         .frame(maxWidth: 180)
     }
 
-    NavigationSplitView {
+      NavigationSplitView (columnVisibility: $columnVisibility){
       // Sidebar
       ScrollViewReader { reader in
         List(selection: $selectedTrackIdx) {
