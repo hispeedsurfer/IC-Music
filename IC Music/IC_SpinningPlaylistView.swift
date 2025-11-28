@@ -50,6 +50,9 @@ struct IC_SpinningPlaylistView: View {
   @State var refreshID = UUID()
     
     @State private var columnVisibility: NavigationSplitViewVisibility = .all
+    
+    @State private var showSaveToast = false
+    @State private var saveToastMessage = ""
 
   @AppStorage(UserKeys.fontoSize.rawValue) var fontoSize: Double = 22.0
 
@@ -138,22 +141,40 @@ struct IC_SpinningPlaylistView: View {
     return csvText
   }
 
-  func saveCSVFile(data: String, fileName: String) {
-    let fileManager = FileManager.default
-    do {
-      let documentDirectory = try fileManager.url(
-        for: .documentDirectory,
-        in: .userDomainMask,
-        appropriateFor: nil,
-        create: true
-      )
-      let fileURL = documentDirectory.appendingPathComponent(fileName)
-      try data.write(to: fileURL, atomically: true, encoding: .utf8)
-      print("File saved: \(fileURL)")
-    } catch {
-      print("Error saving file: \(error)")
+    func saveCSVFile(data: String, fileName: String) {
+      let fileManager = FileManager.default
+      do {
+        let documentDirectory = try fileManager.url(
+          for: .documentDirectory,
+          in: .userDomainMask,
+          appropriateFor: nil,
+          create: true
+        )
+        let fileURL = documentDirectory.appendingPathComponent(fileName)
+        try data.write(to: fileURL, atomically: true, encoding: .utf8)
+        print("File saved: \(fileURL)")
+
+        // show transient toast on main thread
+        DispatchQueue.main.async {
+          self.saveToastMessage = "Saved: \(fileURL.lastPathComponent)"
+          withAnimation { self.showSaveToast = true }
+          DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            withAnimation { self.showSaveToast = false }
+          }
+        }
+      } catch {
+        print("Error saving file: \(error)")
+        DispatchQueue.main.async {
+          self.saveToastMessage = "Save failed"
+          withAnimation { self.showSaveToast = true }
+          DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            withAnimation { self.showSaveToast = false }
+          }
+        }
+      }
     }
-  }
+
+    
 
 
 
@@ -361,6 +382,27 @@ struct IC_SpinningPlaylistView: View {
     .onAppear {
       fetchPlayerState()
     }
+      // Add this overlay to the end of your view's body (for example, before .padding(0)):
+      .overlay(alignment: .bottom) {
+        if showSaveToast {
+          HStack(spacing: 10) {
+            Image(systemName: "checkmark.circle.fill")
+              .foregroundColor(.white)
+            Text(saveToastMessage)
+              .foregroundColor(.white)
+              .lineLimit(1)
+              .truncationMode(.middle)
+          }
+          .padding(.horizontal, 14)
+          .padding(.vertical, 10)
+          .background(Color.black.opacity(0.8))
+          .cornerRadius(12)
+          .padding(.bottom, 20)
+          .transition(.move(edge: .bottom).combined(with: .opacity))
+          .shadow(radius: 6)
+        }
+      }
+      .animation(.easeInOut, value: showSaveToast)
     .padding(0)
 
   }
