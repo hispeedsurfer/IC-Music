@@ -11,6 +11,7 @@ struct IC_OptionsView: View {
     
     @ObservedObject var fileImportExportCtrl: IC_FileImportExportCtrl
     
+    
     var body: some View {
         
         Menu {
@@ -28,6 +29,11 @@ struct IC_OptionsView: View {
       }) {
         Text("queryCoreDate")
       }
+        
+        Text("Version: \(GitVersion.tag)")
+            .font(.caption)
+            .foregroundColor(.secondary)
+            .padding(.top, 6)
     }
 }
 

@@ -12,7 +12,7 @@ struct IC_SymbolPicker: View {
   @StateObject var trackInfo: IC_TrackInfo
   @Binding var isEditable: Bool
 
-  let icons = ["", "SeatedFlat", "StandingFlat", "SeatedClimb", "RunningWithResistance", "Jumps", "StandingClimb", "JumpsOnAHill", "Sprints", "SprintOnAHill"]
+  let icons = ["", "SeatedFlat", "StandingFlat", "SeatedClimb", "RunningResistance", "Jumps", "StandingClimb", "JumpsOnAHill", "Sprints", "SprintOnAHill"]
 
   var body: some View {
 
